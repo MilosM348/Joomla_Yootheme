@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="commercelab_shop_extended" method="upgrade">
+	<name>CommerceLab Shop - Gallery</name>
+	<version>{{version}}</version>
+	<creationDate>Feb 2022</creationDate>
+	<author>Cloud Chief - CommerceLab Shop</author>
+	<authorEmail>Info@commercelab.solutions</authorEmail>
+	<authorUrl>https://Commercelab.solutions</authorUrl>
+	<license>GNU General Public License version 2 or later</license>
+	<copyright>Copyright (C) 2021 Cloud Chief - CommerceLab. All rights reserved.</copyright>
+	<description>Enables CommerceLab's Product Gallery system</description>
+	<files>
+		<filename plugin="gallery">gallery.php</filename>
+	</files>
+</extension>

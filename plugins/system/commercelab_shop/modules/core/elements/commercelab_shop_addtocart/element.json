@@ -1,0 +1,218 @@
+{
+	"@import": "./element.php",
+	"name": "commercelab_shop_addtocart",
+	"title": "Add to Cart",
+	"icon": "${url:images/commercelab_shop_addtocart.svg}",
+	"iconSmall": "${url:images/commercelab_shop_addtocart_small.svg}",
+	"element": true,
+	"container": true,
+	"group": "CommerceLab Products",
+	"defaults": {
+		"product_source": "dynamic",
+		"oos_element": "h1"
+	},
+	"placeholder": {
+		"props": {
+			"product_source": "dynamic",
+			"add_to_cart_button_text": "Add To Cart",
+			"go_to_checkout_button_text": "Go To Checkout",
+			"oos_message": "Out of Stock",
+			"oos_button_behavioir": "disable",
+			"alert_message": "Product added to Cart",
+			"icon": "",
+			"button_style": "default"
+		}
+	},
+	"templates": {
+		"render": "./templates/template.php",
+		"content": "./templates/content.php"
+	},
+	"fields": {
+
+        "product_source": {
+            "label":"Product source",
+            "type": "select",
+            "default": "dynamic",
+            "options": {
+                "Dynamic": "dynamic",
+                "Manual": "manual"
+            },
+            "enable":"${commercelab.add2cartanywhere}"
+        },
+
+        "product_source_manual": {
+            "label":"Manual product",
+            "type": "select",
+            "options": "${commercelab.component.products.products_list}",
+            "show":"${commercelab.add2cartanywhere}",
+            "enable":"product_source == 'manual'"
+        },
+
+		"add_to_cart_button_text": "${cls_builder.add_to_cart_button_text}",
+		"add_to_cart_button_with_icon": "${cls_builder.add_to_cart_button_with_icon}",
+		"add_to_cart_button_icon": "${cls_builder.add_to_cart_button_icon}",
+		"add_to_cart_button_icon_align": "${cls_builder.add_to_cart_button_icon_align}",
+		"add_to_cart_button_style": "${cls_builder.add_to_cart_button_style}",
+		"add_to_cart_button_size": "${cls_builder.add_to_cart_button_size}",
+		"add_to_cart_button_fullwidth": "${cls_builder.add_to_cart_button_fullwidth}",
+
+		"after_add_to_cart_behaviour": "${cls_builder.after_add_to_cart_behaviour}",
+
+		"checkout_button_text": "${cls_builder.checkout_button_text}",
+		"checkout_button_with_icon": "${cls_builder.checkout_button_with_icon}",
+		"checkout_button_icon": "${cls_builder.checkout_button_icon}",
+		"checkout_button_icon_align": "${cls_builder.checkout_button_icon_align}",
+		"checkout_button_style": "${cls_builder.checkout_button_style}",
+		"checkout_button_size": "${cls_builder.checkout_button_size}",
+		"checkout_button_fullwidth": "${cls_builder.checkout_button_fullwidth}",
+		
+		"alert_message": "${cls_builder.alert_message}",
+		"alert_style": "${cls_builder.alert_style}",
+		"alert_position": "${cls_builder.alert_position}",
+		"oos_button_behavioir": "${cls_builder.oos_button_behavioir}",
+		"oos_message_behavioir": "${cls_builder.oos_message_behavioir}",
+		"oos_message": "${cls_builder.oos_message}",
+		"oos_style": "${cls_builder.oos_style}",
+		"oos_decoration": "${cls_builder.oos_decoration}",
+		"oos_font_family": "${cls_builder.oos_font_family}",
+		"oos_color": "${cls_builder.oos_color}",
+		"oos_element": "${cls_builder.oos_element}",
+
+		"position": "${builder.position}",
+		"position_left": "${builder.position_left}",
+		"position_right": "${builder.position_right}",
+		"position_top": "${builder.position_top}",
+		"position_bottom": "${builder.position_bottom}",
+		"position_z_index": "${builder.position_z_index}",
+		"margin": "${builder.margin}",
+		"margin_remove_top": "${builder.margin_remove_top}",
+		"margin_remove_bottom": "${builder.margin_remove_bottom}",
+		"maxwidth": "${builder.maxwidth}",
+		"maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+		"block_align": "${builder.block_align}",
+		"block_align_breakpoint": "${builder.block_align_breakpoint}",
+		"block_align_fallback": "${builder.block_align_fallback}",
+		"text_align": "${builder.text_align}",
+		"text_align_breakpoint": "${builder.text_align_breakpoint}",
+		"text_align_fallback": "${builder.text_align_fallback}",
+		"animation": "${builder.animation}",
+		"_parallax_button": "${builder._parallax_button}",
+		"visibility": "${builder.visibility}",
+		"name": "${builder.name}",
+		"status": "${builder.status}",
+		"class": "${builder.cls}",
+		"attributes": "${builder.attrs}",
+		"css": {
+			"label": "CSS",
+			"description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>, <code>.el-item</code>, <code>.el-content</code>",
+			"type": "editor",
+			"editor": "code",
+			"mode": "css",
+			"attrs": {
+				"debounce": 500
+			}
+		}
+	},
+	"fieldset": {
+		"default": {
+			"type": "tabs",
+			"fields": [
+				{
+					"title": "Setup",
+					"fields": [
+						{
+							"label": "Source",
+							"type": "group",
+				            "description": "You need 'Add 2 Cart Anywhere' plugin in order to choose a different Product source",
+							"fields": [
+								"product_source",
+								"product_source_manual"
+							]
+						},
+						{
+							"label": "Button Design",
+							"type": "group",
+							"divider": true,
+							"fields": [
+								"add_to_cart_button_text",
+								"add_to_cart_button_with_icon",
+								"add_to_cart_button_icon",
+								"add_to_cart_button_icon_align",
+								"add_to_cart_button_style",
+								"add_to_cart_button_size",
+								"add_to_cart_button_fullwidth"
+							]
+						},
+						{
+							"label": "Button Behaviour",
+							"type": "group",
+							"divider": true,
+							"fields": [
+								"after_add_to_cart_behaviour",
+								"checkout_button_text",
+								"checkout_button_with_icon",
+								"checkout_button_icon",
+								"checkout_button_icon_align",
+								"checkout_button_style",
+								"checkout_button_size",
+								"checkout_button_fullwidth",
+								"alert",
+								"alert_message",
+								"alert_style",
+								"alert_position"
+							]
+						},
+						{
+							"label": "Out Of Stock",
+							"type": "group",
+							"description": "This params are applied only if the product has 'Manage Stock' option enabled",
+							"divider": true,
+							"fields": [
+								"oos_button_behavioir",
+								"oos_message_behavioir",
+								"oos_message",
+								"oos_style",
+								"oos_decoration",
+								"oos_font_family",
+								"oos_color",
+								"oos_element"
+							]
+						}
+					]
+				},
+				{
+					"title": "Settings",
+					"fields": [
+						{
+							"label": "General",
+							"type": "group",
+							"fields": [
+								"position",
+								"position_left",
+								"position_right",
+								"position_top",
+								"position_bottom",
+								"position_z_index",
+								"margin",
+								"margin_remove_top",
+								"margin_remove_bottom",
+								"maxwidth",
+								"maxwidth_breakpoint",
+								"block_align",
+								"block_align_breakpoint",
+								"block_align_fallback",
+								"text_align",
+								"text_align_breakpoint",
+								"text_align_fallback",
+								"animation",
+								"_parallax_button",
+								"visibility"
+							]
+						}
+					]
+				},
+				"${builder.advanced}"
+			]
+		}
+	}
+}

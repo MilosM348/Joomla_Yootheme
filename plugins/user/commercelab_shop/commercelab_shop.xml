@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<extension version="3.1" type="plugin" group="user" method="upgrade">
+    <name>CommerceLab  - User</name>
+    <version>1.0.0</version>
+    <creationDate>May 2020</creationDate>
+    <author>Cloud Chief - CommerceLab </author>
+    <authorEmail>info@CommerceLab.solutions</authorEmail>
+    <authorUrl>https://CommerceLab.solutions</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2020 CommerceLab . All rights reserved.</copyright>
+    <description>Plugin to create CommerceLab  Customers</description>
+    <files>
+        <filename plugin="commercelab_shop">commercelab_shop.php</filename>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

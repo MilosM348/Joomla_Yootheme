@@ -1,0 +1,841 @@
+{
+    "@import": "./element.php",
+    "name": "commercelab_shop_cartuser",
+    "title": "User Form",
+    "icon": "${url:images/commercelab_shop_cartuser.svg}",
+    "iconSmall": "${url:images/commercelab_shop_cartuser_small.svg}",
+    "element": true,
+    "container": true,
+    "group": "CommerceLab Cart & Checkout",
+    "placeholder": {
+        "props": {
+            "content": "Add To Cart",
+            "icon": "",
+            "button_style": "default"
+        }
+    },
+    "templates": {
+        "render": "./templates/template.php",
+        "content": "./templates/content.php"
+    },
+    "fields": {
+
+        "panel_background": {
+            "label":"Color",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "uk-background-default",
+                "Primary": "uk-background-primary",
+                "Secondary": "uk-background-secondary",
+                "Muted": "uk-background-muted"
+            }
+        },
+        "panel_margin": {
+            "label":"Margin",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-margin-small",
+                "Medium": "uk-margin",
+                "Large": "uk-margin-large"
+            }
+        },
+        "panel_padding": {
+            "label":"Padding",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-padding-small",
+                "Medium": "uk-padding",
+                "Large": "uk-padding-large"
+            }
+        },
+        "panel_color_inverse": {
+            "label":"Color Inverse",
+            "type": "radio",
+            "default": "",
+            "options": {
+                "None": "",
+                "Light": "uk-light",
+                "Dark": "uk-dark"
+            },
+            "description": "This can be used to force the inner content to be Light or Dark, depending on the background"
+        },
+        
+        "panel_title": {
+            "label":"Title",
+            "default":"User Details"
+        },
+
+
+
+        "title_style": {
+            "label": "Style",
+            "description": "Headline styles differ in font size and font family.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "2X-Large": "heading-2xlarge",
+                "X-Large": "heading-xlarge",
+                "Large": "heading-large",
+                "Medium": "heading-medium",
+                "Small": "heading-small",
+                "H1": "h1",
+                "H2": "h2",
+                "H3": "h3",
+                "H4": "h4",
+                "H5": "h5",
+                "H6": "h6",
+                "Meta": "meta",
+                "Lead": "lead"
+            },
+            "show": "panel_title"
+        },
+        "title_decoration": {
+            "label": "Decoration",
+            "description": "Decorate the headline with a divider, bullet or a line that is vertically centered to the heading.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Divider": "divider",
+                "Bullet": "bullet",
+                "Line": "line"
+            },
+            "show": "panel_title"
+        },
+        "title_font_family": {
+            "label": "Font Family",
+            "description": "Select an alternative font family. Mind that not all styles have different font families.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "default",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Tertiary": "tertiary"
+            },
+            "show": "panel_title"
+        },
+        "title_color": {
+            "label": "Color",
+            "description": "Select the text color. If the Background option is selected, styles that don't apply a background image use the primary color instead.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Muted": "muted",
+                "Emphasis": "emphasis",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Success": "success",
+                "Warning": "warning",
+                "Danger": "danger",
+                "Background": "background"
+            },
+            "show": "panel_title"
+        },
+        "title_element": {
+            "label": "HTML Element",
+            "description": "Choose one of the HTML elements to fit the semantic structure.",
+            "type": "select",
+            "default": "h3",
+            "options": {
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "div": "div",
+                "span": "span"
+            },
+            "show": "panel_title"
+        },
+
+
+        "showlogin": {
+            "type": "checkbox",
+            "text": "Show",
+            "default":"1",
+            "label": "Login"
+        },
+
+        "showlogin_text": {
+            "label": "Title",
+            "attrs": {
+                "placeholder": "Login"
+            },
+            "enable": "showlogin"
+        },
+        
+        "showregister": {
+            "label": "Register",
+            "type": "checkbox",
+            "text": "Show",
+            "default":"1",
+            "enable": "${commercelab.joomla.user.allowUserRegistration}"
+        },
+        "showregister_text": {
+            "label": "Title",
+            "attrs": {
+                "placeholder": "Register"
+            },
+            "enable": "showregister && ${commercelab.joomla.user.allowUserRegistration}"
+        },
+
+        "showguest": {
+            "label": "Guest",
+            "type": "checkbox",
+            "text": "Show",
+            "default":"1",
+            "enable": "${commercelab.component.config.guest_checkout_allowed}"
+        },
+        
+        "showguest_text": {
+            "label": "Title",
+            "attrs": {
+                "placeholder": "Guest"
+            },
+            "enable": "showguest && ${commercelab.component.config.guest_checkout_allowed}"
+        },
+
+        "show_loggedin": {
+            "type": "checkbox",
+            "text": "Logged in message",
+            "default":"1",
+            "Label": "Show"
+        },
+        "show_logout_button": {
+            "type": "checkbox",
+            "text": "Logout Button",
+            "default":"1",
+            "enable": "show_loggedin",
+            "description":"Options to show if user is logged in"
+        },
+        "loggedin_message": {
+            "default":"Hello [user_name], welcome",
+            "attrs": {
+                "placeholder": "Hello [user_name], welcome"
+            },
+            "enable": "show_loggedin"
+        },
+
+        "showguest_message": {
+            "label":"Before Guest Text",
+            "default":"You can continue as Guest",
+            "attrs": {
+                "placeholder": "You can continue as Guest"
+            },
+            "enable": "showguest"
+        },
+
+        "guestcheckout_message": {
+            "label":"Guest Checkout Text",
+            "default":"This is a guest Checkout?",
+            "attrs": {
+                "placeholder": "This is a Guest Checkout?"
+            },
+            "enable": "showguest"
+        },
+
+        "guestcheckout_button_message": {
+            "label":"Guest Checkout Button",
+            "default":"Login/Register instead?",
+            "attrs": {
+                "placeholder": "Login/Register instead?"
+            },
+            "enable": "showguest"
+        },
+
+        "showguest_message_style": {
+            "label": "Style",
+            "description": "Headline styles differ in font size and font family.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "2X-Large": "heading-2xlarge",
+                "X-Large": "heading-xlarge",
+                "Large": "heading-large",
+                "Medium": "heading-medium",
+                "Small": "heading-small",
+                "H1": "h1",
+                "H2": "h2",
+                "H3": "h3",
+                "H4": "h4",
+                "H5": "h5",
+                "H6": "h6",
+                "Meta": "meta",
+                "Lead": "lead"
+            },
+            "show": "showguest_message && showguest || guestcheckout_message && showguest"
+        },
+
+        "showguest_message_decoration": {
+            "label": "Decoration",
+            "description": "Decorate the headline with a divider, bullet or a line that is vertically centered to the heading.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Divider": "divider",
+                "Bullet": "bullet",
+                "Line": "line"
+            },
+            "show": "showguest_message && showguest || guestcheckout_message && showguest"
+        },
+        "showguest_message_font_family": {
+            "label": "Font Family",
+            "description": "Select an alternative font family. Mind that not all styles have different font families.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "default",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Tertiary": "tertiary"
+            },
+            "show": "showguest_message && showguest || guestcheckout_message && showguest"
+        },
+        "showguest_message_color": {
+            "label": "Color",
+            "description": "Select the text color. If the Background option is selected, styles that don't apply a background image use the primary color instead.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Muted": "muted",
+                "Emphasis": "emphasis",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Success": "success",
+                "Warning": "warning",
+                "Danger": "danger",
+                "Background": "background"
+            },
+            "show": "showguest_message && showguest || guestcheckout_message && showguest"
+        },
+        "showguest_message_element": {
+            "label": "HTML Element",
+            "description": "Choose one of the HTML elements to fit the semantic structure.",
+            "type": "select",
+            "default": "h5",
+            "options": {
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "div": "div",
+                "span": "span"
+            },
+            "show": "showguest_message && showguest || guestcheckout_message && showguest"
+        },
+
+        "loggedin_message_style": {
+            "label": "Style",
+            "description": "Headline styles differ in font size and font family.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "2X-Large": "heading-2xlarge",
+                "X-Large": "heading-xlarge",
+                "Large": "heading-large",
+                "Medium": "heading-medium",
+                "Small": "heading-small",
+                "H1": "h1",
+                "H2": "h2",
+                "H3": "h3",
+                "H4": "h4",
+                "H5": "h5",
+                "H6": "h6",
+                "Meta": "meta",
+                "Lead": "lead"
+            },
+            "show": "loggedin_message && show_loggedin"
+        },
+        "loggedin_message_decoration": {
+            "label": "Decoration",
+            "description": "Decorate the headline with a divider, bullet or a line that is vertically centered to the heading.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Divider": "divider",
+                "Bullet": "bullet",
+                "Line": "line"
+            },
+            "show": "loggedin_message && show_loggedin"
+        },
+        "loggedin_message_font_family": {
+            "label": "Font Family",
+            "description": "Select an alternative font family. Mind that not all styles have different font families.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "default",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Tertiary": "tertiary"
+            },
+            "show": "loggedin_message && show_loggedin"
+        },
+        "loggedin_message_color": {
+            "label": "Color",
+            "description": "Select the text color. If the Background option is selected, styles that don't apply a background image use the primary color instead.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Muted": "muted",
+                "Emphasis": "emphasis",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Success": "success",
+                "Warning": "warning",
+                "Danger": "danger",
+                "Background": "background"
+            },
+            "show": "loggedin_message && show_loggedin"
+        },
+        "loggedin_message_element": {
+            "label": "HTML Element",
+            "description": "Choose one of the HTML elements to fit the semantic structure.",
+            "type": "select",
+            "default": "h3",
+            "options": {
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "div": "div",
+                "span": "span"
+            },
+            "show": "loggedin_message && show_loggedin"
+        },
+        
+        "logout_button": {
+            "type": "checkbox",
+            "text": "Show",
+            "default":"1",
+            "label": "Logout Button"
+        },
+
+        "tabs_first": {
+            "label": "First",
+            "type": "select",
+            "default":"login",
+            "options": {
+                "Login":"login",
+                "Register":"register",
+                "Guest":"guest"
+            }
+        },
+
+        "tabs_second": {
+            "label": "Second",
+            "type": "select",
+            "default":"register",
+            "options": {
+                "Login":"login",
+                "Register":"register",
+                "Guest":"guest"
+            }
+        },
+
+        "tabs_third": {
+            "label": "Third",
+            "type": "select",
+            "default":"guest",
+            "options": {
+                "Login":"login",
+                "Register":"register",
+                "Guest":"guest"
+            }
+        },
+
+        "tabs_position": {
+            "label": "Position",
+            "type": "select",
+            "default":"top",
+            "options": {
+                "Top":"top",
+                "Left":"left",
+                "Right":"right"
+            }
+        },
+
+        "tabs_width": {
+            "label": "Width",
+            "type": "select",
+            "default":"auto",
+            "options": {
+                "Auto":"auto",
+                "Quarter":"quarter",
+                "Third":"third",
+                "Half":"half"
+            },
+            "show":"tabs_position != 'top"
+        },
+
+        "tabs_button_text": {
+            "label": "Button Text",
+            "default": "Proceed",
+            "attrs": {
+                "placeholder": "Proceed"
+            }
+        },
+
+        "tabs_button_size": {
+            "label": "Size",
+            "type": "select",
+            "default": "",
+            "options": {
+                "Small": "uk-button-small",
+                "Default": "",
+                "Large": "uk-button-large"
+            }
+        },
+        "tabs_button_alignment": {
+            "label": "Alignment",
+            "type": "radio",
+            "default": "uk-text-right",
+            "options": {
+                "Left": "uk-text-left",
+                "Right": "uk-text-right"
+            }
+        },
+        "tabs_button_type": {
+            "label": "Type",
+            "type": "select",
+            "default": "uk-button-primary",
+            "options": {
+                "Default": "uk-button-default",
+                "Primary": "uk-button-primary",
+                "Secondary": "uk-button-secondary",
+                "Success": "uk-button-success",
+                "Danger": "uk-button-danger",
+                "Warning": "uk-button-warning"
+            }
+        },
+
+
+        "nav_type": {
+            "label": "Nav Type",
+            "type": "radio",
+            "default":"uk-tab",
+            "options": {
+                "Tabs":"uk-tab",
+                "Buttons":"uk-switcher"
+            }
+        },
+
+        "nav_switcher_style": {
+            "label": "Switcher Style",
+            "type": "radio",
+            "default":"uk-subnav uk-subnav-pill",
+            "options": {
+                "Pill":"uk-subnav uk-subnav-pill"
+            },
+            "show": "nav_type == 'uk-switcher'"
+        },
+        "nav_tab_position": {
+            "label": "Tabs Position",
+            "type": "radio",
+            "default":"",
+            "options": {
+                "Top":"",
+                "Left":"uk-tab-left",
+                "Right":"uk-tab-right"
+            },
+            "show": "nav_type == 'uk-tab'"
+        },
+
+
+        "show_labels": {
+            "type": "checkbox",
+            "default": true,
+            "text": "Show Labels"
+        },
+        "show_placeholders": {
+            "type": "checkbox",
+            "default": true,
+            "text": "Show Placeholders"
+        },
+        "fields_size": {
+            "label": "Fields Size",
+            "description": "Set size for all fields",
+            "type": "select",
+            "default": "",
+            "options": {
+                "Small": "uk-form-small",
+                "Default": "",
+                "Large": "uk-form-large"
+            }
+        },
+        "labels_layout": {
+            "label": "Labels Layout",
+            "type": "select",
+            "default": "uk-form-stacked",
+            "options": {
+                "Labels on Top": "uk-form-stacked",
+                "Labels Inline": "uk-form-horizontal"
+            }
+        },
+
+        "fields_width": {
+            "label":"Fields Width", 
+            "type":"select", 
+            "default":"uk-child-width-1-1@s", 
+            "options":{
+                "Full":"uk-child-width-1-1@s", 
+                "Half":"uk-child-width-1-2@s", 
+                "Third":"uk-child-width-1-3@s", 
+                "Quarter":"uk-child-width-1-4@s", 
+                "Large":"uk-child-width-large@s",
+                "Medium":"uk-child-width-medium@s",
+                "Small":"uk-child-width-small@s",
+                "Custom":"custom"
+            }
+        },
+        "fields_width_custom": {
+            "label": "Custom Width",
+            "attrs": {
+                "placeholder":"uk-child-width-expand@s uk-child-width-medium ..."
+            },
+            "enable": "fields_width == 'custom'",
+            "description": "Choose one of the predefined widths for all fields, or add a custom UIkit class. This is applied to the container of the field, you can also set a global option to style all fields, making them more or less compact. If this option is enabled individual width will have no effect"
+        },
+        "rows_spacing": {
+            "label": "Rows Separation",
+            "type": "select",
+            "default": "uk-margin-small-top",
+            "options": {
+                "Compact": "uk-margin-remove",
+                "Normal": "uk-margin-small-top",
+                "Large": "uk-margin-large-top"
+            }
+        },
+
+        "position": "${builder.position}",
+        "position_left": "${builder.position_left}",
+        "position_right": "${builder.position_right}",
+        "position_top": "${builder.position_top}",
+        "position_bottom": "${builder.position_bottom}",
+        "position_z_index": "${builder.position_z_index}",
+        "margin": "${builder.margin}",
+        "margin_remove_top": "${builder.margin_remove_top}",
+        "margin_remove_bottom": "${builder.margin_remove_bottom}",
+        "maxwidth": "${builder.maxwidth}",
+        "maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+        "block_align": "${builder.block_align}",
+        "block_align_breakpoint": "${builder.block_align_breakpoint}",
+        "block_align_fallback": "${builder.block_align_fallback}",
+        "text_align": "${builder.text_align}",
+        "text_align_breakpoint": "${builder.text_align_breakpoint}",
+        "text_align_fallback": "${builder.text_align_fallback}",
+        "animation": "${builder.animation}",
+        "_parallax_button": "${builder._parallax_button}",
+        "visibility": "${builder.visibility}",
+        "name": "${builder.name}",
+        "status": "${builder.status}",
+        "id": "${builder.id}",
+        "class": "${builder.cls}",
+        "attributes": "${builder.attrs}",
+        "css": {
+            "label": "CSS",
+            "description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>, <code>.el-item</code>, <code>.el-content</code>",
+            "type": "editor",
+            "editor": "code",
+            "mode": "css",
+            "attrs": {
+                "debounce": 500
+            }
+        }
+    },
+    "fieldset": {
+        "default": {
+            "type": "tabs",
+            "fields": [
+                {
+                    "title": "Setup",
+                    "fields": [
+                        {
+                            "label": "Panel",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "panel_title",
+                                "title_element",
+                                "title_style",
+                                "title_decoration",
+                                "title_font_family",
+                                "title_color",
+                                "link_style"
+                            ]
+
+                        },
+
+
+                        {
+                            "type": "grid",
+                            "description": "User Registration is disabled in Joomla Configuration, in order to allow the users to registered on the checkout, please enable it first <a target='_blank' href='index.php?option=com_config&view=component&component=com_users'>here</a>",
+                            "name": "_joomla_registration_disabled",
+                            "show": "!${commercelab.joomla.user.allowUserRegistration}"
+                        },
+                        {
+                            "type": "grid",
+                            "description": "Guest Checkout is disabled in Component Configuration, in order to allow the users to proceed with the checkout as guest, please enable it first <a target='_blank' href='index.php?option=com_config&view=component&component=com_commercelab_shop'>here</a>",
+                            "name": "_guest_disabled_in_config",
+                            "show": "!${commercelab.component.config.guest_checkout_allowed}"
+                        },
+                        {
+                            "label": "User Options",
+                            "name": "_user_options",
+                            "type": "grid",
+                            "width": "1-3",
+                            "fields": [
+                                "showlogin",
+                                "showregister",
+                                "showguest"
+                            ]
+                        },
+
+                        {
+                            "type": "grid",
+                            "name": "_user_optoins_text",
+                            "width": "1-3",
+                            "fields": [
+                                "showlogin_text",
+                                "showregister_text",
+                                "showguest_text"
+                            ]
+                        },
+                        {
+                            "type": "grid",
+                            "description": "Guest Checkout is still active untill you disable it in <a target='_blank' href='index.php?option=com_config&view=component&component=com_commercelab_shop'>Component Configuration</a>, this para is only affecting the visual aspect, in order to make that as part of server side validation you need to set it in Component Configuration",
+                            "name": "_guest_still_enabled_in_config",
+                            "show": "!showguest && ${commercelab.component.config.guest_checkout_allowed}"
+                        },
+                        {
+                            "name": "_tabs_order",
+                            "type": "grid",
+                            "width": "1-3",
+                            "divider": true,
+                            "fields": [
+                                "login_order",
+                                "register_order",
+                                "guest_order"
+                            ]
+                        },
+                        {
+                            "label": "Tabs Layout",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "tabs_first",
+                                "tabs_second",
+                                "tabs_third",
+                                "tabs_width",
+                                "tabs_button_text",
+                                "tabs_button_size",
+                                "tabs_button_type",
+                                "tabs_button_alignment"
+                            ]
+
+                        },
+                        {
+                            "label": "Logged in",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "show_loggedin",
+                                "loggedin_message",
+                                "loggedin_message_element",
+                                "loggedin_message_style",
+                                "loggedin_message_decoration",
+                                "loggedin_message_font_family",
+                                "loggedin_message_color"
+                            ],
+                            "description":"Options to show if user is logged in"
+
+                        },
+                        {
+                            "label": "Guest",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "showguest_message",
+                                "guestcheckout_message",
+                                "guestcheckout_button_message",
+                                "showguest_message_style",
+                                "showguest_message_decoration",
+                                "showguest_message_font_family",
+                                "showguest_message_color",
+                                "showguest_message_element"
+                            ],
+                            "description":"Styling Options for Guest Message, if Guest Checkout is enabled"
+
+                        },
+                        {
+                            "label": "Forms Layout",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "show_labels",
+                                "show_placeholders",
+                                "fields_size",
+                                "labels_layout",
+                                "fields_width",
+                                "fields_width_custom",
+                                "rows_spacing"
+                            ]
+
+                        }
+                    ]
+                },
+                {
+                    "title": "Settings",
+                    "fields": [
+                        {
+                            "label": "Panel",
+                            "type": "group",
+                            "fields": [
+                                "panel_background",
+                                "panel_margin",
+                                "panel_padding",
+                                "panel_color_inverse"
+                            ]
+                        },
+                        {
+                            "label": "General",
+                            "type": "group",
+                            "fields": [
+                                "style",
+                                "position",
+                                "position_left",
+                                "position_right",
+                                "position_top",
+                                "position_bottom",
+                                "position_z_index",
+                                "margin",
+                                "margin_remove_top",
+                                "margin_remove_bottom",
+                                "maxwidth",
+                                "maxwidth_breakpoint",
+                                "block_align",
+                                "block_align_breakpoint",
+                                "block_align_fallback",
+                                "text_align",
+                                "text_align_breakpoint",
+                                "text_align_fallback",
+                                "animation",
+                                "_parallax_button",
+                                "visibility"
+                            ]
+                        }
+                    ]
+                },
+                "${builder.advanced}"
+            ]
+        }
+    }
+}

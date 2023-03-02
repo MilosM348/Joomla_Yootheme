@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab Shop -->
+<!-- @author    Ray Lawlor - pro2.store -->
+<!-- @copyright Copyright (C) 2021 Ray Lawlor - pro2.store -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<form>
+    <fieldset name="details"  addfieldpath="/administrator/components/com_commercelab_shop/models/fields">
+
+        <field name="name" type="title" default="" label="Shop Name" description="This name will be visible" />
+
+    </fieldset>
+
+</form>

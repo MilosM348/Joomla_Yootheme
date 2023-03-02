@@ -1,0 +1,199 @@
+{
+	"@import": "./element.php",
+	"name": "commercelab_shop_variants",
+	"title": "Product Variants",
+	"icon": "${url:images/commercelab_shop_variants.svg}",
+	"iconSmall": "${url:images/commercelab_shop_variants_small.svg}",
+	"group": "CommerceLab Products",
+	"element": true,
+	"defaults": {
+		"product_source": "dynamic"
+	},
+	"templates": {
+		"render": "./templates/template.php",
+		"content": "./templates/content.php"
+	},
+	"fields": {
+
+        "product_source": {
+            "label":"Product source",
+            "type": "select",
+            "default": "dynamic",
+            "options": {
+                "Dynamic": "dynamic",
+                "Manual": "manual"
+            },
+            "enable":"${commercelab.add2cartanywhere}"
+        },
+
+        "product_source_manual": {
+            "label":"Manual product",
+            "type": "select",
+            "options": "${commercelab.component.products.products_list}",
+            "show":"${commercelab.add2cartanywhere}",
+            "enable":"product_source == 'manual'"
+        },
+
+		"unavailableMessage": {
+			"label": "Variant Unavailable Message",
+			"description": "Message to show the customer when a variant is unavailable or out of stock"
+		},
+
+		"layout": {
+			"label": "Layout",
+			"type": "select",
+			"default": "radio",
+			"options": {
+				"Dropdown": "dropdown",
+				"Radio": "radio",
+				"Buttons": "buttons"
+			}
+		},
+
+	    "button_style": {
+	        "label": "Style",
+	        "type": "select",
+	        "default": "uk-button-default",
+	        "options": {
+	            "Default": "uk-button-default",
+	            "Primary": "uk-button-primary",
+	            "Secondary": "uk-button-secondary",
+	            "Danger": "uk-button-danger",
+	            "Text": "uk-button-text",
+	            "Link": "",
+	            "Link Muted": "uk-button-link-muted",
+	            "Link Text": "uk-button-link-text"
+	        },
+	        "show":"layout == 'buttons'"
+	    },
+	    "button_size": {
+	        "label": "Size",
+	        "type": "select",
+	        "options": {
+	            "Small": "uk-button-small",
+	            "Default": "",
+	            "Large": "uk-button-large"
+	        },
+	        "show":"layout == 'buttons'"
+	    },
+	    
+		"variant_price_type": {
+			"label": "Price Type",
+			"type": "select",
+			"default": "relative",
+			"options": {
+				"Relative": "relative",
+				"Total": "total"
+			},
+			"description": "Relative price will show the difference amount based on the base price in positive or egative amount depending of it's relation, while the total will show the final price"
+		},
+
+        "with_tax": {
+            "label": "Show with Tax",
+            "type": "checkbox",
+            "default": 1,
+            "text": "Price with or without tax"
+        },
+
+		"position": "${builder.position}",
+		"position_left": "${builder.position_left}",
+		"position_right": "${builder.position_right}",
+		"position_top": "${builder.position_top}",
+		"position_bottom": "${builder.position_bottom}",
+		"position_z_index": "${builder.position_z_index}",
+		"margin": "${builder.margin}",
+		"margin_remove_top": "${builder.margin_remove_top}",
+		"margin_remove_bottom": "${builder.margin_remove_bottom}",
+		"maxwidth": "${builder.maxwidth}",
+		"maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+		"block_align": "${builder.block_align}",
+		"block_align_breakpoint": "${builder.block_align_breakpoint}",
+		"block_align_fallback": "${builder.block_align_fallback}",
+		"text_align": "${builder.text_align}",
+		"text_align_breakpoint": "${builder.text_align_breakpoint}",
+		"text_align_fallback": "${builder.text_align_fallback}",
+		"animation": "${builder.animation}",
+		"_parallax_button": "${builder._parallax_button}",
+		"visibility": "${builder.visibility}",
+		"name": "${builder.name}",
+		"status": "${builder.status}",
+		"class": "${builder.cls}",
+		"attributes": "${builder.attrs}",
+		"css": {
+			"label": "CSS",
+			"description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>, <code>.el-item</code>, <code>.el-content</code>",
+			"type": "editor",
+			"editor": "code",
+			"mode": "css",
+			"attrs": {
+				"debounce": 500
+			}
+		}
+	},
+	"fieldset": {
+		"default": {
+			"type": "tabs",
+			"fields": [
+				{
+					"title": "Setup",
+					"fields": [
+						{	
+							"label": "Source",
+							"type": "group",
+							"description": "You need 'Add 2 Cart Anywhere' plugin in order to choose a different Product source",
+							"fields": [
+								"product_source",
+								"product_source_manual"
+							]
+						},
+						{
+							"label": "Layout",
+							"type": "group",
+							"divider": true,
+							"fields": [
+								"unavailableMessage",
+								"layout",
+								"button_style",
+								"button_size",
+								"variant_price_type",
+								"with_tax"
+							]
+						}
+					]
+				},
+				{
+					"title": "Settings",
+					"fields": [
+						{
+							"label": "General",
+							"type": "group",
+							"fields": [
+								"position",
+								"position_left",
+								"position_right",
+								"position_top",
+								"position_bottom",
+								"position_z_index",
+								"margin",
+								"margin_remove_top",
+								"margin_remove_bottom",
+								"maxwidth",
+								"maxwidth_breakpoint",
+								"block_align",
+								"block_align_breakpoint",
+								"block_align_fallback",
+								"text_align",
+								"text_align_breakpoint",
+								"text_align_fallback",
+								"animation",
+								"_parallax_button",
+								"visibility"
+							]
+						}
+					]
+				},
+				"${builder.advanced}"
+			]
+		}
+	}
+}

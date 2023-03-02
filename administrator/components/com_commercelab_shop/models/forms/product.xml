@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<form>
+    <fieldset name="details" addfieldpath="/administrator/components/com_commercelab_shop/models/fields">
+
+        <field name="title" type="title" default="title" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_PRODUCT_TITLE" description="" size="10" class="uk-input uk-form-width-medium uk-form-large"/>
+        <field name="subtitle" type="subtitle" default="subtitle" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_PRODUCT_SUBTITLE" description="" size="10" class="uk-input uk-form-width-medium uk-form-large"/>
+
+        <field name="base_price" type="baseprice" default="0" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_BASE_PRICE" description=""/>
+
+        <field name="sku" type="vuetext" default="0" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_SKU_LABEL" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" filter="int" />
+
+        <field name="manage_stock" type="pinputswitch" default="0" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_INVENTORY_MANAGE_STOCK_LABEL" description=""
+               class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field name="stock" type="stock" default="0" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_INVENTORY_CURRENT_STOCK_LABEL" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" />
+
+<!--         <field name="short_desc" type="editor" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_SHORT_DESCRIPTION_LABEL" description="" width="" height="100px" filter="safehtml"/>
+        <field name="long_desc" type="editor" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_LONG_DESCRIPTION_LABEL" description="" width="" height="100px" filter="safehtml"/> -->
+
+        <field name="teaserimage" type="image" directory="" preview="true" class="uk-input uk-form-width-small non-uk-input" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_INTRO_IMAGE_LABEL"  />
+
+        <field name="fullimage" type="image" directory="" preview="true" class="uk-input uk-form-width-small non-uk-input" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_FULL_IMAGE_LABEL" />
+
+        <field name="shipping_mode" type="shippingmode" default="none" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_SHIPPING_MODE" description="" />
+
+        <field name="flatfee" type="flatfee" default="0" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_SHIPPING_FLAT_FEE" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" />
+        <field name="weight" type="byweight" default="0" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_SHIPPING_WEIGHT" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" />
+
+        <field name="state" type="pinputswitch" default="1" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_PUBLISHED" description=""
+               class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field name="featured" type="pinputswitch" default="0" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_ORGANISATION_FEATURED_LABEL" description=""
+               class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field name="access" type="accesslevel"
+               label="JFIELD_ACCESS_LABEL"
+               description="JFIELD_ACCESS_DESC"
+               class="span12 small"/>
+
+        <field name="category" type="CategoryEdit" extension="com_content" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_ORGANISATION_CATEGORY_SELECT_LABEL" description="" class="uk-select" required="true"/>
+
+        <field name="tags" type="tags" label="JTAG" description="" mode="ajax" class="inputbox span12 small" multiple="true"/>
+
+        <field name="publish_up_date" type="calendar" required="true" filter="user_utc" default="NOW" showtime="true" todaybutton="true" translateformat="true" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_PUBLISH_DATE_AND_TIME" />
+
+        <field name="taxclass" type="taxclasseslist" default="0" label="Tax Class" description="" />
+
+        <field name="apply_discount" type="pinputswitch" default="0" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_APPLY_DISCOUNT_LABEL" description=""
+               class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field name="discount" type="discount" default="0" label="COM_COMMERCELAB_SHOP_ADD_PRODUCT_DISCOUNT_LABEL" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" />
+
+        <field name="variants" type="variants" default="0" label="Product Variants" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" />
+
+        <field name="options" type="options" default="0" label="Product Options" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" />
+
+
+    </fieldset>
+
+</form>

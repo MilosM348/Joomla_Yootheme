@@ -1,0 +1,53 @@
+.label, .uk-label, a.label {
+    display: inline-block!important;
+    padding: 3px 10px!important;
+    background: #7bd5b2!important;
+    line-height: 1.55!important;
+    font-size: 13px!important;
+    color: #fff!important;
+    vertical-align: middle!important;
+    white-space: nowrap!important;
+    font-weight: 700!important;
+    letter-spacing: -.05rem!important;
+    border-radius: 15px!important;
+}
+
+.uk-label-success {
+    background-color: #84d182!important;
+    color: #fff!important;
+}
+
+.uk-label-s {
+    background-color: #007bff!important;
+    color: #fff!important;
+}
+
+.uk-label-x {
+    background-color: #5856d6!important;
+    color: #fff!important;
+}
+
+.uk-label-d {
+    background-color: #db3f00!important;
+    color: #fff!important;
+}
+
+.uk-label-r {
+    background-color: #ff9500!important;
+    color: #fff!important;
+}
+
+.uk-label-p {
+    background-color: #ffcc00!important;
+    color: #fff!important;
+}
+
+.uk-label-f {
+    background-color: #4cd963!important;
+    color: #fff
+}
+.uk-label-c {
+    background-color: #5ac7fa!important;
+    color: #fff
+}
+

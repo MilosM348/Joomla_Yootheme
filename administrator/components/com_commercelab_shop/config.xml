@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<config>
+    <fieldset
+            name="global_config"
+            label="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_LABEL"
+            description="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_DESC">
+
+        <field name="shop_name" type="text" default="CommerceLab Shop" label="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_SHOP_NAME_LABEL" description="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_SHOP_NAME_DESC" size="50" />
+        <field name="shop_logo" type="media" directory="" preview="true"  label="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_LOGO_LABEL" description="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_LOGO_DESC" />
+        <field name="shop_brandcolour" type="color" default="#0047c3" format="hex"
+               label="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_BRAND_COLOUR_LABEL"
+               description="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_BRAND_COLOUR_DESC" />
+
+        <field
+                type="email"
+                name="supportemail"
+                label="COM_COMMERCELAB_SHOP_CONFIG_SUPPORT_EMAIL_LABEL"
+                default=""
+        />
+        <field
+                type="menuitem"
+                name="terms_and_conditions_url"
+                label="COM_COMMERCELAB_SHOP_CONFIG_TERMS_AND_CONDITIONS_URL_LABEL"
+                default=""
+                filter="int"
+        />
+
+        <field
+                type="menuitem"
+                name="checkout_page_url"
+                label="COM_COMMERCELAB_SHOP_CONFIG_CHECKOUT_PAGE_URL_LABEL"
+                default=""
+                filter="int"
+        />
+
+        <field
+                type="menuitem"
+                name="cart_page_url"
+                label="COM_COMMERCELAB_SHOP_CONFIG_CART_PAGE_URL_LABEL"
+                default=""
+                filter="int"
+        />
+
+        <field
+                type="menuitem"
+                name="confirmation_page_url"
+                label="COM_COMMERCELAB_SHOP_CONFIG_CONFIRMATION_PAGE_URL_LABEL"
+                default=""
+                filter="int"
+        />
+
+<!--         <field
+                type="menuitem"
+                name="cancellation_page_url"
+                label="COM_COMMERCELAB_SHOP_CONFIG_CANCELLATION_PAGE_URL_LABEL"
+                default=""
+                filter="int"
+        /> -->
+        <field name="defaultproductcategory" type="category" extension="com_content" label="COM_COMMERCELAB_SHOP_CONFIG_DEFAULT_PRODUCT_LABEL" description="COM_COMMERCELAB_SHOP_CONFIG_DEFAULT_PRODUCT_DESC" />
+        <field name="defaultproductaccess" type="accesslevel"
+               label="COM_COMMERCELAB_SHOP_CONFIG_DEFAULT_PRODUCT_ACCESS_LABEL"
+               description="COM_COMMERCELAB_SHOP_CONFIG_DEFAULT_PRODUCT_ACCESS_DESC"
+        />
+    </fieldset>
+
+    <fieldset name="taxes_settings" label="Taxes">
+
+        <field name="tax_label" type="text" default="Tax" label="Tax Label" description="The tax label is a generic name that describes the type of tax applied to orders in your store. This will be shown next to prices that include tax (per your display settings) and when taxes on carts, orders, and invoices are shown as one summarized line item. Some suggested values include Sales Tax, GST, VAT or just Tax." size="50" />
+
+        <field name="prices_entered_with_tax" type="radio" default="1" label="Prices entered with Taxes" description="If set as Yes, means that all product prices are input using your store’s default country tax rate." class="btn-group">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field name="calculate_tax_based_on" type="list" default="default_country" 
+            label="Calculate tax based on" 
+            description="Choose based on which contry the taxes will be calculated. Default country is your shop's Country, cinsedered that the product will be shipped from there, alternatively the rates can be taken from the Country from the Billing or Shipping address. If the customer did not entered an address yet, the tax rate will be calculated based on the default country, until the address is added."
+        >
+            <option value="default_country">Default Country</option>
+            <option value="customer_billing_address">Customer Billing Address</option>
+            <option value="customer_shipping_address">Customer Shipping Address</option>
+        </field>
+
+        <field name="shipping_tax_class" type="list" default="0" label="Shipping Tax class" description="COM_COMMERCELAB_SHOP_CONFIG_ADD_TAX_TO_SHIPPING_DESC">
+            <option value="0">No Tax</option>
+            <option value="taxrate">Standard Tax</option>
+            <option value="taxrate_reduced">Reduced Tax</option>
+            <option value="taxrate_extra">Extra Tax</option>
+        </field>
+
+        <field name="tax_totals_layout" type="list" default="single" label="Display Tax totals" description="If you are using more than one tax rate, you can display the totals in cart or checkout as a single tax or divided by different Tax Rates (classes)">
+            <option value="single">As a single Class</option>
+            <option value="separated_by_rates">Separated by rates</option>
+        </field>
+
+        <field name="tax_plugin" type="list" default="Coresystemtaxes" label="Tax Plugin">
+            <option value="Coresystemtaxes">Core System</option>
+        </field>
+<!-- 
+        <field name="discount_before_tax" type="radio" default="-1" label="Discount Before Tax" description="If set to Yes, the discount will be applied to the net value, independently on how you are adding your prices for each product. If this option is not relevant, than you can should leave it on Automatic, which will follow how you are adding the prices per product." class="btn-group">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+            <option value="-1">Auto</option>
+        </field>
+ -->
+<!--         <field name="add_default_country_tax_to_price" type="radio" default="1" label="COM_COMMERCELAB_SHOP_CONFIG_ADD_DEFAULT_COUNTRY_TAX_TO_PRICES" description="COM_COMMERCELAB_SHOP_CONFIG_ADD_DEFAULT_COUNTRY_TAX_TO_PRICES_DESC" class="btn-group">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+         -->
+    </fieldset>
+    <fieldset
+            name="checkout_settings"
+            label="COM_COMMERCELAB_SHOP_CONFIG_CHECKOUT_LABEL"
+            description="COM_COMMERCELAB_SHOP_CONFIG_FORM_DESC">
+
+        <field name="cart_persistence" type="radio" default="1" label="Cart Persistence" description="If enabled, the cart items will never be cleared from the cart, unless the product is disabled or removed" class="btn-group">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field
+            name="cart_persistence_lifetime"
+            description="Value in days, 0.1 days is 2.4h"
+            type="text"
+            label="Cart Lifetime"
+            showon="cart_persistence:0" 
+        />
+
+        <field name="guest_checkout_allowed" type="radio" default="1" label="Guest Checkout Allowed" description="If enabled, the users would be able to process the checkout without creating an account" class="btn-group">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field name="billing_required" type="radio" default="1" label="COM_COMMERCELAB_SHOP_BILLING_REQUIRED" description="COM_COMMERCELAB_SHOP_BILLING_REQUIRED_DESCRIPTION" class="btn-group">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+        
+        <field name="requiretandcs" type="radio" default="0" label="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_TANDCS_REQUIRED_LABEL" description="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_TANDCS_REQUIRED_DESC" class="btn-group">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+    </fieldset>
+    <fieldset
+            name="setup"
+            label="COM_COMMERCELAB_SHOP_CONFIG_OTHER"
+            description="COM_COMMERCELAB_SHOP_CONFIG_OTHER_DESC">
+
+        <field name="order_prefix" type="text" default="" label="COM_COMMERCELAB_SHOP_ORDER_PREFIX" description="COM_COMMERCELAB_SHOP_ORDER_PREFIX_DESC" />
+        <field name="order_start" type="text" min="0" default="1" label="COM_COMMERCELAB_SHOP_ORDER_INITIAL_NUMBER" description="COM_COMMERCELAB_SHOP_ORDER_INITIAL_NUMBER_DESC" />
+
+        <field name="invoice_prefix" type="text" default="" label="COM_COMMERCELAB_SHOP_INVOICE_PREFIX" description="COM_COMMERCELAB_SHOP_INVOICE_PREFIX_DESC" />
+        <field name="invoice_start" type="text" min="0" default="1" label="COM_COMMERCELAB_SHOP_INVOICE_INITIAL_NUMBER" description="COM_COMMERCELAB_SHOP_INVOICE_INITIAL_NUMBER_DESC" />
+
+        <field name="allow_guest_checkout" type="radio" default="1" label="COM_COMMERCELAB_SHOP_CONFIG_ALLOW_GUEST_CHECKOUT" description="COM_COMMERCELAB_SHOP_CONFIG_ALLOW_GUEST_CHECKOUT_DESCRIPTION" class="btn-group">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field name="append_guest_orders_to_user" type="radio" default="1" label="COM_COMMERCELAB_SHOP_CONFIG_APPEND_GUEST_CHECKOUT" description="COM_COMMERCELAB_SHOP_CONFIG_APPEND_GUEST_CHECKOUT_DESCRIPTION" class="btn-group">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field name="hash_expiry" type="number" default="5" label="COM_COMMERCELAB_SHOP_CONFIG_HASH_EXPIRY" description="COM_COMMERCELAB_SHOP_CONFIG_HASH_EXPIRY_DESC" min="1" max="525600" step="1" />
+
+    </fieldset>
+     <fieldset
+            name="updater"
+            label="COM_COMMERCELAB_SHOP_CONFIG_UPDATE"
+            description="COM_COMMERCELAB_SHOP_CONFIG_UPDATE_DESC">
+        <field name="subscription_key" type="text" label="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_SUBSCRIPTION_KEY_LABEL" description="COM_COMMERCELAB_SHOP_CONFIG_GLOBAL_SUBSCRIPTION_KEY_DESC" size="50" />
+
+    </fieldset>
+    <fieldset
+            name="permissions"
+            label="JCONFIG_PERMISSIONS_LABEL"
+            description="JCONFIG_PERMISSIONS_DESC">
+        <field
+                name="rules"
+                type="rules"
+                label="JCONFIG_PERMISSIONS_LABEL"
+                class="inputbox"
+                validate="rules"
+                filter="rules"
+                component="com_commercelab_shop"
+                section="component"
+        />
+    </fieldset>
+</config>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<extension version="3.0" type="plugin" group="ajax" method="upgrade">
+    <name>CommerceLab Shop - AJAX Helper</name>
+    <version>1.0.0</version>
+    <creationDate>May 2021</creationDate>
+    <author>Cloud Chief | Conscious Clouds</author>
+    <authorEmail>info@CommerceLab.solutions</authorEmail>
+    <authorUrl></authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2022 CommerceLab. All rights reserved.</copyright>
+    <description>Ajax Plugin to Support the CommerceLab Shop System</description>
+
+    <files>
+        <filename plugin="commercelab_shop_ajaxhelper">commercelab_shop_ajaxhelper.php</filename>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+
+            </fieldset>
+        </fields>
+    </config>
+
+</extension>

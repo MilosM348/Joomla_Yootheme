@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<form>
+    <fieldset name="details"  addfieldpath="/administrator/components/com_commercelab_shop/models/fields">
+
+        <field name="to" type="vuetext" default="title" label="To" description="" size="10" class="uk-input uk-form-width-medium uk-form-large"/>
+
+        <field name="subject" type="vuetext" default="0" label="Subject" description="" size="10" class="uk-input uk-form-width-medium uk-form-large" required="true" />
+
+        <field name="emailtype" type="vuelist" default="" required="true" label="Email Type" description="">
+            <option value="">Please Select</option>
+            <option value="created">COM_COMMERCELAB_SHOP_EMAILTYPE_THANK_YOU</option>
+            <option value="pending">COM_COMMERCELAB_SHOP_EMAILTYPE_PENDING</option>
+            <option value="confirmed">COM_COMMERCELAB_SHOP_EMAILTYPE_CONFIRMED</option>
+            <option value="cancelled">COM_COMMERCELAB_SHOP_EMAILTYPE_CANCELLED</option>
+            <option value="refunded">COM_COMMERCELAB_SHOP_EMAILTYPE_REFUNDED</option>
+            <option value="shipped">COM_COMMERCELAB_SHOP_EMAILTYPE_SHIPPED</option>
+            <option value="completed">COM_COMMERCELAB_SHOP_EMAILTYPE_COMPLETED</option>
+            <option value="denied">COM_COMMERCELAB_SHOP_EMAILTYPE_DENIED</option>
+        </field>
+
+        <field name="body" type="editor" label="Email Body" description="" filter="safehtml" required="true" />
+
+        <field name="language" type="languageselect"
+               label="JFIELD_LANGUAGE_LABEL"
+               default="*"
+               description=""
+               class="span12 small" >
+        </field>
+
+        <field name="published" type="pinputswitch" default="0" label="Published" description="" class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+    </fieldset>
+
+</form>

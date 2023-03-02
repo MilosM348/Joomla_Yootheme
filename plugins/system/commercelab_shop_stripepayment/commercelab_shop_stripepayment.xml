@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+    <name>System - CommerceLab Shop Stripe Payment</name>
+    <version>2.1.1</version>
+    <creationDate>May 2020</creationDate>
+    <author>CommerceLab\Shop - Cloud Chief</author>
+    <authorEmail>Info@commercelab.solutions</authorEmail>
+    <authorUrl>https://Commercelab.solutions</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2020 Cloud Chief - CommerceLab\Shop. All rights reserved.</copyright>
+    <description>System Plugin for CommerceLab\Shop Stripe Payments</description>
+    <files>
+        <filename plugin="commercelab_shop_stripepayment">commercelab_shop_stripepayment.php</filename>
+        <folder>modules</folder>
+    </files>
+</extension>

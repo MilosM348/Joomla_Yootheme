@@ -1,0 +1,156 @@
+{
+	"global_search":{
+		"label":"Global Search",
+		"description":"If enabled, it will search all items, without any limitation",
+		"type":"checkbox",
+		"default": false,
+		"text":"Yes"
+	},
+	"current_cat_as_root":{
+		"label":"Current Category as base point",
+		"description":"This will limit the items to the current category the user is viewing",
+		"type":"checkbox",
+		"default": true,
+		"text":"Yes",
+		"enable":"!global_search"
+	},
+
+	"subcategory_levels":{
+		"label":"Subcategory levels",
+		"description":"How many levels of subcategories to show items from",
+		"type":"select",
+		"default":"1",
+		"options":{
+			"None":"0",
+			"All":"all",
+			"1":"1",
+			"2":"2",
+			"3":"3",
+			"4":"4",
+			"5":"5"
+		},
+		"enable":"!global_search"
+	},
+
+	"text_margin":{
+        "label": "Margin",
+        "type": "select",
+        "default": "uk-margin-small-top",
+        "options": {
+            "Remove": "uk-margin-remove",
+            "Top large":"uk-margin-large-top",
+            "Top small":"uk-margin-small-top",
+            "Bottom large":"uk-margin-large-bottom",
+            "Bottom small":"uk-margin-small-bottom"
+        },
+    	"show":"show_style_options"
+	},
+	"hide_empty_categories":{
+		"label":"Hide Empty Categories",
+		"type":"checkbox",
+		"text":"Yes",
+		"default": true,
+		"show":"filter_type == 'categories'",
+		"enable":false,
+		"show":"!global_search"
+	},
+
+	"show_style_options":{
+		"label":"Show additional options",
+		"type":"checkbox",
+		"default": false,
+		"text":"Show"
+	},
+
+    "text_style": {
+        "label": "Style",
+        "type": "select",
+        "options": {
+            "None": "",
+            "2Xlarge": "uk-heading-2xlarge",
+            "XLarge": "uk-heading-xlarge",
+            "Large": "uk-heading-large",
+            "Medium": "uk-heading-medium",
+            "Small": "uk-heading-small",
+            "Lead": "uk-text-lead",
+            "Meta": "uk-text-meta",
+            "H1": "uk-h1",
+            "H2": "uk-h2",
+            "H3": "uk-h3",
+            "H4": "uk-h4",
+            "H5": "uk-h5",
+            "H6": "uk-h6"
+        },
+        "show":"show_style_options"
+    },
+
+    "content_text_style": {
+        "label": "Style",
+        "type": "select",
+        "options": {
+            "None": "",
+            "Lead": "uk-text-lead",
+            "Meta": "uk-text-meta"
+        },
+        "show":"show_style_options"
+    },
+    
+    "text_decoration": {
+        "label": "Decoration",
+        "type": "select",
+        "default": "",
+        "options": {
+            "None": "",
+            "Divider": "uk-heading-divider",
+            "Bullet": "uk-heading-bullet",
+            "Line": "uk-heading-line"
+        },
+        "show":"show_style_options"
+    },
+    "text_font_family": {
+        "label": "Font Family",
+        "type": "select",
+        "default": "",
+        "options": {
+            "None": "",
+            "Default": "uk-font-default",
+            "Primary": "uk-font-primary",
+            "Secondary": "uk-font-secondary",
+            "Tertiary": "uk-font-tertiary"
+        },
+        "show":"show_style_options"
+    },
+    "text_color": {
+        "label": "Color",
+        "type": "select",
+        "default": "",
+        "options": {
+            "None": "",
+            "Muted": "uk-text-muted",
+            "Emphasis": "uk-text-emphasis",
+            "Primary": "uk-text-primary",
+            "Secondary": "uk-text-secondary",
+            "Success": "uk-text-success",
+            "Warning": "uk-text-warning",
+            "Danger": "uk-text-danger",
+            "Background": "uk-text-background"
+        },
+        "show":"show_style_options"
+    },
+    "text_element": {
+        "label": "HTML Element",
+        "type": "select",
+        "default": "h5",
+        "options": {
+            "h1": "h1",
+            "h2": "h2",
+            "h3": "h3",
+            "h4": "h4",
+            "h5": "h5",
+            "h6": "h6",
+            "div": "div"
+        },
+        "show":"show_style_options"
+    }
+
+}

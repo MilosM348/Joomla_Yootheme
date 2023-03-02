@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.8.0" type="plugin" group="installer" method="upgrade">
+    <name>Installer Plugin - CommerceLab Shop</name>
+    <version>1.0.0</version>
+    <creationDate>Nov 2020</creationDate>
+    <author>Cloud Chief</author>
+    <creationDate>May 2022</creationDate>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2022 CommerceLab. All rights reserved.</copyright>
+    <files>
+        <filename plugin="commercelab_shop">commercelab_shop.php</filename>
+    </files>
+</extension>

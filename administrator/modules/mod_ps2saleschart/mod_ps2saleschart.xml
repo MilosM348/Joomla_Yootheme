@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<extension type="module" version="3.1" client="administrator" method="upgrade">
+    <name>mod_ps2saleschart</name>
+    <author>Cloud Chief | Conscious Clouds</author>
+    <creationDate>March 2022</creationDate>
+    <copyright>Copyright (C) 2022 CommerceLab  - CommerceLab . All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>info@CommerceLab.solutions</authorEmail>
+    <authorUrl>https://CommerceLab.solutions</authorUrl>
+    <version>1.0.0</version>
+    <description>CommerceLab  Cart - by Cloud Chief - CommerceLab </description>
+    <files>
+        <filename module="mod_ps2saleschart">mod_ps2saleschart.php</filename>
+        <folder>tmpl</folder>
+    </files>
+
+    <config>
+        <fields name="params">
+
+        </fields>
+    </config>
+</extension>

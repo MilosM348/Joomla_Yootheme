@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<form>
+    <fieldset name="details" addfieldpath="/administrator/components/com_commercelab_shop/models/fields">
+
+        <field name="name" type="vuetext" default="title" label="Name" description="" required="true" size="10"
+               class="uk-input uk-form-width-medium uk-form-large"/>
+
+        <field name="email" type="vuetext" default="title" label="Email" required="true" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large"/>
+
+        <field name="j_user_id" type="Userselect" label="Joomla User" readonly="false"   />
+
+
+        <field name="published" type="pinputswitch" default="0" label="Published" description=""
+               class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+    </fieldset>
+
+</form>

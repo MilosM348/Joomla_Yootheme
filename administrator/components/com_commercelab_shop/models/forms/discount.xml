@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<form>
+    <fieldset name="details"  addfieldpath="/administrator/components/com_commercelab_shop/models/fields">
+
+        <field name="name" type="vuetext" default="title" label="Name" description="" required="true" size="10"
+               class="uk-input uk-form-width-medium uk-form-large"/>
+
+        <field name="coupon_code" type="vuetext" default="title" label="Coupon Code" required="true" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large"/>
+
+        <field name="amount" type="pinputnumber" default="0" label="Amount" description="" size="10" formName="discount_amount" class="uk-input uk-form-width-medium uk-form-large" />
+
+        <field name="percentage" type="pinputnumber" label="Percentage" description="" formName="discount_percentage" />
+
+        <field name="discount_type" type="discounttype" default="" required="true" label="Discount Type" description="" />
+
+        <field name="start_date" type="vuedatetime" label="Select a start date"/>
+
+        <field name="expiry_date" type="vuedatetime" label="Select a stop date"/>
+
+        <field name="max_usage" type="vuetext" default="title" label="Max Usage" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large"/>
+       
+        <field name="user_id" type="userselect" default="" label="Select User" description="" />
+
+        <field name="published" type="pinputswitch" default="0" label="Published" description=""
+               class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+    </fieldset>
+
+</form>

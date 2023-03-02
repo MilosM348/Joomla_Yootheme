@@ -1,0 +1,110 @@
+
+const {copy, exists, mkdir, readFile, writeFile, outputFile} = require('fs-extra');
+
+const util              = require('util');
+// const {outputFile} = require('fse');
+const rimRaf            = util.promisify(require('rimraf'));
+const {version} = require('./gallerypackage.json');
+
+const version_updates = [
+    [
+        './build/packagefiles/addons/gallery/pkg_commercelab_shop_gallery.xml',
+        './dist/addons/gallery/package/pkg_commercelab_shop_gallery.xml'
+    ],
+    [
+        './build/packagefiles/addons/gallery/gallery.xml',
+        './dist/addons/gallery/package/packages/gallery/gallery.xml'
+    ],
+    [
+        './build/packagefiles/addons/gallery/commercelab_shop_gallery.xml',
+        './dist/addons/gallery/package/packages/commercelab_shop_gallery/commercelab_shop_gallery.xml'
+    ]
+];
+
+const copy_dirs = [
+    [
+        './plugins/system/commercelab_shop_gallery',
+        './dist/addons/gallery/package/packages/commercelab_shop_gallery'
+    ],
+    [
+        './plugins/commercelab_shop_extended/gallery',
+        './dist/addons/gallery/package/packages/gallery'
+    ],
+    [
+        './build/packagefiles/addons/gallery/script.php',
+        './dist/addons/gallery/package/script.php'
+    ]
+];
+
+const zip_dirs = [
+    [
+        './dist/addons/gallery/package/packages/commercelab_shop_gallery',
+        './dist/addons/gallery/package/packages/plg_system_commercelab_shop_gallery.zip'
+    ],
+    [
+        './dist/addons/gallery/package/packages/gallery',
+        './dist/addons/gallery/package/packages/plg_commercelab_shop_extended_gallery.zip'
+    ]
+];
+
+(async function exec() {
+
+    // Create DIST directory
+    console.log('prepare Dist');
+    await rimRaf('./dist/addons/gallery');
+    await mkdir('./dist/addons/gallery');
+
+    console.log('copy packages');
+    // Copy Packages
+    for (var i = copy_dirs.length - 1; i >= 0; i--) {
+        await copy(
+            copy_dirs[i][0], 
+            copy_dirs[i][1]
+        );
+        console.log(copy_dirs[i][1] + ' Copied');
+    }
+
+    console.log('update xml');
+    // Update XML files
+    for (var i = version_updates.length - 1; i >= 0; i--) {
+        let xml = await readFile(version_updates[i][0], {encoding: 'utf8'});
+        xml     = xml.replace(/{{version}}/g, version);
+        // await writeFile(version_updates[i][1], xml, {encoding: 'utf8'});
+
+        outputFile(version_updates[i][1], xml)
+           .then(() => {
+               // console.log(version_updates[i][1] + ' The file has been saved!');
+           })
+           .catch(err => {
+               console.error(err)
+           });
+    }
+
+    console.log('pack installers');
+    // Pack Installers
+    for (var i = zip_dirs.length - 1; i >= 0; i--) {
+
+        zip = new (require('adm-zip'));
+        zip.addLocalFolder(zip_dirs[i][0], false);
+        zip.writeZip(zip_dirs[i][1]);
+
+    }
+
+    console.log('remove temp files');
+    // Remove
+    for (var i = zip_dirs.length - 1; i >= 0; i--) {
+        await rimRaf(zip_dirs[i][0]);
+    }
+
+
+    console.log('pack it All');
+    // Pack it ALL
+    zip = new (require('adm-zip'));
+    zip.addLocalFolder('./dist/addons/gallery/package', false);
+    zip.writeZip(`./dist/addons/gallery/pkg_commercelab_shop_gallery_${version}.zip`);
+
+    console.log('remove All temp');
+    await rimRaf('./dist/addons/gallery/package');
+
+
+})();

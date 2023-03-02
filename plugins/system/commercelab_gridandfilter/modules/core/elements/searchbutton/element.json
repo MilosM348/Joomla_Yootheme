@@ -1,0 +1,85 @@
+{
+	 "@import":"./element.php",
+	 "name":"searchbutton",
+	 "title":"Search Button",
+	 "icon":"${url:images/searchbutton.svg}",
+	 "iconSmall":"${url:images/searchbutton_small.svg}",
+	 "element":true,
+	 "container":true,
+	 "group":"CommerceLab Grid & Filter",
+	 "defaults":{
+	 },
+	 "placeholder":{
+	 },
+	 "templates":{
+		 "render":"./templates/template.php",
+		 "content":"./templates/content.php"
+	 },
+	 "fields":{
+
+		 "search_button_text":{
+			 "label":"Text",
+			 "default":"Search"
+		 },
+
+		 "search_button_style": "${cls_builder.button_style}",
+		 "search_button_size": "${cls_builder.button_size}",
+		 "search_button_full_width": "${cls_builder.fullwidth}",
+
+		 "search_button_icon":{
+			 "label":"Icon",
+			 "type":"icon",
+			 "default":"search"
+		 },
+
+		 "search_button_icon_position":{
+			 "label":"Icon Position",
+			 "type":"select",
+			 "default":"right",
+			 "options": {
+				 "Left": "left",
+				 "Right": "right"
+			 },
+			 "show":"search_button_icon"
+		 },
+
+		 "search_button_icon_size":{
+			 "label":"Icon Size",
+			 "type":"select",
+			 "default":"1",
+			 "options": {
+				 "Small": "0.7",
+				 "Default": "1",
+				 "Large": "1.5"
+			 },
+			 "show":"search_button_icon"
+		 }
+
+	 },
+	 "fieldset":{
+		 "default":{
+			 "type":"tabs",
+			 "fields":[
+				 {
+					 "title":"Setup",
+					 "fields":[
+						 {
+							 "label":"Search Button",
+							 "type":"group",
+							 "divider":true,
+							 "fields":[
+							 	"search_button_text",
+							 	"search_button_style",
+							 	"search_button_size",
+							 	"search_button_full_width",
+							 	"search_button_icon",
+							 	"search_button_icon_position",
+							 	"search_button_icon_size"
+							 ]
+						 }
+					 ]
+				 }
+			 ]
+		 }
+	 }
+ }

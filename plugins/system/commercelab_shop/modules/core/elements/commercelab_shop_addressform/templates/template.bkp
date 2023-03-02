@@ -1,0 +1,980 @@
+<?php
+
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Uri\Uri;
+use Joomla\CMS\Factory;
+
+use CommerceLabShop\Cart\CartFactory;
+use CommerceLabShop\User\UserFactory;
+use CommerceLabShop\Config\ConfigFactory;
+use CommerceLabShop\Address\AddressFactory;
+use CommerceLabShop\Customer\CustomerFactory;
+use CommerceLabShop\Language\LanguageFactory;
+
+LanguageFactory::load();
+
+$customer = CustomerFactory::get();
+$config   = ConfigFactory::get();
+
+echo "{emailcloak=off}";
+
+$id = uniqid('yps_address_element');
+
+$form_fields = [
+    'shipping' => [
+        'address_type' => 'shipping'
+    ],
+    'billing' => [
+        'address_type' => 'billing'
+    ]
+];
+
+if ($customer) {
+    $form_fields['shipping']['customer_id'] = $customer->id;
+    $form_fields['billing']['customer_id']  = $customer->id;
+}
+
+foreach ($children as $field) {
+    if (!$field->props['field_address_type_exclude']) {
+        $form_fields['shipping'][$field->props['field_type']] = '';
+        $form_fields['billing'][$field->props['field_type']]  = '';
+    } else {
+        $form_fields[$field->props['field_address_type_exclude']][$field->props['field_type']]  = '';
+    }
+}
+
+// dd($customer->addresses);
+
+$addresses = [];
+if (CartFactory::getTempAddress()) {
+    
+    $temp_address = CartFactory::getTempAddress();
+
+    foreach ($temp_address as $address) {
+
+        $address                           = AddressFactory::get($address->address_id);
+        $addresses[$address->address_type] = $address;
+
+        foreach ($form_fields[$address->address_type] as $field => $value) {
+            switch ($field)
+            {
+                case 'country':
+                case 'zone':
+                    if ($value == 0) {
+                        $value = '';
+                    }
+                    break;
+            }
+
+            $form_fields[$address->address_type][$field] = $addresses[$address->address_type]->$field;
+            $form_fields[$address->address_type]['id']   = $addresses[$address->address_type]->id;
+        }
+
+    }
+}
+
+$assigned_addresses = [];
+
+$cart_addresses = CartFactory::getAssignedAddresses();
+// dd($cart_addresses);
+
+if ($cart_addresses)
+{
+
+    if ($cart_addresses->billing_address_id)
+    {
+        $address = AddressFactory::get($cart_addresses->billing_address_id);
+        $assigned_addresses[$address->address_type] = $address;
+    }
+
+    if ($cart_addresses->shipping_address_id)
+    {
+        $address = AddressFactory::get($cart_addresses->shipping_address_id);
+        $assigned_addresses[$address->address_type] = $address;
+    }
+    
+}
+// dd(CartFactory::getAssignedAddresses());
+
+$el = $this->el('div', [
+
+    'class' => [
+        '{panel_background}',
+        '{panel_padding}',
+        '{panel_color_inverse}',
+        'uk-margin-top uk-margin-bottom'
+    ]
+
+]);
+
+if ($node->props['address_order'] == 'billing') {
+    $active_forms = [
+        'billing',
+        'shipping',
+    ];
+} else {
+    $active_forms = [
+        'shipping',
+        'billing',
+    ];
+}
+
+if (!$node->props['billing_address_required']) {
+    unset($active_forms['billing']);
+}
+
+?>
+
+<?= $el($props, $attrs) ?>
+
+    <?php if ($node->props['address_form_show']) : ?>
+
+        <div v-cloak id="<?= $id; ?>" class="uk-animation-fade uk-animation-fast">
+
+            <div>
+
+                <?php if ($node->props['billing_address_required'] && $node->props['forms_layout'] == 'side_by_side') : ?>
+                    <!-- Grid -->
+                    <div class="uk-child-width-1-1 uk-child-width-1-2@m" uk-grid>
+                        <div>
+                <?php endif ; ?>
+
+                <?php if ($node->props['billing_address_required'] && $node->props['forms_layout'] == 'accordion') : ?>
+                    <!-- Accordion -->
+                    <ul uk-accordion="collapsible: false">
+                        <li>
+                            <a class="uk-accordion-title uk-active" href="#">
+                                <?= $node->props['shipping_form_title'] ?>
+                                <!-- <span v-show="storedShippingAddreses" class="uk-margin-small-left" uk-icon="icon: check"></span> -->
+                            </a>
+                            <div class="uk-accordion-content">
+                    <!-- Accordion -->
+                <?php endif ; ?>
+
+                <?php if ($node->props['billing_address_required'] && $node->props['forms_layout'] == 'tabs') : ?>
+                    <!-- Tabs -->
+                    <ul uk-tab>
+                        <li><a class="uk-active" href="#">
+                            <?= $node->props['billing_form_title'] ?>
+                            <span v-show="storedBillingAddreses" class="uk-margin-small-left" uk-icon="icon: check"></span>
+                        </a></li>
+                        <li><a href="#">
+                            <?= $node->props['shipping_form_title'] ?>
+                            <span v-show="storedShippingAddreses" class="uk-margin-small-left" uk-icon="icon: check"></span>
+                        </a></li>
+                    </ul>
+
+                    <ul class="uk-switcher">
+                        <li>
+                    <!-- Tabs -->
+                <?php endif ; ?>
+
+                    <!-- Billing Form -->
+                    <?php if ($node->props['billing_address_required']) : 
+                            $node->props['address_type'] = 'billing';
+                        ?>
+
+                        <!-- <div class="uk-animation-fade uk-animation-fast"> -->
+                        <div v-show="!this.assigned_addresses['billing']" class="uk-animation-fade uk-animation-fast">
+
+                            <?php if ($node->props['forms_layout'] == 'side_by_side') : ?>
+                                <h4 class="uk-h4">
+                                    <?= $node->props['billing_form_title'] ?>
+                                </h4>
+                            <?php endif ; ?>
+
+                            <form class="uk-form <?= $node->props['labels_layout'] ?>" id="billing_address_form_<?= $id ?>" @submit.prevent="submitAddressForm('billing')">
+
+                                <!-- Fields -->
+                                <div uk-grid uk-height-match="target: .uk-form-label">
+                                    
+                                    <?php foreach ($children as $i => $child) : ?>
+                                        <?= $builder->render($child, ['element' => $props, 'address_type' => 'billing']) ?>
+                                    <?php endforeach ?>
+
+                                    <!-- <input type="hidden" name="address_type" value="billing"> -->
+
+                                </div>
+
+                                <!-- Submit -->
+                                <div uk-grid class="<?= $node->props['rows_spacing'] ?>">
+                                    <div class="uk-width-1-1 <?= $node->props['billing_submit_button_alignment'] ?>">
+                                        <button type="submit" 
+                                            class="uk-button <?= $node->props['billing_submit_button_size'] ?> <?= $node->props['billing_submit_button_type'] ?>"
+                                            :class="[(!isValidStatus) ? 'uk-disabled' : '']"
+                                        >
+                                                <?= $node->props['billing_submit_button_text'] ?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                        <div v-cloak v-if="this.assigned_addresses['billing']" class="uk-animation-fade uk-animation-fast">
+
+                            <div class="uk-card-body uk-card-small uk-padding-remove uk-width-1-1">
+
+                                <div class="uk-card-header">
+                                    <div uk-grid>
+
+                                        <div class="uk-width-expand">
+                                            <div>
+                                                <span class="uk-margin-small-right uk-text-muted" uk-icon="icon: user"></span> 
+                                                {{this.assigned_addresses['billing'].first_name}} {{this.assigned_addresses['billing'].last_name}}
+                                            </div>
+                                            <div>
+                                                <span class="uk-margin-small-right uk-text-muted" uk-icon="icon: mail"></span> 
+                                                {{this.assigned_addresses['billing'].email}}
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="uk-width-auto uk-margin-small">
+                                            <input 
+                                                @click="selectBillingAddress($event, address)" 
+                                                v-model="address.isAssignedBilling"
+                                                class="yps_address_checkbox uk-checkbox"
+                                                uk-tooltip="Use this Address"
+                                                type="checkbox"
+                                            >
+                                        </div> -->
+
+                                    </div>
+                                </div>
+
+                                <div class="uk-card-body">
+                                    <div uk-grid>
+                                        <div class="uk-width-auto">
+                                            <span class="uk-text-muted" uk-icon="icon: receiver"></span> 
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            {{this.assigned_addresses['billing'].phone}}<span v-if="this.assigned_addresses['billing'].mobile_phone"> / {{this.assigned_addresses['billing'].mobile_phone}}</span>
+                                        </div>
+                                    </div>
+                                    <div uk-grid>
+                                        <div class="uk-width-auto">
+                                            <span class="uk-text-muted" uk-icon="icon: location"></span> 
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            <div>
+                                                {{ this.assigned_addresses['billing'].address1 }}
+                                            </div>
+                                            <div v-if="this.assigned_addresses['billing'].address2">
+                                                {{this.assigned_addresses['billing'].address2}}
+                                            </div>
+                                            <div v-if="this.assigned_addresses['billing'].address3">
+                                                {{this.assigned_addresses['billing'].address3}}
+                                            </div>
+                                            <div>
+                                                {{this.assigned_addresses['billing'].city}} - {{this.assigned_addresses['billing'].postcode}}
+                                            </div>
+                                            <div>
+                                                {{this.assigned_addresses['billing'].zone_name}} - {{this.assigned_addresses['billing'].country_name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div uk-grid>
+                                        <div class="uk-width-auto">
+                                            <span class="uk-text-muted" uk-icon="icon: bag"></span> 
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            <div>
+                                                {{ this.assigned_addresses['billing'].vat }}
+                                            </div>
+                                            <div>
+                                                {{ this.assigned_addresses['billing'].company_name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="uk-card-footer">
+                                    <div uk-grid>
+                                        <div class="uk-width-expand">
+                                            <h5 class="uk-h5 uk-text-muted">
+                                                <?= $node->props['billing_form_title'] ?>
+                                            </h5>
+                                        </div>
+                                        <div class="uk-width-auto uk-text-right">
+                                            <a href="javascript:void(0);" @click="deletAddress(this.assigned_addresses['billing'].id, 'billing')" class="uk-margin-small-right" uk-icon="icon: trash"></a>
+                                            <a href="javascript:void(0);" @click="editAddress(this.assigned_addresses['billing'])" uk-icon="icon: file-edit"></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    <!-- Billing Form -->
+                    <?php endif; ?>
+
+                    <?php if ($node->props['billing_address_required'] && $node->props['forms_layout'] == 'accordion') : ?>
+                        <!-- Accordion -->
+                            </div>
+                        </li>
+                        <li>
+                            <a class="uk-accordion-title" href="#">
+                                <?= $node->props['billing_form_title'] ?>
+                                <span v-show="storedBillingAddreses" class="uk-margin-small-left" uk-icon="icon: check"></span>
+                            </a>
+                            <div class="uk-accordion-content">
+                        <!-- Accordion -->
+                    <?php endif ; ?>
+
+                    <?php if ($node->props['billing_address_required'] && $node->props['forms_layout'] == 'tabs') : ?>
+                        <!-- Tabs -->
+                        </li><li>
+                    <?php endif ; ?>
+
+                    <?php if ($node->props['billing_address_required'] && $node->props['forms_layout'] == 'side_by_side') : ?>
+                        <!-- Grid -->
+                        </div>
+                        <div>
+                    <?php endif ; ?>
+
+                    <!-- Shipping Form -->
+                    <!-- <div> -->
+                    <div v-show="!this.assigned_addresses['shipping']">
+
+                        <?php if ($node->props['forms_layout'] == 'side_by_side') : ?>
+                            <h4 class="uk-h4">
+                                <?= $node->props['shipping_form_title'] ?>
+                            </h4>
+                        <?php endif ; ?>
+
+                        <div class="uk-alert-danger" uk-alert v-show="formErrors.length" style="display: none">
+                            <a class="uk-alert-close" uk-close></a>
+                            <b><?= Text::_('COM_COMMERCELAB_SHOP_ELM_CART_USER_ALERT_ERROR_IN_ADDRESS_FORM'); ?></b>
+                            <ul>
+                                <li v-for="error in formErrors">{{ error }}</li>
+                            </ul>
+                        </div>
+                        
+                        <form class="uk-form <?= $node->props['labels_layout'] ?>" id="shipping_address_form_<?= $id ?>" @submit.prevent="submitAddressForm('shipping')">
+
+                            <!-- Fields -->
+                            <div uk-grid uk-height-match="target: .uk-form-label">
+
+                                <?php foreach ($children as $i => $child) : ?>
+                                    <?= $builder->render($child, ['element' => $props, 'address_type' => 'shipping']) ?>
+                                <?php endforeach ?>
+
+                                <!-- <input type="hidden" name="address_type" value="shipping"> -->
+
+                            </div>
+
+                            <!-- Submit -->
+                            <div uk-grid class="<?= $node->props['rows_spacing'] ?>">
+                                <div class="uk-width-1-1 <?= $node->props['shipping_submit_button_alignment'] ?>">
+
+                                    <?php if ($node->props['billing_address_required']) : ?>
+                                        <a class="uk-text-mutted uk-margin-small-right" href="javascript:void(0);" @click="copyDataFromBilling()" uk-icon="icon: bolt">
+                                            <?= Text::_('COM_COMMERCELAB_SHOP_ELM_FORM_ADDRESS_COPY_FROM_BILLING'); ?>
+                                        </a>
+                                    <?php endif; ?>
+                                    
+                                    <button type="submit" 
+                                        class="uk-button <?= $node->props['shipping_submit_button_size'] ?> <?= $node->props['shipping_submit_button_type'] ?>"
+                                        :class="[(!isValidStatus) ? 'uk-disabled' : '']">
+                                            <?= $node->props['shipping_submit_button_text'] ?>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div v-cloak v-if="this.assigned_addresses['shipping']" class="uk-animation-fade uk-animation-fast">
+
+
+                        <div class="uk-card-body uk-card-small uk-padding-remove uk-width-1-1">
+
+                            <div class="uk-card-header">
+                                <div uk-grid>
+
+                                    <div class="uk-width-expand">
+                                        <div>
+                                            <span class="uk-margin-small-right uk-text-muted" uk-icon="icon: user"></span> 
+                                            {{this.assigned_addresses['shipping'].first_name}} {{this.assigned_addresses['shipping'].last_name}}
+                                        </div>
+                                        <div>
+                                            <span class="uk-margin-small-right uk-text-muted" uk-icon="icon: mail"></span> 
+                                            {{this.assigned_addresses['shipping'].email}}
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="uk-width-auto uk-margin-small">
+                                        <input 
+                                            @click="selectShippingAddress($event, address)" 
+                                            v-model="address.isAssignedShipping"
+                                            class="yps_address_checkbox uk-checkbox"
+                                            uk-tooltip="Use this Address"
+                                            type="checkbox"
+                                        >
+                                    </div> -->
+
+                                </div>
+                            </div>
+
+                            <div class="uk-card-body">
+                                <div uk-grid>
+                                    <div class="uk-width-auto">
+                                        <span class="uk-text-muted" uk-icon="icon: receiver"></span> 
+                                    </div>
+                                    <div class="uk-width-expand">
+                                        {{this.assigned_addresses['shipping'].phone}} / {{this.assigned_addresses['shipping'].mobile_phone}}
+                                    </div>
+                                </div>
+                                <div uk-grid>
+                                    <div class="uk-width-auto">
+                                        <span class="uk-text-muted" uk-icon="icon: location"></span> 
+                                    </div>
+                                    <div class="uk-width-expand">
+                                        <div>
+                                            {{ this.assigned_addresses['shipping'].address1 }}
+                                        </div>
+                                        <div v-if="this.assigned_addresses['shipping'].address2">
+                                            {{this.assigned_addresses['shipping'].address2}}
+                                        </div>
+                                        <div v-if="this.assigned_addresses['shipping'].address3">
+                                            {{this.assigned_addresses['shipping'].address3}}
+                                        </div>
+                                        <div>
+                                            {{this.assigned_addresses['shipping'].city}} - {{this.assigned_addresses['shipping'].postcode}}
+                                        </div>
+                                        <div>
+                                            {{this.assigned_addresses['shipping'].zone_name}} - {{this.assigned_addresses['shipping'].country_name}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="uk-card-footer">
+                                <div uk-grid>
+                                    <div class="uk-width-expand">
+                                        <h5 class="uk-h5 uk-text-muted">
+                                            <?= $node->props['shipping_form_title'] ?>
+                                        </h5>
+                                    </div>
+                                    <div class="uk-width-auto uk-text-right">
+                                        <a href="javascript:void(0);" @click="deletAddress(this.assigned_addresses['shipping'].id, 'shipping')" class="uk-margin-small-right" uk-icon="icon: trash"></a>
+                                        <a href="javascript:void(0);" @click="editAddress(this.assigned_addresses['shipping'])" uk-icon="icon: file-edit"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Shipping Form -->
+
+                <?php if ($node->props['billing_address_required'] && $node->props['forms_layout'] == 'accordion') : ?>
+                <!-- Accordion -->
+                        </div>
+                    </li>
+                </ul>
+                <?php endif ; ?>
+
+                <?php if ($node->props['billing_address_required'] && $node->props['forms_layout'] == 'tabs') : ?>            
+                <!-- Tabs -->
+                    </li>
+                </ul>
+                <?php endif ; ?>
+
+                <?php if ($node->props['billing_address_required'] && $node->props['forms_layout'] == 'side_by_side') : ?>
+                    <!-- Grid -->
+                    </div>
+                </div>
+                <?php endif ; ?>
+            </div>
+
+        </div>
+
+        <script>
+            const <?= $id; ?> = {
+                data() {
+                    return {
+                        globalValidationStatus: <?= $props['globalValidationStatus'] ?>,
+                        isValidStatus: <?= $props['isValidStatus'] ? 'true' : 'false' ?>,
+                        isGuestCheckout: <?= (CartFactory::get()->guest) ? 'true' : 'false' ?>,
+                        isGuest: <?= UserFactory::getActiveUser()->guest ?>,
+                        address: <?= json_encode($form_fields) ?>,
+                        addresses: <?= json_encode($addresses) ?>,
+                        assigned_addresses: <?= json_encode($assigned_addresses) ?>,
+                        zones: {
+                            shipping: '',
+                            billing: ''
+                        },
+                        empty_fields: [],
+                        formErrors: '',
+                        formErrorsList: '',
+                        loading: false,
+                        openAddAddressForm: false,
+                        doesOrderHaveUniqueBillingAddressAssigned: false,
+                        //language strings
+                        COM_COMMERCELAB_SHOP_ELM_CART_USER_ALERT_ADDRESS_ADDED: '<?= Text::_('COM_COMMERCELAB_SHOP_ELM_CART_USER_ALERT_ADDRESS_ADDED'); ?>',
+                        COM_COMMERCELAB_SHOP_ELM_CART_USER_ALERT_ERROR_IN_ADDRESS_FORM: '<?= Text::_('COM_COMMERCELAB_SHOP_ELM_CART_USER_ALERT_ERROR_IN_ADDRESS_FORM'); ?>',
+                        COM_COMMERCELAB_SHOP_ELM_CART_USER_ALERT_ADDRESS_ASSIGNED: '<?= Text::_('COM_COMMERCELAB_SHOP_ELM_CART_USER_ALERT_ADDRESS_ASSIGNED'); ?>'
+                    }
+                },
+                created() {
+                    // console.log('assigned_addresses', this.assigned_addresses);
+
+                    if (this.address.shipping.country && this.address.shipping.country != '') {
+                            this.updateZones(this.address.shipping.country, 'shipping')
+                    } else {
+                        this.address.shipping.country = '';
+                        if (!this.address.shipping.zone) {
+                            this.address.shipping.zone = '';
+                        }
+                    }
+
+                    if (this.address.billing.country && this.address.billing.country != '') {
+                            this.updateZones(this.address.billing.country, 'billing')
+                    } else {
+                        this.address.billing.country = '';
+                        if (!this.address.billing.zone) {
+                            this.address.billing.zone = '';
+                        }
+                    }
+                    // address[$address_type]['country']
+                    // Copy data from stored fields
+                    // if (this.addresses) {
+                    //     Object.values(this.addresses).forEach(address => {
+                    //         this.copyDataFromToAddress(address, this.address[address.address_type]);
+
+                    //         // Add ID to avoid duplications
+                    //         // this.address[address.address_type].id = address.id;
+                    //     });
+                    // }
+
+                    // console.log('address', this.address);
+
+                    // this.checkEmptyFields();
+
+                    // emitter.on('yps_cart_update', this.validateStatus);
+                    // emitter.on('yps_cart_validation_update', this.validateStatus);
+                    emitter.on('yps_cart_validation_update', this.setValidationStatus);
+
+                    emitter.on('yps_cart_guest_update', this.setIfGuestCheckout);
+                },
+                computed: {
+                    storedShippingAddreses() {
+
+                        let addresses = false;
+                        if (Object.values(this.assigned_addresses)) {
+                            [...Object.values(this.assigned_addresses)].forEach(address => {
+                                if (address && address.address_type == 'shipping') {
+                                    addresses = [address];
+                                }
+                            })
+                        }
+                        return addresses;
+                    },
+                    storedBillingAddreses() {
+
+                        let addresses = false;
+                        if (Object.values(this.assigned_addresses)) {
+                            [...Object.values(this.assigned_addresses)].forEach(address => {
+                                if (address && address.address_type == 'billing') {
+                                    addresses = [address];
+                                }
+                            })
+                        }
+                        return addresses;
+                    }
+                },
+                methods: {
+
+                    // Validation Methods Accross Checkout Elements
+                    async setValidationStatus(status) {
+                        console.log(status, 'setValidationStatus Address');
+                        this.globalValidationStatus = status;
+                        this.isValidStatus          = <?= $props['required_status'] ?> <= status;
+                    },
+
+                    // Validates it's own Validation Status
+                    async validateStatus() {
+
+                        const params = {
+                            'required_status': <?= $props['required_status'] ?>
+                        };
+
+                        const request = await fetch("<?= Uri::base() ?>index.php?option=com_ajax&plugin=commercelab_shop_ajaxhelper&method=post&task=task&type=checkout.validatestatus&format=raw", {
+                            method: 'POST',
+                            mode: 'cors',
+                            cache: 'no-cache',
+                            credentials: 'same-origin',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            redirect: 'follow',
+                            referrerPolicy: 'no-referrer',
+                            body: JSON.stringify(params)
+                        });
+
+                        const response = await request.json();
+
+                        if (response.data === true) {
+                            this.isValidStatus = true;
+                        } else {
+                            this.isValidStatus = false;
+                        }
+                    },
+                    // get Updated Global Validation Status
+                    async getValidationStatus(notify) {
+
+                        const params = {};
+
+                        const request = await fetch("<?= Uri::base() ?>index.php?option=com_ajax&plugin=commercelab_shop_ajaxhelper&method=post&task=task&type=checkout.validationstatus&format=raw", {
+                            method: 'POST',
+                            mode: 'cors',
+                            cache: 'no-cache',
+                            credentials: 'same-origin',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            redirect: 'follow',
+                            referrerPolicy: 'no-referrer',
+                            body: JSON.stringify(params)
+                        });
+
+                        const response = await request.json();
+
+                        this.globalValidationStatus = response.data;
+                        if (notify) {
+                            emitter.emit("yps_cart_validation_update", response);
+                        }
+                    },
+                   
+                    // Internal Methods
+                    async emptyFields(address_type) {
+                        Object.keys(this.address['address_type']).forEach(field => {
+                            if (field != 'customer_id' && field != 'address_type') {
+                                this.address['address_type'][field] = '';
+                            }
+                        })
+                    },
+                    async setIfGuestCheckout(guest) {
+                        if (guest) {
+                            this.isGuestCheckout = true;
+                        } else {
+                            this.isGuestCheckout = false;
+                        }
+                    },
+                    async fieldChanged(address_type) {
+                        this.partialAddressAdd(this.address[address_type]);
+
+                        // Check if Guest should be enabled
+                        this.enableGuest();
+                    },
+                    async enableGuest() {
+                        if (this.isGuest && !this.isGuestCheckout && this.globalValidationStatus < 3) {
+                            this.isGuestCheckout = true;
+                            emitter.emit('yps_cart_set_as_guest', true);
+                        }
+                    },
+
+                    copyDataFromBilling() {
+
+                        const billing_address_data = (this.storedBillingAddreses) ? this.storedBillingAddreses[0] : this.address.billing;
+                        Object.keys(this.address.shipping).forEach(field => {
+                            if (billing_address_data[field] && field != 'address_type') {
+                                this.address.shipping[field] = billing_address_data[field];
+                            }
+                        });
+
+                    },
+                    copyDataFromToAddress(from, to) {
+
+                        Object.keys(to).forEach(field => {
+                            if (from[field]) {
+                                to[field] = from[field];
+                            }
+                        });
+
+                    },
+
+                    async partialAddressAdd(address) {
+
+                        this.loading = true;
+
+                        const request = await fetch("<?= Uri::base() ?>index.php?option=com_ajax&plugin=commercelab_shop_ajaxhelper&method=post&task=task&type=address.addtempaddress&format=raw", {
+                            method: 'POST',
+                            mode: 'cors',
+                            cache: 'no-cache',
+                            credentials: 'same-origin',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            redirect: 'follow',
+                            referrerPolicy: 'no-referrer',
+                            body: JSON.stringify(address)
+                        });
+
+
+                        const response = await request.json();
+
+                        if (response.success) {
+                            address.id = response.data.address_id;
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    },
+
+                    async submitAddressForm(address_type) {
+
+                        this.loading = true;
+
+                        const request = await fetch("<?= Uri::base() ?>index.php?option=com_ajax&plugin=commercelab_shop_ajaxhelper&method=post&task=task&type=address.addAddress&format=raw", {
+                            method: 'POST',
+                            mode: 'cors',
+                            cache: 'no-cache',
+                            credentials: 'same-origin',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            redirect: 'follow',
+                            referrerPolicy: 'no-referrer',
+                            body: JSON.stringify(this.address[address_type])
+                        });
+
+
+                        const response = await request.json();
+
+                        if (response.success) {
+
+                            if (response.data.status === 'ok') {
+                                this.loading = false;
+                                UIkit.notification({
+                                    message: '<span uk-icon=\'icon: check\'></span> ' + this.COM_COMMERCELAB_SHOP_ELM_CART_USER_ALERT_ADDRESS_ADDED,
+                                    status: 'success',
+                                    pos: 'top-center'
+                                });
+                                this.assigned_addresses[address_type] = this.address[address_type];
+                                this.getValidationStatus(true);
+                                // this.updateCustomerAddresses();
+                            } else {
+                                this.loading = false;
+                                UIkit.notification({
+                                    message: '<span uk-icon=\'icon: ban\'></span> ' + this.COM_COMMERCELAB_SHOP_ELM_CART_USER_ALERT_ERROR_IN_ADDRESS_FORM,
+                                    status: 'warning',
+                                    pos: 'top-center'
+                                });
+                                this.formErrors = responseAddAddress.data.errors;
+                                this.formErrorsList = responseAddAddress.data.errorsList;
+                            }
+
+                        } else {
+                            UIkit.notification({
+                                message: 'ERROR',
+                                status: 'danger',
+                                pos: 'top-center'
+                            });
+                        }
+                    },
+
+                    // async updateCustomerAddresses(address_type) {
+
+                    //     const params = {
+                    //         customer_id: <?= ($customer) ? $customer->id : 0; ?>
+                    //     }
+
+                    //     const request = await fetch("<?= Uri::base() ?>index.php?option=com_ajax&plugin=commercelab_shop_ajaxhelper&method=post&task=task&type=address.getCustomerAddresses&format=raw", {
+                    //         method: 'POST',
+                    //         mode: 'cors',
+                    //         cache: 'no-cache',
+                    //         credentials: 'same-origin',
+                    //         headers: {
+                    //             'Content-Type': 'application/json'
+                    //         },
+                    //         redirect: 'follow',
+                    //         referrerPolicy: 'no-referrer',
+                    //         body: JSON.stringify(params)
+                    //     });
+
+                    //     const response = await request.json();
+
+                    //     if (response.success) {
+                    //         this.addresses = response.data;
+                    //         // emitter.emit('yps_cart_update');
+                    //     } else {
+                    //         UIkit.notification({
+                    //             message: 'ERROR',
+                    //             status: 'danger',
+                    //             pos: 'top-center'
+                    //         });
+                    //     }
+                    // },
+                    // async updateZones(address_type) {
+                    //     const params = {
+                    //         country_id: this.address[address_type]['country']
+                    //     };
+
+                    //     const URLparams = this.serialize(params);
+
+                    //     const request = await fetch("<?= Uri::base() ?>index.php?option=com_ajax&plugin=commercelab_shop_ajaxhelper&method=post&task=task&type=address.getZones&format=raw&" + URLparams);
+
+                    //     const response = await request.json();
+
+                    //     if (response.success) {
+                    //         this.zones = response.data;
+                    //     }
+                    // },
+                    // async submitUpdateAddress() {
+                    //     await UIkit.modal("#yps-editAddressModal").hide();
+                    //     this.loading = true;
+
+                    //     const request = await fetch("<?= Uri::base(); ?>index.php?option=com_ajax&plugin=commercelab_shop_ajaxhelper&method=post&task=task&type=address.save&format=raw", {
+                    //         method: 'POST',
+                    //         mode: 'cors',
+                    //         cache: 'no-cache',
+                    //         credentials: 'same-origin',
+                    //         headers: {
+                    //             'Content-Type': 'application/json'
+                    //         },
+                    //         redirect: 'follow',
+                    //         referrerPolicy: 'no-referrer',
+                    //         body: JSON.stringify(this.addressForEdit)
+                    //     });
+
+                    //     const response = await request.json();
+
+                    //     if (response.success) {
+                    //         this.addressForEdit = [];
+
+                    //         this.loading = false;
+                    //         UIkit.notification({
+                    //             message: '<span uk-icon=\'icon: check\'></span> <?= Text::_('COM_COMMERCELAB_SHOP_ELM_CART_USER_ALERT_ADDRESS_SAVED'); ?>',
+                    //             status: 'success',
+                    //             pos: 'top-center'
+                    //         });
+                    //         this.getValidationStatus(true);
+
+
+
+                    //     } else {
+                    //         UIkit.notification({
+                    //             message: 'ERROR',
+                    //             status: 'danger',
+                    //             pos: 'top-center'
+                    //         });
+                    //     }
+                    // },
+                    async deletAddress(uid, address_type){
+                        const params = {
+                            address_id: uid,
+                            remove_from_cart: 1,
+                            address_type: address_type
+                        };
+
+                        const URLparams = this.serialize(params);
+
+                        const request = await fetch("<?= Uri::base(); ?>index.php?option=com_ajax&plugin=commercelab_shop_ajaxhelper&method=post&task=task&type=address.remove&format=raw&" + URLparams);
+
+                        const response = await request.json();
+
+                        if (response.success) {
+
+                            delete this.assigned_addresses[address_type];
+                            Object.keys(this.address[address_type]).forEach(field_name => {
+                                if (field_name != 'address_type' && field_name != 'address_id') {
+                                    this.address[address_type][field_name] = '';
+                                }
+                            })
+                            
+
+                            this.getValidationStatus(true);
+                            // this.updateCustomerAddresses();
+                            UIkit.notification({
+                                message: '<span uk-icon=\'icon: check\'></span> Address successfully removed !!',
+                                status: 'success',
+                                pos: 'top-center',
+                                timeout: 3000
+                            });
+                        }
+                    },
+                    editAddress(address){
+                        delete this.assigned_addresses[address.address_type];                    
+                    },
+                    
+                    async updateZones(country_id, address_type) {
+
+                        // Empty Country
+                        if (this.address[address_type].country == '') {
+                            this.zones[address_type] = '';
+                            this.address[address_type].zone = '';
+                            return;
+                        }
+
+                        const params = {
+                            country_id: country_id
+                        };
+
+                        const URLparams = this.serialize(params);
+                        const request   = await fetch("<?= Uri::base(); ?>index.php?option=com_ajax&plugin=commercelab_shop_ajaxhelper&method=post&task=task&type=address.getZones&format=raw&" + URLparams);
+                        const response  = await request.json();
+
+                        if (response.success) {
+                            this.zones[address_type] = response.data;
+                            if (!this.address[address_type].zone) {
+                                this.address[address_type].zone = '';
+                            }
+                        }
+                    },
+
+                    // async selectBillingAddress(e, address) {
+
+                    //     this.addresses.forEach((thisaddress) => {
+                    //         this.address.isAssignedBilling = false;
+                    //     });
+                    //     address.isAssignedBilling = true;
+
+                    //     // init params
+                    //     const params = {
+                    //         'shipping_address_id': address.id,
+                    //         'shipping_type': 'billing'
+                    //     };
+
+                    //     const request = await fetch("<?= Uri::base() ?>index.php?option=com_ajax&plugin=commercelab_shop_ajaxhelper&method=post&task=task&type=cart.assignaddress&format=raw", {
+                    //         method: 'POST',
+                    //         mode: 'cors',
+                    //         cache: 'no-cache',
+                    //         credentials: 'same-origin',
+                    //         headers: {
+                    //             'Content-Type': 'application/json'
+                    //         },
+                    //         redirect: 'follow',
+                    //         referrerPolicy: 'no-referrer',
+                    //         body: JSON.stringify(params)
+                    //     });
+
+                    //     const response = await request.json();
+                    //     if (response.success) {
+                    //         // this.updateCustomerAddresses();
+                    //         this.loading = false;
+                    //         UIkit.notification({
+                    //             message: this.COM_COMMERCELAB_SHOP_ELM_CART_USER_ALERT_ADDRESS_ASSIGNED,
+                    //             status: 'success',
+                    //             pos: 'top-right',
+                    //             timeout: 3000
+                    //         });
+
+                    //     }
+
+                    // },
+                    serialize(obj) {
+                        var str = [];
+                        for (var p in obj)
+                            if (obj.hasOwnProperty(p)) {
+                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                            }
+                        return str.join("&");
+                    }
+                }
+            }
+
+            Vue.createApp(<?= $id; ?>).mount('#<?= $id; ?>')
+        </script>
+
+    <?php endif; ?>
+
+<?= $el->end(); ?>

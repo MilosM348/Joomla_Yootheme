@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+    <name>System - CommerceLab Shop Add 2 Cart Anywhere</name>
+    <version>{{version}}</version>
+    <creationDate>May 2020</creationDate>
+    <author>CommerceLab\Shop - Cloud Chief</author>
+    <authorEmail>Info@commercelab.solutions</authorEmail>
+    <authorUrl>https://commercelab.solutions</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2020 CommerceLab\Shop - Cloud Chief - All rights reserved.</copyright>
+    <description>System Plugin for CommerceLab Shop - Add 2 Cart Anywhere {{version}}</description>
+    <files>
+        <filename plugin="commercelab_shop_add2cartanywhere">commercelab_shop_add2cartanywhere.php</filename>
+
+    </files>
+    <scriptfile>script.php</scriptfile>
+    <config>
+        <fields name="params">
+            <fieldset name="basic"></fieldset>
+        </fields>
+    </config>
+    <updateservers>
+        <server type="extension" priority="1" name="CommerceLab Shop Add 2 Cart Anywhere"><![CDATA[https://app.commercelab.shop/index.php?option=com_rdsubs&view=updater&format=xml&element=commercelab_shop_add2cartanywhere]]></server>
+    </updateservers>
+</extension>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="content" method="upgrade">
+	<name>CommerceLab Shop Shortcodes</name>
+	<author>Cloud Chief - CommerceLab Shop</author>
+	<creationDate>May 2021</creationDate>
+	<copyright>Copyright (C) 2021 Cloud Chief - CommerceLab Shop. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>info@CommerceLab.solutions</authorEmail>
+	<authorUrl>https://Commercelab.solutions</authorUrl>
+	<version>1.0.0</version>
+	<description>Shortcodes for CommerceLab Shop</description>
+	<files>
+		<filename plugin="commercelab_shop_shortcodes">commercelab_shop_shortcodes.php</filename>
+	</files>
+	<config>
+		<fields name="params">
+
+		</fields>
+	</config>
+</extension>

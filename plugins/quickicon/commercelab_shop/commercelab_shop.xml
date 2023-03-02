@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.8" type="plugin" group="quickicon" method="upgrade">
+	<name>CommerceLab Shop Quick Icon</name>
+	<version>2.0.0</version>
+    <creationDate>11-11-2021</creationDate>
+    <author>Cloud Chief - CommerceLab Shop</author>
+    <authorEmail>info@commercelab.solutions</authorEmail>
+    <authorUrl>https://Commercelab.solutions</authorUrl>
+    <copyright>Copyright (C) 2021 Cloud Chief - CommerceLab Shop. All rights reserved</copyright>
+    <license>GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html</license>
+	<description>CommerceLab Shop Quick Icon</description>
+	<files folder="plugins/quickicon/commercelab_shop">
+		<filename plugin="commercelab_shop">commercelab_shop.php</filename>
+	</files>
+</extension>

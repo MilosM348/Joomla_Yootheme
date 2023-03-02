@@ -1,0 +1,282 @@
+{
+	"@import": "./element.php",
+	"name": "commercelab_shop_paypal",
+	"title": "PayPal",
+	"icon": "${url:images/commercelab_shop_paypal.svg}",
+	"iconSmall": "${url:images/commercelab_shop_paypal_small.svg}",
+	"element": true,
+	"container": true,
+	"group": "CommerceLab Payment (Standard)",
+	"defaults": {
+		"funding_source_PAYPAL": 1,
+		"funding_source_CARD": 1,
+		"size": "responsive",
+		"shape": "rect",
+		"color": "gold",
+		"disabledType": "greyout",
+	    "IfBilling": 1,
+	    "ifShipping": 1,
+		"title_element": "h3",
+		"disabledMessage":"Shipping and Billing must be fullfilled before proceeding to payment",
+		"systemDisabledMessage": "",
+		"funding_sources": "",
+		"currency": "",
+		"localeTag": "",
+		"buttons_container_width": "uk-width-medium",
+		"buttons_container_class": "",
+		"plugin_id": "0"
+	},
+	"placeholder": {},
+	"templates": {
+		"render": "./templates/template.php",
+		"content": "./templates/content.php"
+	},
+	"fields": {
+
+
+        "panel_background": {
+            "label":"Color",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "uk-background-default",
+                "Primary": "uk-background-primary",
+                "Secondary": "uk-background-secondary",
+                "Muted": "uk-background-muted"
+            }
+        },
+        "panel_margin": {
+            "label":"Margin",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-margin-small",
+                "Medium": "uk-margin",
+                "Large": "uk-margin-large"
+            }
+        },
+        "panel_padding": {
+            "label":"Padding",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-padding-small",
+                "Medium": "uk-padding",
+                "Large": "uk-padding-large"
+            }
+        },
+        "panel_color_inverse": {
+            "label":"Color Inverse",
+            "type": "radio",
+            "default": "",
+            "options": {
+                "None": "",
+                "Light": "uk-light",
+                "Dark": "uk-dark"
+            },
+            "description": "This can be used to force the inner content to be Light or Dark, depending on the background"
+        },
+        
+		"title_element": {
+			"label": "Not Ready HTML Element",
+			"description": "Choose one of the HTML elements to fit your semantic structure.",
+			"type": "select",
+			"options": {
+				"h1": "h1",
+				"h2": "h2",
+				"h3": "h3",
+				"h4": "h4",
+				"h5": "h5",
+				"h6": "h6",
+				"div": "div"
+			}
+		},
+		"add_address_message": {
+			"label": "Not ready Message",
+			"description": "Message to show when order is not ready",
+			"type": "text"
+		},
+	    "funding_source_CARD": {
+	        "type": "checkbox",
+	        "text": "Credit/Debit Card"
+	    },
+	    "funding_source_PAYLATER": {
+	        "type": "checkbox",
+	        "text": "Pay Later"
+	    },
+	    "funding_source_VENMO": {
+	        "type": "checkbox",
+	        "text": "Venmo"
+	    },
+		"color": {
+			"label": "Color",
+			"type": "select",
+			"options": {
+				"Gold": "gold",
+				"Blue": "blue",
+				"Silver": "silver",
+				"White": "white",
+				"Black": "black"
+			}
+		},
+		"shape": {
+			"label": "Shape",
+			"type": "select",
+			"options": {
+				"Rectangle": "rect",
+				"Pill": "pill"
+			}
+		},
+	    "buttons_container_class": {
+	        "label": "Container Class",
+	        "show": "buttons_container_width == 'custom'",
+	        "attrs": {
+	        	"placeholder": "uk-width-auto"
+	        }
+	    },
+	    "buttons_container_width": {
+	        "label": "Container Layout",
+			"type": "select",
+			"options": {
+				"Full": "uk-width-1-1",
+				"Half": "uk-width-1-2",
+				"Third": "uk-width-1-3",
+				"Quarter": "uk-width-1-4",
+				"Large": "uk-width-large",
+				"Medium": "uk-width-medium",
+				"Small": "uk-width-small",
+				"Custom": "custom"
+			}
+	    },
+	    "IfBilling": {
+	        "type": "checkbox",
+	        "text": "Billing"
+	    },	    
+	    "ifShipping": {
+	        "type": "checkbox",
+	        "text": "Shipping"
+	    },
+	    "disabledMessage": {
+	        "type": "editor",
+	        "text": "Message"
+	    },
+		"disabledType": {
+			"label": "Disabled Type",
+			"type": "select",
+			"options": {
+				"Greyout": "greyout",
+				"Hidden": "hidden"
+			}
+		},
+	    
+		"position": "${builder.position}",
+		"position_left": "${builder.position_left}",
+		"position_right": "${builder.position_right}",
+		"position_top": "${builder.position_top}",
+		"position_bottom": "${builder.position_bottom}",
+		"position_z_index": "${builder.position_z_index}",
+		"margin": "${builder.margin}",
+		"margin_remove_top": "${builder.margin_remove_top}",
+		"margin_remove_bottom": "${builder.margin_remove_bottom}",
+		"maxwidth": "${builder.maxwidth}",
+		"maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+		"block_align": "${builder.block_align}",
+		"block_align_breakpoint": "${builder.block_align_breakpoint}",
+		"block_align_fallback": "${builder.block_align_fallback}",
+		"text_align": "${builder.text_align}",
+		"text_align_breakpoint": "${builder.text_align_breakpoint}",
+		"text_align_fallback": "${builder.text_align_fallback}",
+		"animation": "${builder.animation}",
+		"_parallax_button": "${builder._parallax_button}",
+		"visibility": "${builder.visibility}",
+		"name": "${builder.name}",
+		"status": "${builder.status}",
+		"class": "${builder.cls}",
+		"attributes": "${builder.attrs}",
+		"css": {
+			"label": "CSS",
+			"description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>, <code>.el-item</code>, <code>.el-content</code>",
+			"type": "editor",
+			"editor": "code",
+			"mode": "css",
+			"attrs": {
+				"debounce": 500
+			}
+		}
+	},
+	"fieldset": {
+		"default": {
+			"type": "tabs",
+			"fields": [
+				{
+					"title": "Setup",
+					"fields": [
+						{
+							"label": "Additional Buttons",
+							"type": "grid",
+							"divider": true,
+							"fields": [
+								"funding_source_CARD",
+								"funding_source_PAYLATER",
+								"funding_source_VENMO"
+							]
+						},
+						{
+							"label": "Style",
+							"type": "group",
+							"divider": true,
+							"fields": [
+								"color",
+								"shape",
+								"buttons_container_width",
+								"buttons_container_class"
+							]
+						}
+					]
+				},
+				{
+					"title": "Settings",
+					"fields": [
+                        {
+                            "label": "Panel",
+                            "type": "group",
+                            "fields": [
+                                "panel_background",
+                                "panel_margin",
+                                "panel_padding",
+                                "panel_color_inverse"
+                            ]
+                        },
+						{
+							"label": "General",
+							"type": "group",
+							"fields": [
+								"position",
+								"position_left",
+								"position_right",
+								"position_top",
+								"position_bottom",
+								"position_z_index",
+								"margin",
+								"margin_remove_top",
+								"margin_remove_bottom",
+								"maxwidth",
+								"maxwidth_breakpoint",
+								"block_align",
+								"block_align_breakpoint",
+								"block_align_fallback",
+								"text_align",
+								"text_align_breakpoint",
+								"text_align_fallback",
+								"animation",
+								"_parallax_button",
+								"visibility"
+							]
+						}
+					]
+				},
+				"${builder.advanced}"
+			]
+		}
+	}
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<form>
+    <fieldset name="details"  addfieldpath="/administrator/components/com_commercelab_shop/models/fields">
+
+        <field name="name" type="vuetext" default="Name" label="Name" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large"/>
+
+        <field name="iso" type="vuetext" default="0" label="ISO" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" />
+
+        <field name="currencysymbol" type="vuetext" default="0" label="Symbol" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" filter="raw" />
+
+        <field name="rate" type="vuetext" default="0" label="Currency Conversion Rate" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" filter="float" />
+
+        <field name="default" type="pinputswitch" default="0" label="Default" description=""
+               class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field name="published" type="pinputswitch" default="0" label="Published" description=""
+               class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+    </fieldset>
+
+</form>

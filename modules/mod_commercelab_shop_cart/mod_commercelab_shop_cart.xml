@@ -1,0 +1,1197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<extension type="module" version="3.5" client="site" method="upgrade">
+    <name>CommerceLab Shop - Cart</name>
+    <author>Cloud Chief</author>
+    <creationDate>February 2020</creationDate>
+    <copyright>Copyright (C) 2022 CommerceLab. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <author>Cloud Chief</author>
+    <creationDate>March 2022</creationDate>
+    <version>2.0.0</version>
+    <description>CommerceLab Shop Cart - by Cloud Chief - CommerceLab</description>
+    <files>
+        <filename module="mod_commercelab_shop_cart">mod_commercelab_shop_cart.php</filename>
+        <folder>tmpl</folder>
+    </files>
+      <config>
+        <fields name="params">
+
+            <fieldset name="basic" label="Basic">
+
+                <field name="main_display" 
+                    type="list" 
+                    default="layout_button_and_products" 
+                    label="Main Layout" 
+                    description="Choose how to use the Module">
+                        <option value="layout_button">Button Only (micro cart)</option>
+                        <option value="layout_button_and_products">Button and Products (mini cart)</option>
+                        <option value="layout_products">Products Only (cart)</option>
+                </field>
+
+                <field name="show_products_in" type="radio" 
+                    default="dropdown" 
+                    label="Show Products in" 
+                    class="btn-group" 
+                    showon="main_display:layout_button_and_products" 
+                    description="You can show products in different ways, all of them are mobile compatible">
+                        <option value="dropdown">Droppdown</option>
+                        <option value="modal">Modal</option>
+                        <option value="offcanvas">Off-canvas</option>
+                </field>
+
+                <field name="main_button_additional_info" 
+                    type="note" 
+                    class="" 
+                    label="This button opens the dropdown" 
+                    description="It's main functionality is to show the mini cart dropdown, it accepts different dynamic properties - see bellow options"  
+                    showon="main_display:layout_button_and_products" 
+                />
+
+                <field name="main_only_button_additional_info" 
+                    type="note" 
+                    class="" 
+                    label="This button is the only visible" 
+                    description="This button is commonly used as a link to Checkout or Cart, it can also show dynamic content from the Cart - see bellow options"  
+                    showon="main_display:layout_button" 
+                />
+
+                <!-- Button Only AND Products in Dropdown -->
+                <field type="spacer" name="buttonsspacer" hr="true" showon="main_display!:layout_products" />
+                <field name="buttonsetup" type="note" label="Button Setup" showon="main_display!:layout_products" />
+
+                <field name="main_button" type="radio" 
+                    default="button_type" 
+                    label="Button Type" 
+                    class="btn-group btn-group-yesno" 
+                    showon="main_display!:layout_products">
+                        <option value="button_type">Button</option>
+                        <option value="icon_type">Icon</option>
+                </field>
+
+                <field name="iconbuttondef" type="note" 
+                    label="Icon with a Badge" 
+                    description="This will show an Icon type button, with no background or border, together with a badge with cart total inside, if any, if it's 0, it will not be visible until first item added" 
+                    showon="main_display!:layout_products[AND]main_button:icon_type" 
+                />
+
+                <field name="main_button_icon_badge_background_color" 
+                    type="color" 
+                    default="#ff0900" 
+                    label="Badge Background Color" 
+                    description="It's highly nrecommended to use a colorful badge, chose wiselly based on it's background"  
+                    showon="main_button:icon_type[AND]main_display!:layout_products[AND]main_button_style:custom" 
+                />
+
+                <field name="main_button_icon_badge_text_color" 
+                    type="color" 
+                    default="#ffffff" 
+                    label="Badge Text Color" 
+                    description="Color inside the badge, should do a nice contrast with the background"  
+                    showon="main_button:icon_type[AND]main_display!:layout_products[AND]main_button_style:custom" 
+                />
+
+                <field name="main_button_custom_style" 
+                    type="color" 
+                    default="" 
+                    label="Custom Color" 
+                    description=""  
+                    showon="main_button:button_type[AND]main_display!:layout_products[AND]main_button_style:custom" 
+                />
+
+                <!-- Button Innter Test Custom Color | Available for Button and Icon Type BUtton-->
+                <field name="main_button_custom_style_text" 
+                    type="color" 
+                    default="" 
+                    label="Text and Icon Color" 
+                    description="Color of inner Text (if any) and Icon"  
+                    showon="main_button:button_type,icon_type[AND]main_display!:layout_products[AND]main_button_style:custom" 
+                />
+
+                <field name="main_button_style" 
+                    type="list" 
+                    default="uk-button-primary" 
+                    label="Button Style" 
+                    description="" 
+                    class="btn-group btn-group-yesno" 
+                    showon="main_display!:layout_products">
+                        <option value="uk-button-default">Default</option>
+                        <option value="uk-button-primary">Primary</option>
+                        <option value="uk-button-secondary">Secondary</option>
+                        <option value="uk-button-danger">Danger</option>
+                        <option value="uk-button-text">Typographic</option>
+                        <option value="uk-button-link">Plain Link</option>
+                        <option value="custom">Custom</option>
+                </field>
+
+                <field name="main_button_size" type="radio" 
+                    default="" 
+                    label="Button Size" 
+                    description="" 
+                    class="btn-group" 
+                    showon="main_button:button_type[AND]main_display!:layout_products">
+                        <option value="uk-button-small">Small</option>
+                        <option value="">Default</option>
+                        <option value="uk-button-large">Large</option>
+                </field>
+
+                <field name="main_button_is_link" 
+                    type="checkbox" 
+                    checked="1" 
+                    label="Button is a Link" 
+                    description="The main button can be a menu item link, commonly used for Checkoout or Cart menu" 
+                    value="1" 
+                    showon="main_button:button_type,icon_type[AND]main_display:layout_button" 
+                />
+
+                <field name="main_button_link" 
+                    type="radio" 
+                    label="Button Action" 
+                    description="What should this button do, when pressend" 
+                    class="btn-group" 
+                    default="goToCheckout()" 
+                    showon="main_button:button_type,icon_type[AND]main_display:layout_button[AND]main_button_is_link:1">
+                        <option value="goToCheckout()">Go to Checkout</option>
+                        <option value="goToCart()">Go to Cart</option>
+                </field>
+
+                <!-- Button Content -->
+                <field type="spacer" name="buttoncontentspacer" hr="true" showon="main_display!:layout_products" />
+                <field type="note" name="buttoncontentlabel" label="Button Content" showon="main_display!:layout_products" />
+
+                <field name="iconbuttontextsuggestion" 
+                    type="note" 
+                    label="Text with an Icon Button" 
+                    description="The Icon type button already show the amount of items in the cart, within a badge, you may want to adjust this text accordingly, if any. This layout is a very good looking layout, self intuititive, by default it does not require additional text, we left this option just in case you want to improve it with some custom content. If you changed the icon, the best working one is cart, just choose it from the dropdown and you are good to go ;)" 
+                    showon="main_display!:layout_products[AND]main_button:icon_type" 
+                />
+
+                <field name="main_button_text" 
+                    type="text" 
+                    default="Total: [cartTotal]" 
+                    hint="Total: [cartTotal]" 
+                    label="Text in Button" 
+                    description="Accepts dynamic variables: [cartTotal] [cartItemsCount] - This field has a default value, in order to NOT show a text, just put an empty space."  
+                    showon="main_display!:layout_products" 
+                />
+
+                <field name="main_button_icon" 
+                    type="radio" 
+                    default="cart" 
+                    label="Icon in Button" 
+                    description="Icon visible inside the button, or without a button, if Button Icon is selected, together with text if any is set" 
+                    class="btn-group" 
+                    showon="main_display!:layout_products">
+                        <option value="0">None</option>
+                        <option value="cart">Cart</option>
+                        <option value="custom">Custom</option>
+                </field>
+
+                <field name="main_button_custom_icon" 
+                    type="text" 
+                    default="heart" 
+                    hint="heart" 
+                    label="Button custom icon" 
+                    description="Can use any icon from UIkit 3"  
+                    showon="main_button:button_type[AND]main_display!:layout_products[AND]main_button_icon:custom" 
+                />
+
+                <field name="main_button_icon_size" 
+                    type="radio" 
+                    default="1" 
+                    label="Icon Size" 
+                    description="" 
+                    class="btn-group" 
+                    showon="main_display!:layout_products">
+                        <option value="0.5">Small</option>
+                        <option value="1">Medium</option>
+                        <option value="2">Large</option>
+                </field>
+
+                <field name="main_button_icon_side" 
+                    type="radio" 
+                    default="left" 
+                    label="Icon Side" 
+                    description="Where to position the icon relative to the text" 
+                    class="btn-group btn-group-yesno" 
+                    showon="main_display!:layout_products">
+                        <option value="left">Left</option>
+                        <option value="right">Right</option>
+                </field>
+
+            </fieldset>
+
+            <fieldset name="products" label="Products">
+
+                <field name="products_layout" 
+                    type="filelist" 
+                    label="Products Layout" 
+                    description="Choose from different Layouts for Producst, this layouts can be overriden, or you can create new ones" 
+                    default="Table" 
+                    hide_none="true" 
+                    directory="modules/mod_commercelab_shop_cart/tmpl" 
+                    filter="" 
+                    exclude="default.php|List|Cards|MobileTable|HtmlTable|BottomBNuttons|icon" 
+                    stripext="true" 
+                />
+
+                <field name="products_with_taxes" 
+                    type="radio" 
+                    default="0" 
+                    label="Show prices with tax" 
+                    class="btn-group btn-group-yesno" >
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                </field>
+
+                <field name="items_image_width" 
+                    type="text" 
+                    default="80" 
+                    label="Image Width" 
+                    description="Set image pixel width (only the number), the height will be automatically calculated" 
+                />
+
+                <field name="items_image_design" 
+                    type="radio" 
+                    label="Image Design" 
+                    description="" 
+                    class="btn-group" 
+                    default="uk-border-rounded" 
+                >
+                    <option value="square">Square</option>
+                    <option value="uk-border-rounded">Rounded corners</option>
+                    <option value="uk-border-circle">In a circle</option>
+                    <option value="uk-border-pill">In a pill</option>
+                </field>
+
+                <field name="empty_cart" 
+                    type="textarea" 
+                    filter="raw"
+                    label="Empty Cart Message" 
+                    description="" 
+                    size="10" 
+                    defualt="THERE ARE NO ITEMS IN YOUR CART" 
+                    hint="THERE ARE NO ITEMS IN YOUR CART"
+                />
+
+                <field name="alert_product_removed" 
+                    type="radio" 
+                    default="0" 
+                    label="Alert on Product Removal" 
+                    description="Show a confirmation alert before the product is removed from the cart" 
+                    class="btn-group btn-group-yesno" >
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                </field>
+
+                <field name="buttons_products_list" 
+                    type="radio" 
+                    label="Cart Button" 
+                    class="btn-group btn-group-yesno" 
+                    default="0"
+                    description="You can show up to 2 links at the end of the products list, usually for Cart and/or Checkout" 
+                >
+                    <option value="0">No</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                </field>
+
+                <!-- Button 1  -->
+                <field type="spacer" name="button1spacer" showon="buttons_products_list:1,2" hr="true" />
+                <field name="button1setup" type="note" label="Button #1 Setup" showon="buttons_products_list:1,2" />
+
+                <field name="main_button1_link" 
+                    type="radio" 
+                    label="Button Action" 
+                    description="Select a menu item for the Button Link"
+                    class="btn-group" 
+                    default="goToCheckout()" 
+                    showon="buttons_products_list:1,2">
+                        <option value="goToCheckout()">Go to Checkout</option>
+                        <option value="goToCart()">Go to Cart</option>
+                        <option value="closeCart()">Close Cart</option>
+                        <option value="goToCustomLink">Custom Link</option>
+                </field>
+
+                <field name="main_button1_link_custom" 
+                    type="text" 
+                    label="Custom Link" 
+                    showon="main_button1_link:goToCustomLink" 
+                />
+
+                <field name="main_button1_size" type="radio" 
+                    default="" 
+                    label="Button Size" 
+                    description="" 
+                    class="btn-group btn-group-yesno"
+                    showon="buttons_products_list:1,2"
+                >
+                        <option value="uk-button-small">Small</option>
+                        <option value="">Default</option>
+                        <option value="uk-button-large">Large</option>
+                </field>
+
+                <field name="main_button1_fixed_width" type="radio" 
+                    default="" 
+                    label="Fixed Width" 
+                    description="" 
+                    class="btn-group btn-group-yesno"
+                    showon="buttons_products_list:1,2"
+                >
+                        <option value="">None</option>
+                        <option value="uk-width-1-2">Half</option>
+                        <option value="uk-width-1-1">Full</option>
+                </field>
+
+                <field name="main_button1_style" 
+                    type="list" 
+                    default="uk-button-primary" 
+                    label="Button Style" 
+                    description="" 
+                    class="btn-group btn-group-yesno"
+                    showon="buttons_products_list:1,2"
+                >
+                        <option value="uk-button-default">Default</option>
+                        <option value="uk-button-primary">Primary</option>
+                        <option value="uk-button-secondary">Secondary</option>
+                        <option value="uk-button-danger">Danger</option>
+                        <option value="uk-button-text">Typographic</option>
+                        <option value="uk-button-link">Plain Link</option>
+                        <option value="custom">Custom</option>
+                </field>
+
+                <field name="main_button1_custom_style" 
+                    type="color" 
+                    default="" 
+                    label="Background Color" 
+                    description=""  
+                    showon="main_button1_style:custom" 
+                />
+
+                <field name="main_button1_custom_style_text" 
+                    type="color" 
+                    default="" 
+                    label="Text Color" 
+                    description="Color of inner Text and Icon"  
+                    showon="main_button1_style:custom" 
+                />
+
+                <field name="main_button1_text" 
+                    type="text" 
+                    deault="Go to Checkout" 
+                    label="Text in Button" 
+                    showon="buttons_products_list:1,2" 
+                />
+
+                <field name="main_button1_icon" 
+                    type="radio" 
+                    default="cart" 
+                    label="Icon in Button" 
+                    description="Icon visible inside the button" 
+                    class="btn-group"
+                    showon="buttons_products_list:1,2" >
+                        <option value="0">None</option>
+                        <option value="cart">Cart</option>
+                        <option value="custom">Custom</option>
+                </field>
+
+                <field name="main_button1_custom_icon" 
+                    type="text" 
+                    default="heart" 
+                    hint="heart" 
+                    label="Button custom icon" 
+                    description="Can use any icon from UIkit 3"  
+                    showon="main_button1_icon:custom[AND]buttons_products_list:1,2" 
+                />
+
+                <field name="main_button1_icon_size" 
+                    type="radio" 
+                    default="1" 
+                    label="Icon Size" 
+                    description="" 
+                    class="btn-group"
+                    showon="buttons_products_list:1,2[AND]main_button1_icon!:0" 
+                >
+                        <option value="0.5">Small</option>
+                        <option value="1">Medium</option>
+                        <option value="2">Large</option>
+                </field>
+
+                <field name="main_button1_icon_side" 
+                    type="radio" 
+                    default="left" 
+                    label="Icon Side" 
+                    description="Where to position the icon relative to the text" 
+                    class="btn-group btn-group-yesno" 
+                    showon="buttons_products_list:1,2[AND]main_button1_icon!:0" 
+                >
+                        <option value="left">Left</option>
+                        <option value="right">Right</option>
+                </field>
+
+                <!-- Button Only AND Products in Dropdown -->
+                <field type="spacer" name="button2spacer" showon="buttons_products_list:2" hr="true" />
+                <field name="button2setup" type="note" label="Button #2 Setup" showon="buttons_products_list:2" />
+
+
+                <field name="main_button2_link" 
+                    type="radio" 
+                    label="Button Action" 
+                    description="Select a menu item for the Button Link"
+                    class="btn-group" 
+                    default="closeCart()" 
+                    showon="buttons_products_list:2">
+                        <option value="goToCheckout()">Go to Checkout</option>
+                        <option value="goToCart()">Go to Cart</option>
+                        <option value="closeCart()">Close Cart</option>
+                        <option value="goToCustomLink">Custom Link</option>
+                </field>
+
+                <field name="main_button2_link_custom" 
+                    type="text" 
+                    label="Custom Link" 
+                    showon="main_button2_link:goToCustomLink" 
+                />
+
+                <field name="main_button2_size" type="radio" 
+                    default="" 
+                    label="Button Size" 
+                    description="" 
+                    class="btn-group btn-group-yesno"
+                    showon="buttons_products_list:2"
+                >
+                        <option value="uk-button-small">Small</option>
+                        <option value="">Default</option>
+                        <option value="uk-button-large">Large</option>
+                </field>
+
+                <field name="main_button2_fixed_width" type="radio" 
+                    default="" 
+                    label="Fixed Width" 
+                    description="" 
+                    class="btn-group btn-group-yesno"
+                    showon="buttons_products_list:2"
+                >
+                        <option value="">None</option>
+                        <option value="uk-width-1-2">Half</option>
+                        <option value="uk-width-1-1">Full</option>
+                </field>
+
+                <field name="main_button2_style" 
+                    type="list" 
+                    default="uk-button-primary" 
+                    label="Button Style" 
+                    description="" 
+                    class="btn-group btn-group-yesno"
+                    showon="buttons_products_list:2"
+                >
+                        <option value="uk-button-default">Default</option>
+                        <option value="uk-button-primary">Primary</option>
+                        <option value="uk-button-secondary">Secondary</option>
+                        <option value="uk-button-danger">Danger</option>
+                        <option value="uk-button-text">Typographic</option>
+                        <option value="uk-button-link">Plain Link</option>
+                        <option value="custom">Custom</option>
+                </field>
+
+                <field name="main_button2_custom_style" 
+                    type="color" 
+                    default="" 
+                    label="Background Color" 
+                    description=""  
+                    showon="main_button2_style:custom[AND]buttons_products_list:2" 
+                />
+
+                <field name="main_button2_custom_style_text" 
+                    type="color" 
+                    default="" 
+                    label="Text Color" 
+                    description="Color of inner Text and Icon"  
+                    showon="main_button2_style:custom[AND]buttons_products_list:2" 
+                />
+
+                <field name="main_button2_text" 
+                    type="text" 
+                    label="Text in Button" 
+                    deault="Go to Cart" 
+                    showon="buttons_products_list:2" 
+                />
+
+                <field name="main_button2_icon" 
+                    type="radio" 
+                    default="cart" 
+                    label="Icon in Button" 
+                    description="Icon visible inside the button" 
+                    class="btn-group"
+                    showon="buttons_products_list:2" >
+                        <option value="0">None</option>
+                        <option value="cart">Cart</option>
+                        <option value="custom">Custom</option>
+                </field>
+
+                <field name="main_button2_custom_icon" 
+                    type="text" 
+                    default="heart" 
+                    hint="heart" 
+                    label="Button custom icon" 
+                    description="Can use any icon from UIkit 3"  
+                    showon="main_button2_icon:custom[AND]buttons_products_list:2" 
+                />
+
+                <field name="main_button2_icon_size" 
+                    type="radio" 
+                    default="1" 
+                    label="Icon Size" 
+                    description="" 
+                    class="btn-group"
+                    showon="buttons_products_list:2[AND]main_button2_icon!:0" 
+                >
+                        <option value="0.5">Small</option>
+                        <option value="1">Medium</option>
+                        <option value="2">Large</option>
+                </field>
+
+                <field name="main_button2_icon_side" 
+                    type="radio" 
+                    default="left" 
+                    label="Icon Side" 
+                    description="Where to position the icon relative to the text" 
+                    class="btn-group btn-group-yesno" 
+                    showon="buttons_products_list:2[AND]main_button2_icon!:0" 
+                >
+                        <option value="left">Left</option>
+                        <option value="right">Right</option>
+                </field>
+
+            </fieldset>
+
+            <fieldset name="dropdown" label="Dropdown">
+
+                <field name="dropdown_heading" 
+                    type="text" 
+                    label="Heading text" 
+                    hint="Items in your Cart" 
+                    description="This text will be displayed above the cart items" 
+                />
+
+                <field name="dropdown_heading_alignment" 
+                    type="radio" 
+                    label="Alignment" 
+                    class="btn-group" 
+                    default="uk-text-left" 
+                    showon="modal_heading!:">
+                        <option value="uk-text-left">Left</option>
+                        <option value="uk-text-center">Center</option>
+                        <option value="uk-text-right">Right</option>
+                </field>
+
+                <field name="dropdown_heading_style" 
+                    type="list" 
+                    label="Style" 
+                    default="uk-h4" 
+                    showon="modal_heading!:"
+                    description="Heading style that can be added to the heading, independently from the HTML element">
+                        <option value="">None</option>
+                        <option value="uk-heading-2xlarge">2Xlarge</option>
+                        <option value="uk-heading-xlarge">XLarge</option>
+                        <option value="uk-heading-large">Large</option>
+                        <option value="uk-heading-medium">Medium</option>
+                        <option value="uk-heading-small">Small</option>
+                        <option value="uk-h1">H1</option>
+                        <option value="uk-h2">H2</option>
+                        <option value="uk-h4">H3</option>
+                        <option value="uk-h4">H4</option>
+                        <option value="uk-h5">H5</option>
+                        <option value="uk-h6">H6</option>
+                </field>
+
+                <field name="dropdown_heading_color" 
+                    type="list" 
+                    label="Color" 
+                    default="" 
+                    showon="modal_heading!:">
+                        <option value="">Default</option>
+                        <option value="uk-text-muted">Muted</option>
+                        <option value="uk-light">Light</option>
+                        <option value="uk-text-emphasis">Emphasis</option>
+                        <option value="uk-text-primary">Primary</option>
+                        <option value="uk-text-success">Success</option>
+                        <option value="uk-text-warning">Warning</option>
+                        <option value="uk-text-danger">Danger</option>
+                        <option value="uk-text-background">Background</option>
+                </field>
+
+                <field name="dropdown_heading_decoration" 
+                    type="list" 
+                    label="Decoration" 
+                    default="" 
+                    showon="modal_heading!:">
+                        <option value="">None</option>
+                        <option value="uk-heading-divider">Divider</option>
+                        <option value="uk-heading-bullet">Bullet</option>
+                        <option value="uk-heading-line">Line</option>
+                </field>
+
+                <field name="dropdown_heading_fontfamily" 
+                    type="list" 
+                    label="Font Family" 
+                    default="" 
+                    showon="modal_heading!:">
+                        <option value= "">None</option>
+                        <option value="uk-font-default">Default</option>
+                        <option value="uk-font-primary">Primary</option>
+                        <option value="uk-font-secondary">Secondary</option>
+                        <option value="uk-font-tertiary">Tertiary</option>
+                </field>
+
+                <field name="drop_show" 
+                    type="radio" 
+                    label="Show On" 
+                    default="click" 
+                    class="btn-group" 
+                    description="">
+                        <option value="hover">Hover</option>
+                        <option value="click">Click</option>
+                </field>
+
+                <field name="drop_card_width" 
+                    label="Width" 
+                    type="radio" 
+                    default="uk-width-large" 
+                    class="btn-group" 
+                    description="">
+                        <!-- <option value="uk-width-small">Small</option> -->
+                        <option value="uk-width-medium">Small</option>
+                        <option value="uk-width-large">Compact</option>
+                        <option value="uk-width-xlarge">Medium</option>
+                        <option value="uk-width-2xlarge">Large</option>
+                </field>
+
+                <field name="drop_card_corners" 
+                    label="Corners" 
+                    type="radio" 
+                    default="" 
+                    class="btn-group" 
+                    description="">
+                        <option value="">Square</option>
+                        <option value="uk-border-rounded">Rounded</option>
+                </field>
+
+                <field name="drop_card_color" 
+                    label="Color" 
+                    type="radio" 
+                    default="uk-card-default" 
+                    class="btn-group" 
+                    description="">
+                        <option value="uk-card-default">Default</option>
+                        <option value="uk-card-primary">Primary</option>
+                        <option value="uk-card-secondary">Secondary</option>
+                        <option value="custom">Custom</option>
+                </field>
+
+                <field name="custom_dropdown_bg_color" 
+                    label="Background Color" 
+                    type="color" 
+                    default="" 
+                    description=""  
+                    showon="drop_card_color:custom" 
+                />
+
+                <field name="custom_dropdown_text_color" 
+                    label="Text Color" 
+                    type="color" 
+                    default="" 
+                    description=""  
+                    showon="drop_card_color:custom" 
+                />
+
+                <field name="dropdown_pos" 
+                    label="Position" 
+                    type="list" 
+                    default="bottom-right" 
+                    class="btn-group" 
+                    description="Position relative to the trigger element">
+                        <option value="bottom-left">Bottom Left</option>
+                        <option value="bottom-center">Bottom Center</option>
+                        <option value="bottom-right">Bottom Right</option>
+                        <option value="bottom-justify">Bottom Justify</option>
+                        <option value="top-left">Top Left</option>
+                        <option value="top-center">Top Center</option>
+                        <option value="top-right">Top Right</option>
+                        <option value="top-justify">Top Justify</option>
+                        <option value="left-top">Left Top</option>
+                        <option value="left-center">Left Center</option>
+                        <option value="left-bottom">Left Bottom</option>
+                        <option value="right-top">Right Top</option>
+                        <option value="right-center">Right Center</option>
+                        <option value="right-bottom">Right Bottom</option>
+                </field>
+
+                <field name="dropdown_offset" 
+                    type="text" 
+                    label="Offset" 
+                    description="Offsets the dropdown from the trigger button, based on the position param, the value are pixels, without px" 
+                    size="10"  
+                    defualt="0"
+                />
+
+                <field name="dropdown_shadow" 
+                    label="Shadow" 
+                    type="radio" 
+                    default="uk-box-shadow-medium" 
+                    class="btn-group" 
+                    description="">
+                        <option value="">None</option>
+                        <option value="uk-box-shadow-small">Small</option>
+                        <option value="uk-box-shadow-medium">Medium</option>
+                        <option value="uk-box-shadow-large">Large</option>
+                        <option value="uk-box-shadow-xlarge">XLarge</option>
+
+                </field>
+
+                <field name="dropdown_spacing" 
+                    label="Spacing" 
+                    type="radio" 
+                    default="uk-card-medium" 
+                    class="btn-group" 
+                    description="Spacing for the Dropdown container">
+                        <option value="uk-card-small">Small</option>
+                        <option value="uk-card-medium">Medium</option>
+                        <option value="uk-card-large">Large</option>
+                </field>
+
+
+                <field type="note" 
+                    name="dropdown_close"
+                    label="Close Behaviour" 
+                    description="Options that enable different behaviour for closing the Cart Dropdown" 
+                />
+                
+                <field name="drop_card_close_button" 
+                    label="Close Button" 
+                    type="radio" 
+                    default="0" 
+                    class="btn-group" 
+                    description="Top right corner X button to close the dropdown">
+                        <option value="0">Hide</option>
+                        <option value="1">Show</option>
+                </field>
+
+                <field name="drop_card_close_on_outclik" 
+                    label="Outside of the Dropdown" 
+                    type="radio" 
+                    default="0" 
+                    class="btn-group" 
+                    description="Close the dropdown if clicked at any other part of the page">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </field>
+
+                <field name="drop_card_close_on_samebutton" 
+                    label="Same button that opens it" 
+                    type="radio" 
+                    default="1" 
+                    class="btn-group" 
+                    showon="drop_card_close_on_outclik:0" 
+                    description="Same button that opens the dropdown can close it">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                </field>
+                
+                <field type="note" 
+                    name="dropdown_close_alert" class="alert alert-error" 
+                    label="The Dropdown will not Close" 
+                    description="If all options are negative, there will be nothing to close the dropdown, unless the user go to a different page. Just be aware... :)" 
+                    showon="drop_card_close_button:0[AND]drop_card_close_on_samebutton:0[AND]drop_card_close_on_outclik:0" 
+                />
+                
+            </fieldset>
+
+            <fieldset name="offcanvas" label="Off-canvas">
+
+                <field name="offcanvas_overlay" 
+                    type="radio" 
+                    label="Overlay" 
+                    default="true" 
+                    class="btn-group" 
+                    description="To add an overlay, blanking out the rest of the page. If overlay is disabled the user can still use the rest of the page and scroll trough it">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                </field>
+
+                <field name="offcanvas_flip" 
+                    type="radio" 
+                    label="Side" 
+                    default="false" 
+                    class="btn-group" 
+                    description="">
+                        <option value="false">Left</option>
+                        <option value="true">Right</option>
+                </field>
+
+                <field name="offcanvas_mode" 
+                    label="Animation Mode" 
+                    type="radio" 
+                    default="slide" 
+                    class="btn-group" 
+                    description="">
+                        <option value="slide">Slide</option>
+                        <option value="push">Push</option>
+                        <option value="reveal">Reveal</option>
+                        <option value="none">None</option>
+                </field>
+
+                <field name="offcanvas_close_button" 
+                    label="Show Close button" 
+                    type="radio" 
+                    default="1" 
+                    class="btn-group" 
+                    description="">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                </field>
+
+                <field name="offcanvas_close_bg" 
+                    label="Close on Background" 
+                    type="radio" 
+                    default="true" 
+                    class="btn-group" 
+                    description="If user click on the background or overlay, it will close the Offcanvas">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                </field>
+
+                <field name="offcanvas_close_esc" 
+                    label="Close when Esc pressed" 
+                    type="radio" 
+                    default="true" 
+                    class="btn-group" 
+                    description="If Esc is pressed on the keyboard, the Offcanvas will be closed">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                </field>
+
+                <field name="offcanvasheading" type="note" label="Heading"/>
+
+                <field name="offcanvas_heading" 
+                    type="text" 
+                    label="Heading text" 
+                    hint="Items in your Cart" 
+                    description="This text will be displayed above the cart items" 
+                />
+
+                <field name="offcanvas_heading_alignment" 
+                    type="radio" 
+                    label="Alignment" 
+                    class="btn-group" 
+                    default="uk-text-left" 
+                    showon="offcanvas_heading!:">
+                        <option value="uk-text-left">Left</option>
+                        <option value="uk-text-center">Center</option>
+                        <option value="uk-text-right">Right</option>
+                </field>
+
+                <field name="offcanvas_heading_style" 
+                    type="list" 
+                    label="Style" 
+                    default="uk-h4" 
+                    showon="offcanvas_heading!:"
+                    description="Heading style that can be added to the heading, independently from the HTML element">
+                        <option value="">None</option>
+                        <option value="uk-heading-2xlarge">2Xlarge</option>
+                        <option value="uk-heading-xlarge">XLarge</option>
+                        <option value="uk-heading-large">Large</option>
+                        <option value="uk-heading-medium">Medium</option>
+                        <option value="uk-heading-small">Small</option>
+                        <option value="uk-h1">H1</option>
+                        <option value="uk-h2">H2</option>
+                        <option value="uk-h4">H3</option>
+                        <option value="uk-h4">H4</option>
+                        <option value="uk-h5">H5</option>
+                        <option value="uk-h6">H6</option>
+                </field>
+
+                <field name="offcanvas_heading_color" 
+                    type="list" 
+                    label="Color" 
+                    default="" 
+                    showon="offcanvas_heading!:">
+                        <option value="">Default</option>
+                        <option value="uk-text-muted">Muted</option>
+                        <option value="uk-light">Light</option>
+                        <option value="uk-text-emphasis">Emphasis</option>
+                        <option value="uk-text-primary">Primary</option>
+                        <option value="uk-text-success">Success</option>
+                        <option value="uk-text-warning">Warning</option>
+                        <option value="uk-text-danger">Danger</option>
+                        <option value="uk-text-background">Background</option>
+                </field>
+
+                <field name="offcanvas_heading_decoration" 
+                    type="list" 
+                    label="Decoration" 
+                    default="" 
+                    showon="offcanvas_heading!:">
+                        <option value="">None</option>
+                        <option value="uk-heading-divider">Divider</option>
+                        <option value="uk-heading-bullet">Bullet</option>
+                        <option value="uk-heading-line">Line</option>
+                </field>
+
+                <field name="offcanvas_heading_fontfamily" 
+                    type="list" 
+                    label="Font Family" 
+                    default="" 
+                    showon="offcanvas_heading!:">
+                        <option value= "">None</option>
+                        <option value="uk-font-default">Default</option>
+                        <option value="uk-font-primary">Primary</option>
+                        <option value="uk-font-secondary">Secondary</option>
+                        <option value="uk-font-tertiary">Tertiary</option>
+                </field>
+
+            </fieldset>
+
+            <fieldset name="modal" label="Modal">
+
+                <field name="modal_container" 
+                    type="radio" 
+                    label="Width" 
+                    default="" 
+                    class="btn-group">
+                        <option value="">Default</option>
+                        <option value="uk-modal-container">Large</option>
+                </field>
+
+                <field name="modal_center" 
+                    type="radio" 
+                    label="Vetical Align" 
+                    default="" 
+                    class="btn-group">
+                        <option value="">Top</option>
+                        <option value="uk-flex-top">Middle</option>
+                </field>
+
+                <field name="modal_close" 
+                    type="radio" 
+                    label="Show Close Button" 
+                    default="1" 
+                    class="btn-group">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                </field>
+
+                <field name="modal_close_position" 
+                    type="radio" 
+                    label="Close Button Position" 
+                    default="uk-modal-close-default" 
+                    class="btn-group"
+                    show="modal_close:1">
+                        <option value="uk-modal-close-default">Inside</option>
+                        <option value="uk-modal-close-outside">Outside</option>
+                </field>
+
+                <field name="modal_close_bg" 
+                    label="Close on Background" 
+                    type="radio" 
+                    default="true" 
+                    class="btn-group" 
+                    description="If user click on the background or overlay, it will close the Offcanvas">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                </field>
+
+                <field name="modal_close_esc" 
+                    label="Close when Esc pressed" 
+                    type="radio" 
+                    default="true" 
+                    class="btn-group" 
+                    description="If Esc is pressed on the keyboard, the Offcanvas will be closed">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                </field>
+
+                <field name="modalheading" type="note" label="Heading"/>
+
+                <field name="modal_heading" 
+                    type="text" 
+                    label="Heading text" 
+                    hint="Items in your Cart" 
+                    description="This text will be displayed above the cart items" 
+                />
+
+                <field name="modal_heading_alignment" 
+                    type="radio" 
+                    label="Alignment" 
+                    class="btn-group" 
+                    default="uk-text-left" 
+                    showon="modal_heading!:">
+                        <option value="uk-text-left">Left</option>
+                        <option value="uk-text-center">Center</option>
+                        <option value="uk-text-right">Right</option>
+                </field>
+
+                <field name="modal_heading_style" 
+                    type="list" 
+                    label="Style" 
+                    default="uk-h4" 
+                    showon="modal_heading!:"
+                    description="Heading style that can be added to the heading, independently from the HTML element">
+                        <option value="">None</option>
+                        <option value="uk-heading-2xlarge">2Xlarge</option>
+                        <option value="uk-heading-xlarge">XLarge</option>
+                        <option value="uk-heading-large">Large</option>
+                        <option value="uk-heading-medium">Medium</option>
+                        <option value="uk-heading-small">Small</option>
+                        <option value="uk-h1">H1</option>
+                        <option value="uk-h2">H2</option>
+                        <option value="uk-h4">H3</option>
+                        <option value="uk-h4">H4</option>
+                        <option value="uk-h5">H5</option>
+                        <option value="uk-h6">H6</option>
+                </field>
+
+                <field name="modal_heading_color" 
+                    type="list" 
+                    label="Color" 
+                    default="" 
+                    showon="modal_heading!:">
+                        <option value="">Default</option>
+                        <option value="uk-text-muted">Muted</option>
+                        <option value="uk-light">Light</option>
+                        <option value="uk-text-emphasis">Emphasis</option>
+                        <option value="uk-text-primary">Primary</option>
+                        <option value="uk-text-success">Success</option>
+                        <option value="uk-text-warning">Warning</option>
+                        <option value="uk-text-danger">Danger</option>
+                        <option value="uk-text-background">Background</option>
+                </field>
+
+                <field name="modal_heading_decoration" 
+                    type="list" 
+                    label="Decoration" 
+                    default="" 
+                    showon="modal_heading!:">
+                        <option value="">None</option>
+                        <option value="uk-heading-divider">Divider</option>
+                        <option value="uk-heading-bullet">Bullet</option>
+                        <option value="uk-heading-line">Line</option>
+                </field>
+
+                <field name="modal_heading_fontfamily" 
+                    type="list" 
+                    label="Font Family" 
+                    default="" 
+                    showon="modal_heading!:">
+                        <option value= "">None</option>
+                        <option value="uk-font-default">Default</option>
+                        <option value="uk-font-primary">Primary</option>
+                        <option value="uk-font-secondary">Secondary</option>
+                        <option value="uk-font-tertiary">Tertiary</option>
+                </field>
+
+            </fieldset>
+
+<!-- 
+            <fieldset name="products" label="Products">
+
+                <field name="items_spacing" 
+                    type="list" 
+                    label="Spacing" 
+                    description="Space between items rows and columns"
+                    default="uk-grid-small" 
+                >
+                    <option value="uk-grid-collapse">Compact</option>
+                    <option value="uk-grid-small">Small</option>
+                    <option value="uk-grid-medium">Medium</option>
+                    <option value="uk-grid-large">Large</option>
+                </field>
+
+                <field name="total_type" type="list" default="" label="Total Type" description="">
+                    <option value="subtotal">Subtotal</option>
+                    <option value="grandtotal">Grand Total</option>
+                </field>
+
+                <field name="items_show_image" 
+                    type="checkbox" 
+                    label="Image" 
+                    description="Show the image of the product" 
+                    checked="1" 
+                    value="1" 
+                />
+
+                <field name="items_image_width" 
+                    type="text" 
+                    default="80" 
+                    label="Image Width" 
+                    description="Set image pixel width (only the number), the height will be automatically calculated" 
+                />
+                <field name="items_image_design" 
+                    type="list" 
+                    label="Image Design" 
+                    description="" 
+                    default="uk-border-rounded" 
+                >
+                    <option value="square">Square</option>
+                    <option value="uk-border-rounded">Rounded corners</option>
+                    <option value="uk-border-circle">In a circle</option>
+                    <option value="uk-border-pill">In a pill</option>
+                </field>
+                
+                <field 
+                    name="items_show_title" 
+                    type="checkbox" 
+                    checked="1" 
+                    label="Title" 
+                    description="Show the Title of the product" 
+                    value="1" 
+                />
+
+                <field name="items_show_quantity" 
+                    type="checkbox" 
+                    checked="1" 
+                    label="Quantity" 
+                    description="Show the Quantity added for the product" 
+                    value="1" 
+                />
+
+                <field name="items_show_quantity_allow_change" 
+                    type="radio" 
+                    default="1" 
+                    label="Allow quantity change" 
+                    description="" 
+                    class="btn-group btn-group-yesno" 
+                >
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field 
+                    name="items_show_price_per_quantity" 
+                    type="checkbox" 
+                    checked="1" 
+                    label="Total" 
+                    description="Show the Total of the product" 
+                    value="1" 
+                />
+
+                <field 
+                    name="items_show_remove_product_button" 
+                    type="checkbox" 
+                    checked="1" 
+                    label="Remove" 
+                    description="Show the Remove button for the product" 
+                    value="1" 
+                />
+                
+            </fieldset>
+ -->
+        </fields>
+    </config>
+</extension>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<extension type="package" version="3.2" method="upgrade">
+    <name>CommerceLab  Stripe Payments Package</name>
+    <author>Cloud Chief</author>
+    <creationDate>March 2022</creationDate>
+    <packagename>commercelab_shop_stripepayment</packagename>
+    <version>{{version}}</version>
+    <copyright>Copyright (C) 2021 CommerceLab </copyright>
+    <license>http://www.gnu.org/licenses/gpl.html GNU/GPL</license>
+    <authorEmail>info@CommerceLab.solutions</authorEmail>
+    <authorUrl>https://CommerceLab.solutions</authorUrl>
+    <description>
+        <![CDATA[
+        <h1>CommerceLab Shop Stripe Payments ({{version}})</h1>
+		<div style="clear: both;"></div>
+		<p>CommerceLab Shop Stripe - Add Stripe Inline Checkout to your CommerceLab Shop checkout.</p>
+		<p>Visit https://Commercelab.solutions for more info</p>
+	]]>
+    </description>
+    <files folder="packages">
+        <file type="plugin" id="commercelab_shop_stripepayment" group="system">plg_system_commercelab_shop_stripepayment.zip</file>
+        <file type="plugin" id="stripepayment" group="commercelab_shop_payment">plg_commercelab_shop_payment_stripepayment.zip</file>
+    </files>
+    <scriptfile>script.php</scriptfile>
+    <updateservers>
+        <server type="extension" priority="1" name="CommerceLab Shop Stripe Payment"><![CDATA[https://Commercelab.solutions/index.php?option=com_rdsubs&view=updater&format=xml&element=protostore_stripepayment]]></server>
+    </updateservers>
+</extension>

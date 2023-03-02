@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+    <name>System - CommerceLab Shop Cardlink Payment Gateway</name>
+    <version>1.0</version>
+    <creationDate>May 2020</creationDate>
+    <author>CommerceLab\Shop - Cloud Chief</author>
+    <authorEmail>Info@commercelab.solutions</authorEmail>
+    <authorUrl>https://commercelab.solutions</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2020 CommerceLab\Shop - Cloud Chief - All rights reserved.</copyright>
+    <description>System Plugin for CommerceLab Shop - Cardlink Payment Gateway 1.0</description>
+    <files>
+        <filename plugin="commercelab_shop_cardlinkpayment">commercelab_shop_cardlinkpayment.php</filename>
+        <folder>modules</folder>
+        <folder>vendor</folder>
+    </files>
+    <scriptfile>script.php</scriptfile>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+
+                <field name="live" type="radio" default="0" label="Live Mode" description="" class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="business_partner" type="radio" default="cardlink" label="Business Partner" description="" class="btn-group btn-group-yesno">
+                    <option value="cardlink">Cardlink</option>
+                    <option value="nexi">Nexi</option>
+                    <option value="worldline">Worldline</option>
+                </field>
+
+                <field name="mid" type="text" default="" label="MID" description="" size="10"  />
+
+                <field name="test_shared_secret" type="text" default="" label="Test Shared Secret Key" description="" size="10" showon="live:0"  />
+
+                <field name="live_shared_secret" type="text" default="" label="Live Shared Secret Key" description="" size="10" showon="live:1"  />
+
+                <field name="test_cardlink_url" 
+                    type="text" default="https://ecommerce-test.cardlink.gr/vpos/shophandlermpi" 
+                    label="Test Cardlink Url" 
+                    disabled="true"
+                    description="" size="10" showon="live:0[AND]business_partner:cardlink" />
+
+                <field name="live_cardlink_url" 
+                    type="text" default="https://ecommerce.cardlink.gr/vpos/shophandlermpi" 
+                    label="Live Cardlink Url" 
+                    description="" size="10" showon="live:1[AND]business_partner:cardlink" />
+
+
+                <field name="test_nexi_url" 
+                    type="text" default="https://alphaecommerce-test.cardlink.gr/vpos/shophandlermpi" 
+                    label="Test Nexi Url" 
+                    disabled="true"
+                    description="" size="10" showon="live:0[AND]business_partner:nexi" />
+
+                <field name="live_nexi_url" 
+                    type="text" default="https://alphaecommerce.cardlink.gr/vpos/shophandlermpi" 
+                    label="Live Nexi Url" 
+                    description="" size="10" showon="live:1[AND]business_partner:nexi" />
+
+
+                <field name="test_worldline_url" 
+                    type="text" default="https://eurocommerce-test.cardlink.gr/vpos/shophandlermpi" 
+                    label="Test Worldline Url" 
+                    disabled="true"
+                    description="" size="10" showon="live:0[AND]business_partner:worldline" />
+
+                <field name="live_worldline_url" 
+                    type="text" default="" 
+                    label="Live Worldline Url" 
+                    description="" size="10" showon="live:1[AND]business_partner:worldline" />
+
+            </fieldset>
+        </fields>
+    </config>
+    <updateservers>
+        <server type="extension" priority="1" name="CommerceLab Shop Stripe Advanced"><![CDATA[https://commercelab.solutions/index.php?option=com_rdsubs&view=updater&format=xml&element=commercelab_shop_cardlinkpayment]]></server>
+    </updateservers>
+</extension>

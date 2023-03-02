@@ -1,0 +1,428 @@
+{
+    "@import": "./element.php",
+    "name": "commercelab_shop_total",
+    "title": "Total",
+    "icon": "${url:images/commercelab_shop_total.svg}",
+    "iconSmall": "${url:images/commercelab_shop_total_small.svg}",
+    "element": true,
+    "container": true,
+    "group": "CommerceLab Products",
+    "placeholder": {
+        "props": {
+            "product_source": "dynamic"
+        }
+    },
+    "defaults": {
+        "title_element": "h3",
+        "product_source": "dynamic"
+    },
+    "templates": {
+        "render": "./templates/template.php",
+        "content": "./templates/content.php"
+    },
+    "fields": {
+        "product_source": {
+            "label":"Product source",
+            "type": "select",
+            "default": "dynamic",
+            "options": {
+                "Dynamic": "dynamic",
+                "Manual": "manual"
+            },
+            "enable":"${commercelab.add2cartanywhere}"
+        },
+
+        "product_source_manual": {
+            "label":"Manual product",
+            "type": "select",
+            "options": "${commercelab.component.products.products_list}",
+            "show":"${commercelab.add2cartanywhere}",
+            "enable":"product_source == 'manual'"
+        },
+
+        "with_tax": {
+            "label": "Show with Tax",
+            "type": "checkbox",
+            "default": 1,
+            "text": "Total price with or without tax"
+        },
+
+        "title_element": {
+            "label": "HTML Element",
+            "description": "Choose one of the HTML elements to fit the semantic structure.",
+            "type": "select",
+            "default": "h3",
+            "options": {
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "div": "div",
+                "span": "span"
+            }
+        },
+        "title_style": {
+            "label": "Style",
+            "description": "Headline styles differ in font size and font family.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "2X-Large": "heading-2xlarge",
+                "X-Large": "heading-xlarge",
+                "Large": "heading-large",
+                "Medium": "heading-medium",
+                "Small": "heading-small",
+                "H1": "h1",
+                "H2": "h2",
+                "H3": "h3",
+                "H4": "h4",
+                "H5": "h5",
+                "H6": "h6",
+                "Meta": "meta",
+                "Lead": "lead"
+            }
+        },
+        "title_decoration": {
+            "label": "Decoration",
+            "description": "Decorate the headline with a divider, bullet or a line that is vertically centered to the heading.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Divider": "divider",
+                "Bullet": "bullet",
+                "Line": "line"
+            }
+        },
+        "title_font_family": {
+            "label": "Font Family",
+            "description": "Select an alternative font family. Mind that not all styles have different font families.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "default",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Tertiary": "tertiary"
+            }
+        },
+        "title_color": {
+            "label": "Color",
+            "description": "Select the text color. If the Background option is selected, styles that don't apply a background image use the primary color instead.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Muted": "muted",
+                "Emphasis": "emphasis",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Success": "success",
+                "Warning": "warning",
+                "Danger": "danger",
+                "Background": "background"
+            }
+        },
+
+
+
+        "before": {
+            "label": "Content Before"
+        },
+
+        "before_style": {
+            "label": "Style",
+            "description": "Headline styles differ in font size and font family.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "2X-Large": "heading-2xlarge",
+                "X-Large": "heading-xlarge",
+                "Large": "heading-large",
+                "Medium": "heading-medium",
+                "Small": "heading-small",
+                "H1": "h1",
+                "H2": "h2",
+                "H3": "h3",
+                "H4": "h4",
+                "H5": "h5",
+                "H6": "h6",
+                "Meta": "meta",
+                "Lead": "lead"
+            },
+            "enable":"before"
+        },
+        "before_decoration": {
+            "label": "Decoration",
+            "description": "Decorate the headline with a divider, bullet or a line that is vertically centered to the heading.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Divider": "divider",
+                "Bullet": "bullet",
+                "Line": "line"
+            },
+            "enable":"before"
+        },
+        "before_font_family": {
+            "label": "Font Family",
+            "description": "Select an alternative font family. Mind that not all styles have different font families.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "default",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Tertiary": "tertiary"
+            },
+            "enable":"before"
+        },
+        "before_color": {
+            "label": "Color",
+            "description": "Select the text color. If the Background option is selected, styles that don't apply a background image use the primary color instead.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Muted": "muted",
+                "Emphasis": "emphasis",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Success": "success",
+                "Warning": "warning",
+                "Danger": "danger",
+                "Background": "background"
+            },
+            "enable":"before"
+        },
+        "before_element": {
+            "label": "HTML Element",
+            "description": "Choose one of the HTML elements to fit the semantic structure.",
+            "type": "select",
+            "default": "span",
+            "options": {
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "div": "div",
+                "span": "span"
+            },
+            "enable":"before"
+        },
+
+        "after": {
+            "type": "text"
+        },
+        "after_element": {
+            "label": "HTML Element",
+            "description": "Choose one of the HTML elements to fit the semantic structure.",
+            "type": "select",
+            "default": "span",
+            "options": {
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "div": "div",
+                "span": "span"
+            },
+            "enable":"after"
+        },
+        "after_style": {
+            "label": "Style",
+            "description": "Headline styles differ in font size and font family.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "2X-Large": "heading-2xlarge",
+                "X-Large": "heading-xlarge",
+                "Large": "heading-large",
+                "Medium": "heading-medium",
+                "Small": "heading-small",
+                "H1": "h1",
+                "H2": "h2",
+                "H3": "h3",
+                "H4": "h4",
+                "H5": "h5",
+                "H6": "h6",
+                "Meta": "meta",
+                "Lead": "lead"
+            },
+            "enable":"after"
+        },
+        "after_decoration": {
+            "label": "Decoration",
+            "description": "Decorate the headline with a divider, bullet or a line that is vertically centered to the heading.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Divider": "divider",
+                "Bullet": "bullet",
+                "Line": "line"
+            },
+            "enable":"after"
+        },
+        "after_font_family": {
+            "label": "Font Family",
+            "description": "Select an alternative font family. Mind that not all styles have different font families.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "default",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Tertiary": "tertiary"
+            },
+            "enable":"after"
+        },
+        "after_color": {
+            "label": "Color",
+            "description": "Select the text color. If the Background option is selected, styles that don't apply a background image use the primary color instead.",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Muted": "muted",
+                "Emphasis": "emphasis",
+                "Primary": "primary",
+                "Secondary": "secondary",
+                "Success": "success",
+                "Warning": "warning",
+                "Danger": "danger",
+                "Background": "background"
+            },
+            "enable":"after"
+        },
+
+
+        "position": "${builder.position}",
+        "position_left": "${builder.position_left}",
+        "position_right": "${builder.position_right}",
+        "position_top": "${builder.position_top}",
+        "position_bottom": "${builder.position_bottom}",
+        "position_z_index": "${builder.position_z_index}",
+        "margin": "${builder.margin}",
+        "margin_remove_top": "${builder.margin_remove_top}",
+        "margin_remove_bottom": "${builder.margin_remove_bottom}",
+        "maxwidth": "${builder.maxwidth}",
+        "maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+        "block_align": "${builder.block_align}",
+        "block_align_breakpoint": "${builder.block_align_breakpoint}",
+        "block_align_fallback": "${builder.block_align_fallback}",
+        "text_align": "${builder.text_align_justify}",
+        "text_align_breakpoint": "${builder.text_align_breakpoint}",
+        "text_align_fallback": "${builder.text_align_justify_fallback}",
+        "animation": "${builder.animation}",
+        "_parallax_button": "${builder._parallax_button}",
+        "visibility": "${builder.visibility}",
+        "name": "${builder.name}",
+        "status": "${builder.status}",
+        "id": "${builder.id}",
+        "class": "${builder.cls}",
+        "css": {
+            "label": "CSS",
+            "description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>",
+            "type": "editor",
+            "editor": "code",
+            "mode": "css",
+            "attrs": {
+                "debounce": 500
+            }
+        }
+    },
+    "fieldset": {
+        "default": {
+            "type": "tabs",
+            "fields": [
+                {
+                    "title": "Setup",
+                    "fields": [
+                        {   
+                            "label": "Source",
+                            "type": "group",
+                            "description": "You need 'Add 2 Cart Anywhere' plugin in order to choose a different Product source",
+                            "fields": [
+                                "product_source",
+                                "product_source_manual"
+                            ]
+                        },
+                        {
+                            "label": "Price",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "with_tax",
+                                "title_element",
+                                "title_style",
+                                "title_decoration",
+                                "title_font_family",
+                                "title_color"
+                            ]
+                        },
+                        {
+                            "label": "Before Text",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "before",
+                                "before_element",
+                                "before_style",
+                                "before_decoration",
+                                "before_font_family",
+                                "before_color"
+                            ]
+                        },
+                        {
+                            "label": "After Text",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "after",
+                                "after_element",
+                                "after_style",
+                                "after_decoration",
+                                "after_font_family",
+                                "after_color"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Settings",
+                    "fields": [
+                        {
+                            "label": "General",
+                            "type": "group",
+                            "fields": [
+                                "position",
+                                "position_left",
+                                "position_right",
+                                "position_top",
+                                "position_bottom",
+                                "position_z_index",
+                                "margin",
+                                "margin_remove_top",
+                                "margin_remove_bottom",
+                                "maxwidth",
+                                "maxwidth_breakpoint",
+                                "block_align",
+                                "block_align_breakpoint",
+                                "block_align_fallback",
+                                "text_align",
+                                "text_align_breakpoint",
+                                "text_align_fallback",
+                                "animation",
+                                "_parallax_button",
+                                "visibility"
+                            ]
+                        }
+                    ]
+                },
+                "${builder.advanced}"
+            ]
+        }
+    }
+}

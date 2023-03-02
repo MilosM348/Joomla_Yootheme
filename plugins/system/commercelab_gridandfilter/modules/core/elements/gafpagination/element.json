@@ -1,0 +1,198 @@
+{
+	"@import":"./element.php",
+	"name":"gafpagination",
+	"title":"Pagination",
+	"icon":"${url:images/pagination.svg}",
+	"iconSmall":"${url:images/pagination_small.svg}",
+	"element":true,
+	"container":true,
+	"group":"CommerceLab Grid & Filter",
+	"defaults":{
+	},
+	"placeholder":{
+	},
+	"templates":{
+		"render":"./templates/template.php",
+		"content":"./templates/content.php"
+	},
+	"fields":{
+
+		"align_pagination":{
+			"label":"Alignment",
+			"type":"select",
+			"default":"uk-flex-center",
+			"options":{
+				"Left":"",
+				"Center":"uk-flex-center",
+				"Right":"uk-flex-right"
+			}
+		},
+		
+		"middle_pages":{
+			"label":"Middle Pages",
+            "type": "range",
+			"type":"select",
+			"default":3,
+			"options":{
+				"3":3,
+				"5":5,
+				"7":7
+			}
+		},
+
+		"edge_pages":{
+			"label":"Pages on edge",
+			"type":"select",
+			"default":1,
+			"options":{
+				"1":1,
+				"2":2,
+				"3":3
+			}
+		},
+		
+		"prevnext":{
+			"label":"Preview and Next",
+			"type":"select",
+			"default":"stacked",
+			"options":{
+				"None":0,
+				"Stacked":"stacked",
+				"Separated":"separated"
+			}
+		},
+		
+		"prev_text":{
+			"label":"Preview Text",
+			"default":"Preview",
+			"show":"prevnext == 'separated'"
+		},
+		
+		"next_text":{
+			"label":"Next Text",
+			"default":"Next",
+			"show":"prevnext == 'separated'"
+		},
+
+		"panel_background": "${cls_builder.panel_background}",
+		"panel_margin": "${cls_builder.panel_margin}",
+		"panel_padding": "${cls_builder.panel_padding}",
+		"panel_color_inverse": "${cls_builder.panel_color_inverse}",
+
+        "position": "${builder.position}",
+        "position_left": "${builder.position_left}",
+        "position_right": "${builder.position_right}",
+        "position_top": "${builder.position_top}",
+        "position_bottom": "${builder.position_bottom}",
+        "position_z_index": "${builder.position_z_index}",
+        "margin": "${builder.margin}",
+        "margin_remove_top": "${builder.margin_remove_top}",
+        "margin_remove_bottom": "${builder.margin_remove_bottom}",
+        "maxwidth": "${builder.maxwidth}",
+        "maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+        "block_align": "${builder.block_align}",
+        "block_align_breakpoint": "${builder.block_align_breakpoint}",
+        "block_align_fallback": "${builder.block_align_fallback}",
+        "text_align": "${builder.text_align}",
+        "text_align_breakpoint": "${builder.text_align_breakpoint}",
+        "text_align_fallback": "${builder.text_align_fallback}",
+        "animation": "${builder.animation}",
+        "_parallax_button": "${builder._parallax_button}",
+        "visibility": "${builder.visibility}",
+        "container_padding_remove": "${builder.container_padding_remove}",
+        "name": "${builder.name}",
+        "status": "${builder.status}",
+        "source": "${builder.source}",
+        "id": "${builder.id}",
+        "class": "${builder.cls}",
+        "attributes": "${builder.attrs}",
+        "css": {
+            "label": "CSS",
+            "description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>, <code>.el-image</code>, <code>.el-title</code>, <code>.el-meta</code>, <code>.el-content</code>, <code>.el-hover-image</code>",
+            "type": "editor",
+            "editor": "code",
+            "mode": "css",
+            "attrs": {
+                "debounce": 500
+            }
+        }
+		
+	},
+	"fieldset":{
+		"default":{
+			"type":"tabs",
+			"fields":[
+				{
+					"title":"Setup",
+					"fields":[
+						{
+							"label":"Basic",
+							"type":"group",
+							"divider":true,
+							"fields":[
+							 "align_pagination",
+							 "middle_pages",
+							 "edge_pages"
+							]
+						},
+						{
+							"label":"Navigation",
+							"type":"group",
+							"divider":true,
+							"fields":[
+							 "prevnext",
+							 "prev_text",
+							 "next_text"
+							]
+						}
+					]
+				},
+                {
+                    "title": "Settings",
+                    "fields": [
+                        {
+                            "label": "Panel",
+                            "type": "group",
+                            "fields": [
+                                "panel_background",
+                                "panel_margin",
+                                "panel_padding",
+                                "panel_color_inverse",
+                                "panel_border_bottom",
+                                "panel_border_bottom_color"
+                            ]
+                        },
+                        {
+                            "label": "General",
+                            "type": "group",
+                            "fields": [
+                                "position",
+                                "position_left",
+                                "position_right",
+                                "position_top",
+                                "position_bottom",
+                                "position_z_index",
+                                "margin",
+                                "margin_remove_top",
+                                "margin_remove_bottom",
+                                "maxwidth",
+                                "maxwidth_breakpoint",
+                                "block_align",
+                                "block_align_breakpoint",
+                                "block_align_fallback",
+                                "text_align",
+                                "text_align_breakpoint",
+                                "text_align_fallback",
+                                "animation",
+                                "_parallax_button",
+                                "visibility",
+                                "container_padding_remove"
+                            ]
+                        }
+                    ]
+                },
+                "${builder.advanced}"
+			]
+		}
+	}
+}

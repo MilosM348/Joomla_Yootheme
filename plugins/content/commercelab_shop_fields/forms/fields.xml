@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+    <fields name="attribs">
+        <fieldset name="commercelab_shop" label="CLS On/Off" addfieldpath="/plugins/content/commercelab_shop_fields/fields">
+            <field name="ispro2storeproduct" type="radio" default="0" label="Set as CommerceLab Shop Product" description="" class="btn-group btn-group-yesno">
+                <option value="1">JYES</option>
+                <option value="0">JNO</option>
+            </field>
+            <field type="commercelab_shop"></field>
+        </fieldset>
+    </fields>
+</form>

@@ -1,0 +1,425 @@
+{
+    "panel_basic": {
+        "label": "Panel",
+        "type": "group",
+        "fields": ["panel_background", "panel_margin", "panel_padding", "panel_color_inverse"]
+    },
+
+    "panel_card": {
+        "label": "Card",
+        "type": "checkbox",
+        "text": "Card"
+    },
+    "panel_card_style": {
+        "label":"Card Type",
+        "type": "select",
+        "default": "uk-card-small",
+        "options": {
+            "Compact": "uk-card-small",
+            "Default": "",
+            "Large": "uk-card-large"
+        },
+        "show": "panel_card"
+    },
+    "panel_background": {
+        "label":"Background",
+        "type": "select",
+        "options": {
+            "None": "",
+            "Default": "uk-background-default",
+            "Primary": "uk-background-primary",
+            "Secondary": "uk-background-secondary",
+            "Muted": "uk-background-muted"
+        }
+    },
+    "panel_margin": {
+        "label":"Margin",
+        "type": "select",
+        "options": {
+            "None": "",
+            "Small": "uk-margin-small",
+            "Medium": "uk-margin",
+            "Large": "uk-margin-large"
+        }
+    },
+    "panel_padding": {
+        "label":"Padding",
+        "type": "select",
+        "options": {
+            "None": "",
+            "Small": "uk-padding-small",
+            "Medium": "uk-padding",
+            "Large": "uk-padding-large"
+        }
+    },
+    "panel_color_inverse": {
+        "label":"Color Inverse",
+        "type": "select",
+        "default": "",
+        "options": {
+            "None": "",
+            "Light": "uk-light",
+            "Dark": "uk-dark"
+        },
+        "description": "This can be used to force the inner content to be Light or Dark, depending on the background"
+    },
+
+    
+    "button_basic": {
+        "label": "Button Basic Options",
+        "type": "group",
+        "fields": [
+            "button_text",
+            "button_style",
+            "button_size",
+            "fullwidth"
+        ]
+    },
+
+    "button_text": {
+        "label": "Text",
+        "type": "text",
+        "default": "Sample Text"
+    },
+
+    "button_style": {
+        "label": "Style",
+        "type": "select",
+        "options": {
+            "Default": "uk-button-default",
+            "Primary": "uk-button-primary",
+            "Secondary": "uk-button-secondary",
+            "Danger": "uk-button-danger",
+            "Text": "uk-button-text",
+            "Link": "",
+            "Link Muted": "uk-button-link-muted",
+            "Link Text": "uk-button-link-text"
+        }
+    },
+    "button_size": {
+        "label": "Size",
+        "type": "select",
+        "options": {
+            "Small": "uk-button-small",
+            "Default": "",
+            "Large": "uk-button-large"
+        }
+    },
+    "fullwidth": {
+        "type": "checkbox",
+        "text": "Full width"
+    },
+
+
+
+
+
+
+
+
+
+    "after_add_to_cart_behaviour": {
+        "label": "After Add Action",
+        "type": "select",
+        "default": "go_to_dropdown",
+        "options": {
+            "Open Cart Dropdown": "go_to_dropdown",
+            "Go to Checkout": "go_to_checkout",
+            "Show Checkout Button": "show_checkout_button",
+            "Show Alert": "show_alert",
+            "Do Nothing": "0"
+        }
+    },
+
+    "add_to_cart_button_text": {
+        "default": "Add to Cart",
+        "label": "Button Text"
+    },
+    "add_to_cart_button_with_icon": {
+        "type": "checkbox",
+        "text": "With Icon"
+    },
+    "add_to_cart_button_icon": {
+        "label": "Icon",
+        "description": "Pick an optional icon.",
+        "type": "icon",
+        "default": "cart",
+        "enable": "add_to_cart_button_with_icon"
+    },
+    "add_to_cart_button_icon_align": {
+        "label": "Icon Alignment",
+        "description": "Choose the icon position.",
+        "type": "select",
+        "default": "left",
+        "options": {
+            "Left": "left",
+            "Right": "right"
+        },
+        "enable": "add_to_cart_button_with_icon && add_to_cart_button_icon"
+    },
+    "add_to_cart_button_style": {
+        "label": "Style",
+        "description": "Set the button style.",
+        "type": "select",
+        "default": "uk-button-primary",
+        "options": {
+            "Default": "uk-button-default",
+            "Primary": "uk-button-primary",
+            "Secondary": "uk-button-secondary",
+            "Danger": "uk-button-danger",
+            "Text": "uk-button-text",
+            "Link": "uk-button-link",
+            "Link Muted": "uk-button-link-muted",
+            "Link Text": "uk-button-link-text"
+        }
+    },
+    "add_to_cart_button_size": {
+        "label": "Size",
+        "type": "select",
+        "default": "",
+        "options": {
+            "Small": "uk-button-small",
+            "Default": "",
+            "Large": "uk-button-large"
+        }
+    },
+    "add_to_cart_button_fullwidth": {
+        "type": "checkbox",
+        "text": "Full width button"
+    },
+
+    "checkout_button_text": {
+        "label": "Checkout Text",
+        "default": "Go to Checkout",
+        "show": "after_add_to_cart_behaviour == 'show_checkout_button'"
+    },
+    "checkout_button_with_icon": {
+        "type": "checkbox",
+        "text": "With Icon",
+        "show": "after_add_to_cart_behaviour == 'show_checkout_button'"
+    },
+    "checkout_button_icon": {
+        "label": "Icon",
+        "description": "Pick an optional icon.",
+        "type": "icon",
+        "default": "cart",
+        "show": "after_add_to_cart_behaviour == 'show_checkout_button'",
+        "enable": "checkout_button_with_icon"
+    },
+    "checkout_button_icon_align": {
+        "label": "Icon Alignment",
+        "description": "Choose the icon position.",
+        "type": "select",
+        "default": "left",
+        "options": {
+            "Left": "left",
+            "Right": "right"
+        },
+        "show": "after_add_to_cart_behaviour == 'show_checkout_button'",
+        "enable": "checkout_button_with_icon && checkout_button_icon"
+    },
+    "checkout_button_style": {
+        "label": "Style",
+        "description": "Set the button style.",
+        "type": "select",
+        "default": "uk-button-primary",
+        "options": {
+            "Default": "uk-button-default",
+            "Primary": "uk-button-primary",
+            "Secondary": "uk-button-secondary",
+            "Danger": "uk-button-danger",
+            "Text": "uk-button-text",
+            "Link": "uk-button-link",
+            "Link Muted": "uk-button-link-muted",
+            "Link Text": "uk-button-link-text"
+        },
+        "show": "after_add_to_cart_behaviour == 'show_checkout_button'"
+    },
+    "checkout_button_size": {
+        "label": "Size",
+        "type": "select",
+        "default": "",
+        "options": {
+            "Small": "uk-button-small",
+            "Default": "",
+            "Large": "uk-button-large"
+        },
+        "show": "after_add_to_cart_behaviour == 'show_checkout_button'"
+    },
+    "checkout_button_fullwidth": {
+        "type": "checkbox",
+        "text": "Full width button",
+        "show": "after_add_to_cart_behaviour == 'show_checkout_button'"
+    },
+
+
+    "alert_message": {
+        "label": "Alert Message",
+        "default":"Product added to Cart",
+        "show": "after_add_to_cart_behaviour == 'show_alert'"
+    },
+    "alert_style": {
+        "type": "select",
+        "default": "primary",
+        "options": {
+            "Default": "primary",
+            "Success": "success",
+            "Warning": "warning",
+            "Danger": "danger"
+        },
+        "label": "Alert Style",
+        "show": "after_add_to_cart_behaviour == 'show_alert'"
+    },
+    "alert_position": {
+        "type": "select",
+        "default": "top-center",
+        "options": {
+            "Top Left": "top-left",
+            "Top Center": "top-center",
+            "Top right": "top-right",
+            "Bottom Left": "bottom-left",
+            "Bottom Center": "bottom-center",
+            "Bottom Right": "bottom-right"
+        },
+        "label": "Alert Position",
+        "show": "after_add_to_cart_behaviour == 'show_alert'"
+    },
+
+    "oos_button_behavioir": {
+        "label": "Button Behaviour",
+        "type": "select",
+        "description": "When Out of Stock is reached, what should Add to Cart button do",
+        "default": "disable",
+        "options": {
+            "Disable": "disable",
+            "Hide": "hide"
+        }
+    },
+    "oos_message_behavioir": {
+        "label": "Show Message",
+        "type": "select",
+        "description": "Should the message be displayed as soon the product is added to the cart, or only when the order is processed in there is no more real Stock",
+        "default": "added_to_cart",
+        "options": {
+            "As soon as added to Cart": "added_to_cart",
+            "No real Stock Available": "no_real_stock"
+        }
+    },
+    "oos_message": {
+        "label": "Out of Stock Message",
+        "default": "Out of Stock"
+    },
+    "oos_style": {
+        "label": "Style",
+        "description": "Headline styles differ in font-size but may also come with a predefined color, size and font.",
+        "type": "select",
+        "default": "uk-h5",
+        "options": {
+            "None": "",
+            "2Xlarge": "uk-heading-2xlarge",
+            "XLarge": "uk-heading-xlarge",
+            "Large": "uk-heading-large",
+            "Medium": "uk-heading-medium",
+            "Small": "uk-heading-small",
+            "H1": "uk-h1",
+            "H2": "uk-h2",
+            "H3": "uk-h3",
+            "H4": "uk-h4",
+            "H5": "uk-h5",
+            "H6": "uk-h6"
+        }
+    },
+    "oos_decoration": {
+        "label": "Decoration",
+        "description": "Decorate the headline with a divider, bullet or a line that is vertically centered to the heading.",
+        "type": "select",
+        "default": "",
+        "options": {
+            "None": "",
+            "Divider": "uk-heading-divider",
+            "Bullet": "uk-heading-bullet",
+            "Line": "uk-heading-line"
+        }
+    },
+    "oos_font_family": {
+        "label": "Font Family",
+        "description": "Select an alternative font family.",
+        "type": "select",
+        "default": "",
+        "options": {
+            "None": "",
+            "Default": "uk-font-default",
+            "Primary": "uk-font-primary",
+            "Secondary": "uk-font-secondary",
+            "Tertiary": "uk-font-tertiary"
+        }
+    },
+    "oos_color": {
+        "label": "Color",
+        "description": "Select the text color. If the Background option is selected, styles that don't apply a background image use the primary color instead.",
+        "type": "select",
+        "default": "uk-text-danger",
+        "options": {
+            "None": "",
+            "Muted": "uk-text-muted",
+            "Emphasis": "uk-text-emphasis",
+            "Primary": "uk-text-primary",
+            "Secondary": "uk-text-secondary",
+            "Success": "uk-text-success",
+            "Warning": "uk-text-warning",
+            "Danger": "uk-text-danger",
+            "Background": "uk-text-background"
+        }
+    },
+    "oos_element": {
+        "label": "HTML Element",
+        "description": "Choose one of the HTML elements to fit your semantic structure.",
+        "type": "select",
+        "default": "h5",
+        "options": {
+            "h1": "h1",
+            "h2": "h2",
+            "h3": "h3",
+            "h4": "h4",
+            "h5": "h5",
+            "h6": "h6",
+            "div": "div"
+        }
+    },
+
+
+
+
+
+
+
+
+
+
+    "payment_button_basic": {
+        "label": "Payment Button",
+        "type": "group",
+        "fields": [
+            "payment_button_processing_text",
+            "payment_button_processed_text"
+        ]
+    },
+
+    "payment_button_processing_text": {
+        "label": "Processing Text",
+        "type": "text",
+        "default": "Processing",
+        "attrs": {
+            "placeholder": "Processing Payment"
+        }
+    },
+    "payment_button_processed_text": {
+        "label": "Completed Text",
+        "default": "Completed",
+        "type": "text",
+        "attrs": {
+            "placeholder": "Payment Completed"
+        }
+    }
+
+}

@@ -1,0 +1,154 @@
+{
+	"@import": "./element.php",
+	"name": "commercelab_shop_checkboxoptions",
+	"title": "Checkbox Options",
+	"icon": "${url:images/commercelab_shop_checkboxoptions.svg}",
+	"iconSmall": "${url:images/commercelab_shop_checkboxoptions_small.svg}",
+	"group": "CommerceLab Products",
+	"element": true,
+	"defaults": {
+		"product_source": "dynamic"
+	},
+	"templates": {
+		"render": "./templates/template.php",
+		"content": "./templates/content.php"
+	},
+	"fields": {
+
+        "product_source": {
+            "label":"Product source",
+            "type": "select",
+            "default": "dynamic",
+            "options": {
+                "Dynamic": "dynamic",
+                "Manual": "manual"
+            },
+            "enable":"${commercelab.add2cartanywhere}"
+        },
+
+        "product_source_manual": {
+            "label":"Manual product",
+            "type": "select",
+            "options": "${commercelab.component.products.products_list}",
+            "show":"${commercelab.add2cartanywhere}",
+            "enable":"product_source == 'manual'"
+        },
+
+		"checkbox_options_layout": {
+			"label": "Layout",
+			"type": "select",
+			"default": "default",
+			"options": {
+				"List": "list",
+				"Breadcrumb": "breadcrumb"
+			}
+		},
+
+		"checkbox_options_default_label": {
+			"label": "Name Position",
+			"type": "select",
+			"default": "uk-form-stacked",
+			"options": {
+				"Top": "uk-form-stacked",
+				"Side": "uk-form-horizontal"
+			},
+			"show": "checkbox_options_layout == 'default"
+		},
+
+		"position": "${builder.position}",
+		"position_left": "${builder.position_left}",
+		"position_right": "${builder.position_right}",
+		"position_top": "${builder.position_top}",
+		"position_bottom": "${builder.position_bottom}",
+		"position_z_index": "${builder.position_z_index}",
+		"margin": "${builder.margin}",
+		"margin_remove_top": "${builder.margin_remove_top}",
+		"margin_remove_bottom": "${builder.margin_remove_bottom}",
+		"maxwidth": "${builder.maxwidth}",
+		"maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+		"block_align": "${builder.block_align}",
+		"block_align_breakpoint": "${builder.block_align_breakpoint}",
+		"block_align_fallback": "${builder.block_align_fallback}",
+		"text_align": "${builder.text_align}",
+		"text_align_breakpoint": "${builder.text_align_breakpoint}",
+		"text_align_fallback": "${builder.text_align_fallback}",
+		"animation": "${builder.animation}",
+		"_parallax_button": "${builder._parallax_button}",
+		"visibility": "${builder.visibility}",
+		"name": "${builder.name}",
+		"status": "${builder.status}",
+		"class": "${builder.cls}",
+		"attributes": "${builder.attrs}",
+		"css": {
+			"label": "CSS",
+			"description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>, <code>.el-item</code>, <code>.el-content</code>",
+			"type": "editor",
+			"editor": "code",
+			"mode": "css",
+			"attrs": {
+				"debounce": 500
+			}
+		}
+	},
+	"fieldset": {
+		"default": {
+			"type": "tabs",
+			"fields": [
+				{
+					"title": "Options",
+					"fields": [
+						{
+							"label": "Source",
+							"type": "group",
+				            "description": "You need 'Add 2 Cart Anywhere' plugin in order to choose a different Product source",
+							"fields": [
+								"product_source",
+								"product_source_manual"
+							]
+						},
+						{
+							"label": "Options",
+							"type": "group",
+							"divider": true,
+							"fields": [
+								"checkbox_options_layout"
+							]
+						}
+					]
+				},
+				{
+					"title": "Settings",
+					"fields": [
+						{
+							"label": "General",
+							"type": "group",
+							"fields": [
+								"position",
+								"position_left",
+								"position_right",
+								"position_top",
+								"position_bottom",
+								"position_z_index",
+								"margin",
+								"margin_remove_top",
+								"margin_remove_bottom",
+								"maxwidth",
+								"maxwidth_breakpoint",
+								"block_align",
+								"block_align_breakpoint",
+								"block_align_fallback",
+								"text_align",
+								"text_align_breakpoint",
+								"text_align_fallback",
+								"animation",
+								"_parallax_button",
+								"visibility"
+							]
+						}
+					]
+				},
+				"${builder.advanced}"
+			]
+		}
+	}
+}

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.5" client="site" method="upgrade">
+    <name>CommerceLab Shop - Currency Switcher</name>
+    <author>Cloud Chief</author>   
+    <copyright>Copyright (C) 2022 CommerceLab. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <author>Cloud Chief</author>
+    <creationDate>March 2022</creationDate>
+    <version>1.0.0</version>
+    <description>CommerceLab Shop - Currency Switcher - by Cloud Chief - CommerceLab</description>
+    <files>
+        <filename module="mod_commercelab_shop_currencyswitcher">mod_commercelab_shop_currencyswitcher.php</filename>
+        <folder>tmpl</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="Basic">                
+
+
+                <field name="switcher_style" 
+                    type="list" 
+                    default="dropdwon" 
+                    label="Switcher Style" 
+                    description="" 
+                    class="btn-group btn-group-yesno"
+                >
+                        <option value="dropdown">Dropdown</option>
+                        <option value="buttons">Buttons</option>
+                        <option value="buttons_dropdown">Buttons Dropdown</option>
+                </field>
+
+                <field name="currency_text" type="radio" 
+                    default="currencysymbol" 
+                    label="Show Currency" 
+                    description="" 
+                    class="btn-group">
+                        <option value="currencysymbol">Symbol</option>
+                        <option value="name">Name</option>
+                        <option value="iso">ISO</option>
+                </field>
+
+                <field name="buttons_dropdown_showon" type="radio" 
+                    default="click" 
+                    label="Show on" 
+                    description="" 
+                    showon="switcher_style:buttons_dropdown"
+                    class="btn-group">
+                        <option value="click">Click</option>
+                        <option value="hover">Hover</option>
+                </field>
+
+                <field name="buttons_dropdown_pos" 
+                    label="Position" 
+                    type="list" 
+                    default="bottom-right" 
+                    class="btn-group" 
+                    showon="switcher_style:buttons_dropdown"
+                    description="Position relative to the trigger element">
+                        <option value="bottom-left">Bottom Left</option>
+                        <option value="bottom-center">Bottom Center</option>
+                        <option value="bottom-right">Bottom Right</option>
+                        <option value="bottom-justify">Bottom Justify</option>
+                        <option value="top-left">Top Left</option>
+                        <option value="top-center">Top Center</option>
+                        <option value="top-right">Top Right</option>
+                        <option value="top-justify">Top Justify</option>
+                        <option value="left-top">Left Top</option>
+                        <option value="left-center">Left Center</option>
+                        <option value="left-bottom">Left Bottom</option>
+                        <option value="right-top">Right Top</option>
+                        <option value="right-center">Right Center</option>
+                        <option value="right-bottom">Right Bottom</option>
+                </field>
+
+                <field name="switcher_button_style" 
+                    type="list" 
+                    default="uk-button-default" 
+                    label="Button Style" 
+                    description="" 
+                    class="btn-group btn-group-yesno" 
+                    showon="switcher_style!:dropdown">
+                        <option value="uk-button-default">Default</option>
+                        <option value="uk-button-primary">Primary</option>
+                        <option value="uk-button-secondary">Secondary</option>
+                        <option value="uk-button-danger">Danger</option>
+                        <option value="uk-button-text">Typographic</option>
+                        <option value="uk-button-link">Plain Link</option>
+                </field>
+
+                <field name="switcher_button_size" type="radio" 
+                    default="" 
+                    label="Button Size" 
+                    description="" 
+                    class="btn-group" 
+                    showon="switcher_style!:dropdown">
+                        <option value="uk-button-small">Small</option>
+                        <option value="">Default</option>
+                        <option value="uk-button-large">Large</option>
+                </field>
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

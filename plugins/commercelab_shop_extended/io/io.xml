@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab Shop -->
+<!-- @author    Cloud Chief - CommerceLab Shop -->
+<!-- @copyright Copyright (C) 2021 Cloud Chief - CommerceLab Shop -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<extension version="3.0" type="plugin" group="commercelab_shop_extended" method="upgrade">
+    <name>CommerceLab Shop - IO</name>
+    <version>1.0</version>
+    <creationDate>Aug 2021</creationDate>
+    <author>Cloud Chief - CommerceLab Shop</author>
+    <authorEmail>info@CommerceLab.solutions</authorEmail>
+    <authorUrl>https://commerceLab.solutions</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2021 Cloud Chief - CommerceLab Shop. All rights reserved.</copyright>
+    <description>Enables CommerceLab Shop Import/Export system</description>
+    <files>
+        <filename plugin="io">io.php</filename>
+        <folder>forms</folder>
+        <folder>views</folder>
+    </files>
+</extension>

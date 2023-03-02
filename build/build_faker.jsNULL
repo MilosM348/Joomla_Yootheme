@@ -1,0 +1,27 @@
+////////////////////////////////////////////////////////////////////////////////
+// @package   CommerceLab 
+// @author    Cloud Chief - CommerceLab.solutions
+// @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions
+// @license   http://www.gnu.org/licenses/gpl.html GNU/GPL
+//
+
+const {copy, remove, exists, mkdir, readFile, emptyDir, writeFile, outputFile} = require('fs-extra');
+const util = require('util');
+// const path = require('path');
+// const fs = require('fs');
+const stringreplace = require('replace-in-file');
+const rimRaf = util.promisify(require('rimraf'));
+const find = require('find');
+const {version} = require('../package.json');
+
+(async function exec() {
+
+    // // system plugin
+    zip = new (require('adm-zip'));
+    zip.addLocalFolder('./plugins/commercelab_shop_extended/p2sfaker', false);
+    zip.writeZip(`./build/output/p2sfaker/plg_commercelab_shop_extended_p2sfaker.zip`);
+
+    /** SYSTEM PLUGIN DONE **/
+
+
+})();

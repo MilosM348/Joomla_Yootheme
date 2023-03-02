@@ -1,0 +1,251 @@
+{
+	"@import": "./element.php",
+	"name": "commercelab_shop_stripeadvanced",
+	"title": "Stripe",
+	"icon": "${url:images/commercelab_shop_stripeadvanced.svg}",
+	"iconSmall": "${url:images/commercelab_shop_stripeadvanced_small.svg}",
+	"element": true,
+	"container": true,
+	"group": "CommerceLab Payment (Advanced)",
+	"defaults": {
+		"content": "Checkout",
+		"button_style": "default",
+		"icon_align": "left",
+		"icon_width": "30px"
+	},
+	"placeholder": {
+		"props": {
+			"content": "Button",
+			"icon": "",
+			"mode": "Sandbox",
+			"live_client_id": "pk_live_xxxxxxxxx",
+			"sb_client_id": "pk_test_xxxxxxxxx"
+		}
+	},
+	"templates": {
+		"render": "./templates/template.php",
+		"content": "./templates/content.php"
+	},
+	"fields": {
+		"content": {
+			"label": "Content",
+			"default": "Checkout"
+		},
+		"icon": {
+			"label": "Icon",
+			"description": "Pick an optional icon.",
+			"type": "select",
+			"options": {
+				"None": "",
+				"Brand": "stripe",
+				"S": "stripe-s",
+				"Card": "cc-stripe"
+			}
+		},
+		"icon_width": {
+			"label": "Icon Width",
+			"description": "Enter width value in pixels",
+			"type": "text"
+		},
+		"icon_align": {
+			"label": "Icon Alignment",
+			"description": "Choose the icon position.",
+			"type": "select",
+			"options": {
+				"Left": "left",
+				"Right": "right"
+			},
+			"enable": "icon"
+		},
+		"button_style": {
+			"label": "Ready Style",
+			"description": "Set the button style when ready to checkout.",
+			"type": "select",
+			"default": "uk-button-primary",
+			"options": {
+				"Default": "uk-button-default",
+				"Primary": "uk-button-primary",
+				"Secondary": "uk-button-secondary",
+				"Danger": "uk-button-danger",
+				"Text": "uk-button-text",
+				"Link": "",
+				"Link Muted": "uk-button-link-muted",
+				"Link Text": "uk-button-link-text"
+			}
+		},
+		"button_style_inactive": {
+			"label": "Not Ready Style",
+			"description": "Set the button style if not ready to checkout yet.",
+			"type": "select",
+			"default": "uk-button-primary",
+			"options": {
+				"Default": "uk-button-default",
+				"Primary": "uk-button-primary",
+				"Secondary": "uk-button-secondary",
+				"Danger": "uk-button-danger",
+				"Text": "uk-button-text",
+				"Link": "",
+				"Link Muted": "uk-button-link-muted",
+				"Link Text": "uk-button-link-text"
+			}
+		},
+		"button_size": {
+			"label": "Size",
+			"type": "select",
+			"options": {
+				"Small": "uk-button-small",
+				"Default": "",
+				"Large": "uk-button-large"
+			}
+		},
+		"fullwidth": {
+			"type": "checkbox",
+			"text": "Full width button"
+		},
+
+
+        "panel_background": {
+            "label":"Color",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "uk-background-default",
+                "Primary": "uk-background-primary",
+                "Secondary": "uk-background-secondary",
+                "Muted": "uk-background-muted"
+            }
+        },
+        "panel_margin": {
+            "label":"Margin",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-margin-small",
+                "Medium": "uk-margin",
+                "Large": "uk-margin-large"
+            }
+        },
+        "panel_padding": {
+            "label":"Padding",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-padding-small",
+                "Medium": "uk-padding",
+                "Large": "uk-padding-large"
+            }
+        },
+        "panel_color_inverse": {
+            "label":"Color Inverse",
+            "type": "radio",
+            "default": "",
+            "options": {
+                "None": "",
+                "Light": "uk-light",
+                "Dark": "uk-dark"
+            },
+            "description": "This can be used to force the inner content to be Light or Dark, depending on the background"
+        },
+        
+		"margin": "${builder.margin}",
+		"margin_remove_top": "${builder.margin_remove_top}",
+		"margin_remove_bottom": "${builder.margin_remove_bottom}",
+		"maxwidth": "${builder.maxwidth}",
+		"maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+		"block_align": "${builder.block_align}",
+		"block_align_breakpoint": "${builder.block_align_breakpoint}",
+		"block_align_fallback": "${builder.block_align_fallback}",
+		"text_align": "${builder.text_align}",
+		"text_align_breakpoint": "${builder.text_align_breakpoint}",
+		"text_align_fallback": "${builder.text_align_fallback}",
+		"animation": "${builder.animation}",
+		"id": "${builder.id}",
+		"class": "${builder.cls}",
+		"attributes": "${builder.attrs}",
+		"css": {
+			"label": "CSS",
+			"description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>, <code>.el-item</code>, <code>.el-content</code>",
+			"type": "editor",
+			"editor": "code",
+			"mode": "css",
+			"attrs": {
+				"debounce": 500
+			}
+		}
+	},
+	"fieldset": {
+		"default": {
+			"type": "tabs",
+			"fields": [
+				{
+					"title": "Layout",
+					"fields": [
+						"content",
+						"icon",
+						"icon_width",
+						"icon_align",
+						"button_style",
+						"button_style_inactive",
+						"button_size",
+						"fullwidth",
+						"margin",
+						"margin_remove_top",
+						"margin_remove_bottom",
+						"maxwidth",
+						"maxwidth_breakpoint",
+						"block_align",
+						"block_align_breakpoint",
+						"block_align_fallback",
+						"text_align",
+						"text_align_breakpoint",
+						"text_align_fallback",
+						"animation"
+					]
+				},
+				{
+					"title": "Settings",
+					"fields": [
+                        {
+                            "label": "Panel",
+                            "type": "group",
+                            "fields": [
+                                "panel_background",
+                                "panel_margin",
+                                "panel_padding",
+                                "panel_color_inverse"
+                            ]
+                        },
+						{
+							"label": "General",
+							"type": "group",
+							"fields": [
+								"style",
+								"position",
+								"position_left",
+								"position_right",
+								"position_top",
+								"position_bottom",
+								"position_z_index",
+								"margin",
+								"margin_remove_top",
+								"margin_remove_bottom",
+								"maxwidth",
+								"maxwidth_breakpoint",
+								"block_align",
+								"block_align_breakpoint",
+								"block_align_fallback",
+								"text_align",
+								"text_align_breakpoint",
+								"text_align_fallback",
+								"animation",
+								"_parallax_button",
+								"visibility"
+							]
+						}
+					]
+				},
+				"${builder.advanced}"
+			]
+		}
+	}
+}

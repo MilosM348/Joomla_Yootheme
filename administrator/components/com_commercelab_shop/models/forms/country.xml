@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<form>
+    <fieldset name="details"  addfieldpath="/administrator/components/com_commercelab_shop/models/fields">
+
+        <field name="country_name" type="vuetext" default="title" label="COM_COMMERCELAB_SHOP_COUNTRIES_TABLE_COUNTRYNAME" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large"/>
+
+        <field name="country_isocode_2" type="vuetext" default="0" label="COM_COMMERCELAB_SHOP_COUNTRIES_TABLE_ISO2" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" />
+
+        <field name="country_isocode_3" type="vuetext" default="0" label="COM_COMMERCELAB_SHOP_COUNTRIES_TABLE_ISO3" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" filter="raw" />
+
+        <field name="taxrate" type="vuenumbertaxrate" default="0" label="Standard Taxrate (%)" description="" size="4" step="0.01"
+               class="uk-input uk-form-width-medium uk-form-large" />
+
+        <field name="taxrate_reduced" type="vuenumbertaxrate" default="0" label="Reduced Taxrate (%)" description="" size="4" step="0.01"
+               class="uk-input uk-form-width-medium uk-form-large" />
+
+        <field name="taxrate_extra" type="vuenumbertaxrate" default="0" label="Extra Taxrate (%)" description="" size="4" step="0.01"
+               class="uk-input uk-form-width-medium uk-form-large" />
+
+        <field name="requires_vat" type="pinputswitch" default="0" label="COM_COMMERCELAB_SHOP_COUNTRIES_ENABLE_VAT" description=""
+               class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+        <field name="published" type="pinputswitch" default="0" label="COM_COMMERCELAB_SHOP_COUNTRIES_TABLE_PUBLISHED" description=""
+               class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+    </fieldset>
+
+</form>

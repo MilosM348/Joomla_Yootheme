@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<extension version="3.1" type="plugin" group="commercelab_shop_shipping" method="upgrade">
+    <name>Default Shipping - CommerceLab Shop</name>
+    <version>1.0.0</version>
+    <creationDate>Oct 2020</creationDate>
+    <author>Cloud Chief</author>
+    <author>Cloud Chief</author>
+    <creationDate>March 2022</creationDate>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2022 CommerceLab. All rights reserved.</copyright>
+    <description>Default Shipping - CommerceLab Shop</description>
+    <files>
+        <filename plugin="defaultshipping">defaultshipping.php</filename>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field type="spacer" name="order_flat_spacer" label="&lt;b&gt; Order Flat Shipping Override &lt;/b&gt;" />
+                <field name="order_flat_enable" type="radio" default="0" class="btn-group btn-group-yesno" label="Enable Order Flat Shipping Override" description="If this setting is enabled, every order will have a flat rate of shipping specified in the text field.">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="order_flat_value" type="text" default="10.00" label="Order Flat Shipping Value" description="Set the flat shipping rate for every order" filter="float" showon="order_flat_enable:1"/>
+
+                <field type="spacer" name="threshold_spacer" label="&lt;b&gt; Free Shipping Threshold &lt;/b&gt;" />
+                <field name="threshold_enable" type="radio" default="0" class="btn-group btn-group-yesno" label="Enable Free Shipping Threshold" description="To offer free shipping on all SUBTOTALS over a certain amount, enable this option and then add a threshold order value to be reached.">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="threshold_value" type="text" default="100.00" label="Threshold Value" description="Shipping will be free if the order total reached this value" filter="float" showon="threshold_enable:1"/>
+
+
+                <field type="spacer" name="expensive_spacer" label="&lt;b&gt; Shipping Fee Capping &lt;/b&gt;" />
+                <field name="capping_enable" type="radio" default="0" class="btn-group btn-group-yesno" label="Enable Shipping Fee Capping" description="If enabled, the shipping fee will be 'capped' at the specified amount or capped to the most expensive item to ship. For example, if the most expensive item to ship is €20, then the order shipping total will be capped to €20.">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field name="capping_type" type="list" default="expensive"  label="Capping Type" description="Choose to cap the shipping to a specified value or to the most expensive item to ship" showon="capping_enable:1">
+                    <option value="value">Specified Value</option>
+                    <option value="expensive">Most expensive Item</option>
+                </field>
+                <field name="capping_value" type="text" default="50.00" label="Capping Value" description="Shipping will be capped to this value" filter="float" showon="capping_type:value"/>
+
+
+            </fieldset>
+        </fields>
+    </config>
+</extension>

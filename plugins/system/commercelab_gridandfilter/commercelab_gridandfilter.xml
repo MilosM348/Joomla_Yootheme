@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+    <name>Grid and Filter - CommerceLab</name>
+    <version>1.0</version>
+    <creationDate>March 2022</creationDate>
+    <author>Cloud Chief - CommerceLab</author>
+    <authorEmail>Info@commercelab.solutions</authorEmail>
+    <authorUrl>https://app.commercelab.shop</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2021 Cloud Chief - CommerceLab\Shop. All rights reserved.</copyright>
+    <description>Grid and Filter elements for YOOtheme Pro</description>
+    <files>
+        <filename plugin="commercelab_gridandfilter">commercelab_gridandfilter.php</filename>
+        <folder>modules</folder>
+        <folder>assets</folder>
+    </files>
+    <config>
+       
+    </config>
+    <scriptfile>script.php</scriptfile>
+    <updateservers>
+        <server type="extension" priority="1" name="CommerceLab Grid and Filter"><![CDATA[https://app.commercelab.shop/index.php?option=com_rdsubs&view=updater&format=xml&element=gridandfilter]]></server>
+    </updateservers>
+</extension>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<extension version="3.0" type="plugin" group="commercelab_shop_extended" method="upgrade">
+    <name>CommerceLab Shop Faker</name>
+    <version>1.0.0</version>
+    <creationDate>May 2020</creationDate>
+    <author>Cloud Chief - CommerceLab.solutions</author>
+    <authorEmail>info@CommerceLab.solutions</authorEmail>
+    <authorUrl>https://commerceLab.solutions</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2020 Cloud Chief - CommerceLab.solutions. All rights reserved.</copyright>
+    <description>Plugin to Allow Testers to easily generate fake Shop data</description>
+    <files>
+        <filename plugin="p2sfaker">p2sfaker.php</filename>
+        <folder>vendor</folder>
+        <folder>views</folder>
+        <folder>forms</folder>
+    </files>
+</extension>

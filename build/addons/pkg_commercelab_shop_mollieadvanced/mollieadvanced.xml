@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="commercelab_shop_payment" method="upgrade">
+    <name>Mollie Advanced - CommerceLab Shop</name>
+    <version>{{version}}</version>
+    <creationDate>Feb 2022</creationDate>
+    <author>CommerceLab\Shop - Cloud Chief</author>
+    <authorEmail>Info@commercelab.solutions</authorEmail>
+    <authorUrl>https://commercelab.solutions</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2022 CommerceLab\Shop - Cloud Chief. All rights reserved.</copyright>
+    <description>Mollie Advanced - CommerceLab Shop</description>
+    <files>
+        <filename plugin="mollieadvanced">mollieadvanced.php</filename>
+        <folder>vendor</folder>
+    </files>
+
+    <config>
+        <config>
+            <fields name="params">
+                <fieldset name="basic">
+                    <field name="live" type="radio" default="0" label="Live Mode" description=""
+                           class="btn-group btn-group-yesno">
+                        <option value="1">JYES</option>
+                        <option value="0">JNO</option>
+                    </field>
+                    <field name="test_api_key" type="text" default="" label="Test API key" description="" size="10"
+                           showon="live:0"/>
+                    <field name="live_api_key" type="text" default="" label="Live API key" description="" size="10"
+                           showon="live:1"/>
+                    <!-- <field name="purchase_description" type="text" default="" label="Purchase Description" description="" /> -->
+                </fieldset>
+            </fields>
+        </config>
+    </config>
+</extension>

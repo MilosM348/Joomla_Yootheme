@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<form>
+    <fieldset name="details"  addfieldpath="/administrator/components/com_commercelab_shop/models/fields">
+
+        <field name="zone_id" required="true" type="zoneselect" default="title" label="COM_COMMERCELAB_SHOP_ZONES_TABLE_ZONENAME" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large"/>       
+        <field name="weight_from" required="true" type="vuetext" default="0" label="COM_COMMERCELAB_SHOP_SHIPPINGRATES_TABLE_WEIGHT_FROM" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" />
+        <field name="weight_to" required="true" type="vuetext" default="0" label="COM_COMMERCELAB_SHOP_SHIPPINGRATES_TABLE_WEIGHT_TO" description="" size="10"
+               class="uk-input uk-form-width-medium uk-form-large" />
+        <field name="cost" type="pinputnumber" default="0" label="COM_COMMERCELAB_SHOP_SHIPPINGRATES_TABLE_COST" description="" size="10" formName="zonecost"
+               class="uk-input uk-form-width-medium uk-form-large" />
+        <field name="handling_cost" type="pinputnumber" default="0" label="COM_COMMERCELAB_SHOP_SHIPPINGRATES_TABLE_HANDLING_COST" description="" size="10" formName="zonehandling_cost"
+               class="uk-input uk-form-width-medium uk-form-large" />       
+        <field name="published" type="pinputswitch" default="0" label="Published" description=""
+               class="btn-group btn-group-yesno">
+            <option value="1">JYES</option>
+            <option value="0">JNO</option>
+        </field>
+
+    </fieldset>
+
+</form>

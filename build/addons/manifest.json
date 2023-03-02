@@ -1,0 +1,95 @@
+{
+	"addons": {
+		"pkg_commercelab_shop_mollieadvanced": {
+			"name": "pkg_commercelab_shop_mollieadvanced",
+			"version": "1.3.1",
+			"type": "package",
+			"packages": {
+				"1": {
+					"path": "plugins/system/commercelab_shop_mollieadvanced",
+					"name": "plg_system_commercelab_shop_mollieadvanced",
+					"manifest": "commercelab_shop_mollieadvanced"
+				},
+				"1.3": {
+					"path": "plugins/commercelab_shop_payment/mollieadvanced",
+					"name": "plg_commercelab_shop_payment_mollieadvanced",
+					"manifest": "mollieadvanced"
+				}
+			}
+		},
+		"pkg_commercelab_shop_gallery": {
+			"name": "pkg_commercelab_shop_gallery",
+			"version": "1.3",
+			"type": "package",
+			"packages": {
+				"1": {
+					"path": "plugins/system/commercelab_shop_gallery",
+					"name": "plg_system_commercelab_shop_gallery",
+					"manifest": "commercelab_shop_gallery"
+				},
+				"2": {
+					"path": "plugins/commercelab_shop_extended/gallery",
+					"name": "plg_commercelab_shop_extended_gallery",
+					"manifest": "gallery"
+				}
+			}
+		},
+		"pkg_commercelab_shop_shops": {
+			"name": "pkg_commercelab_shop_shops",
+			"version": "1.0",
+			"type": "package",
+			"packages": {
+				"1": {
+					"path": "plugins/system/commercelab_shop_shops",
+					"name": "plg_system_commercelab_shop_shops",
+					"manifest": "commercelab_shop_shops"
+				},
+				"2": {
+					"path": "plugins/commercelab_shop_extended/shops",
+					"name": "plg_commercelab_shop_extended_shops",
+					"manifest": "shops"
+				}
+			}
+		},
+		"plg_system_commercelab_shop_stripeadvanced": {
+			"name": "plg_system_commercelab_shop_stripeadvanced",
+			"version": "1.3.1",
+			"type": "plg_system",
+			"path": "plugins/system/commercelab_shop_stripeadvanced",
+			"name": "plg_system_commercelab_shop_stripeadvanced",
+			"manifest": "commercelab_shop_stripeadvanced"
+		},
+		"plg_system_commercelab_shop_cardlinkpayment": {
+			"name": "plg_system_commercelab_shop_cardlinkpayment",
+			"version": "1.3.1",
+			"type": "plg_system",
+			"path": "plugins/system/commercelab_shop_cardlinkpayment",
+			"name": "plg_system_commercelab_shop_cardlinkpayment",
+			"manifest": "commercelab_shop_cardlinkpayment"
+		},
+		"plg_system_commercelab_shop_nowpayment": {
+			"name": "plg_system_commercelab_shop_nowpayment",
+			"version": "1.3.1",
+			"type": "plg_system",
+			"path": "plugins/system/commercelab_shop_nowpayment",
+			"name": "plg_system_commercelab_shop_nowpayment",
+			"manifest": "commercelab_shop_nowpayment"
+		},
+		"plg_system_commercelab_gridandfilter": {
+			"name": "plg_system_commercelab_gridandfilter",
+			"version": "1.3",
+			"type": "plg_system",
+			"path": "plugins/system/commercelab_gridandfilter",
+			"name": "plg_system_commercelab_gridandfilter",
+			"manifest": "commercelab_gridandfilter"
+		},
+		"plg_system_commercelab_shop_add2cartanywhere": {
+			"name": "plg_system_commercelab_shop_add2cartanywhere",
+			"version": "1.3",
+			"type": "plg_system",
+			"path": "plugins/system/commercelab_shop_add2cartanywhere",
+			"name": "plg_system_commercelab_shop_add2cartanywhere",
+			"manifest": "commercelab_shop_add2cartanywhere"
+		}
+	}
+}

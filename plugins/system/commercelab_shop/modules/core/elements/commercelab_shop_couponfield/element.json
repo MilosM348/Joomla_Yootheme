@@ -1,0 +1,209 @@
+{
+	"@import": "./element.php",
+	"name": "commercelab_shop_couponfield",
+	"title": "Coupon Field",
+	"icon": "${url:images/commercelab_shop_couponfield.svg}",
+	"iconSmall": "${url:images/commercelab_shop_couponfield.svg}",
+	"element": true,
+	"container": true,
+	"group": "CommerceLab Cart & Checkout",
+	"placeholder": {
+		"props": {
+			"content": "Add To Cart",
+			"icon": "",
+			"button_style": "default"
+		}
+	},
+	"templates": {
+		"render": "./templates/template.php",
+		"content": "./templates/content.php"
+	},
+	"fields": {
+
+        "panel_background": {
+            "label":"Color",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "uk-background-default",
+                "Primary": "uk-background-primary",
+                "Secondary": "uk-background-secondary",
+                "Muted": "uk-background-muted"
+            }
+        },
+        "panel_margin": {
+            "label":"Margin",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-margin-small",
+                "Medium": "uk-margin",
+                "Large": "uk-margin-large"
+            }
+        },
+        "panel_padding": {
+            "label":"Padding",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-padding-small",
+                "Medium": "uk-padding",
+                "Large": "uk-padding-large"
+            }
+        },
+        "panel_color_inverse": {
+            "label":"Color Inverse",
+            "type": "radio",
+            "default": "",
+            "options": {
+                "None": "",
+                "Light": "uk-light",
+                "Dark": "uk-dark"
+            },
+            "description": "This can be used to force the inner content to be Light or Dark, depending on the background"
+        },
+        
+
+		"style": {
+			"type": "select",
+			"label": "Style",
+			"description": "Select a panel style.",
+			"options": {
+				"None": "",
+				"Card Default": "card-default",
+				"Card Primary": "card-primary",
+				"Card Secondary": "card-secondary",
+				"Card Hover": "card-hover"
+			}
+		},
+		"icon": {
+			"label": "Icon",
+			"description": "Pick an optional icon.",
+			"type": "icon"
+		},
+		"icon_align": {
+			"label": "Icon Alignment",
+			"description": "Choose the icon position.",
+			"type": "select",
+			"options": {
+				"Left": "left",
+				"Right": "right"
+			},
+			"enable": "icon"
+		},
+		"button_style": {
+			"label": "Style",
+			"description": "Set the button style.",
+			"type": "select",
+			"options": {
+				"Default": "default",
+				"Primary": "primary",
+				"Secondary": "secondary",
+				"Danger": "danger",
+				"Text": "text",
+				"Link": "",
+				"Link Muted": "link-muted",
+				"Link Text": "link-text"
+			}
+		},
+		"button_size": {
+			"label": "Size",
+			"type": "select",
+			"default": "",
+			"options": {
+				"Small": "small",
+				"Default": "",
+				"Large": "large"
+			}
+		},
+		"fullwidth": {
+			"type": "checkbox",
+			"text": "Full width button"
+		},
+		"position": "${builder.position}",
+		"position_left": "${builder.position_left}",
+		"position_right": "${builder.position_right}",
+		"position_top": "${builder.position_top}",
+		"position_bottom": "${builder.position_bottom}",
+		"position_z_index": "${builder.position_z_index}",
+		"margin": "${builder.margin}",
+		"margin_remove_top": "${builder.margin_remove_top}",
+		"margin_remove_bottom": "${builder.margin_remove_bottom}",
+		"maxwidth": "${builder.maxwidth}",
+		"maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+		"block_align": "${builder.block_align}",
+		"block_align_breakpoint": "${builder.block_align_breakpoint}",
+		"block_align_fallback": "${builder.block_align_fallback}",
+		"text_align": "${builder.text_align}",
+		"text_align_breakpoint": "${builder.text_align_breakpoint}",
+		"text_align_fallback": "${builder.text_align_fallback}",
+		"animation": "${builder.animation}",
+		"_parallax_button": "${builder._parallax_button}",
+		"visibility": "${builder.visibility}",
+		"name": "${builder.name}",
+		"status": "${builder.status}",
+		"id": "${builder.id}",
+		"class": "${builder.cls}",
+		"attributes": "${builder.attrs}",
+		"css": {
+			"label": "CSS",
+			"description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>, <code>.el-item</code>, <code>.el-content</code>",
+			"type": "editor",
+			"editor": "code",
+			"mode": "css",
+			"attrs": {
+				"debounce": 500
+			}
+		}
+	},
+	"fieldset": {
+		"default": {
+			"type": "tabs",
+			"fields": [
+				{
+					"title": "Settings",
+					"fields": [
+                        {
+                            "label": "Panel",
+                            "type": "group",
+                            "fields": [
+                                "panel_background",
+                                "panel_margin",
+                                "panel_padding",
+                                "panel_color_inverse"
+                            ]
+                        },
+						{
+							"label": "General",
+							"type": "group",
+							"fields": [
+								"style",
+								"position",
+								"position_left",
+								"position_right",
+								"position_top",
+								"position_bottom",
+								"position_z_index",
+								"margin",
+								"margin_remove_top",
+								"margin_remove_bottom",
+								"maxwidth",
+								"maxwidth_breakpoint",
+								"block_align",
+								"block_align_breakpoint",
+								"block_align_fallback",
+								"text_align",
+								"text_align_breakpoint",
+								"text_align_fallback",
+								"animation",
+								"_parallax_button",
+								"visibility"
+							]
+						}
+					]
+				},
+				"${builder.advanced}"
+			]
+		}
+	}
+}

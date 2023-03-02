@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<extension version="3.1" type="plugin" group="commercelab_shop_taxes" method="upgrade">
+    <name>Core System Taxes - CommerceLab Shop</name>
+    <version>1.0.0</version>
+    <creationDate>Oct 2020</creationDate>
+    <author>Cloud Chief</author>
+    <creationDate>August 2022</creationDate>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2022 CommerceLab. All rights reserved.</copyright>
+    <description>Core System Taxes - CommerceLab Shop</description>
+    <files>
+        <filename plugin="coresystemtaxes">coresystemtaxes.php</filename>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+            </fieldset>
+        </fields>
+    </config>
+</extension>

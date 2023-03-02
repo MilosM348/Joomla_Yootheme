@@ -1,0 +1,9 @@
+{
+  "name": "commercelab_shop/p2sfaker",
+  "description": "Hello CommerceLab Shop",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+   "fzaninotto/faker": "v1.9.2"
+  }
+}

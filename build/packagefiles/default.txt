@@ -1,0 +1,7 @@
+/**
+ * @package     CommerceLab 
+ * @subpackage  com_commercelab_shop
+ *
+ * @copyright   Copyright (C) 2021 Cloud Chief - CommerceLab  - https://CommerceLab.solutions. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */

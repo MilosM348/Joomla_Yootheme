@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+    <name>System - CommerceLab Shop NOWPayments Gateway</name>
+    <version>{{version}}</version>
+    <creationDate>May 2020</creationDate>
+    <author>CommerceLab\Shop - Cloud Chief</author>
+    <authorEmail>Info@commercelab.solutions</authorEmail>
+    <authorUrl>https://commercelab.solutions</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2020 CommerceLab\Shop - Cloud Chief - All rights reserved.</copyright>
+    <description>System Plugin for CommerceLab Shop - NOWPayments Gateway {{version}}</description>
+    <files>
+        <filename plugin="commercelab_shop_nowpayment">commercelab_shop_nowpayment.php</filename>
+        <folder>modules</folder>
+    </files>
+    <scriptfile>script.php</scriptfile>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+
+                <field name="live" type="radio" default="0" label="Live Mode" description="" class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field name="api_key" type="text" default="" label="Api Key" description="" size="10" showon="live:1"  />
+                <field name="ipn_secret_key" type="text" default="" label="IPN Secret Key" description="" size="10" showon="live:1"  />
+
+                <field name="test_api_key" type="text" default="" label="Sandbox Api Key" description="" size="10" showon="live:0"  />
+                <field name="test_ipn_secret_key" type="text" default="" label="Sandbox IPN Secret Key" description="" size="10" showon="live:0"  />
+
+            </fieldset>
+        </fields>
+    </config>
+    <updateservers>
+        <server type="extension" priority="1" name="CommerceLab Shop Stripe Advanced"><![CDATA[https://app.commercelab.shop/index.php?option=com_rdsubs&view=updater&format=xml&element=nowpayment]]></server>
+    </updateservers>
+</extension>

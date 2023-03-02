@@ -1,0 +1,292 @@
+{
+	"@import":"./element.php",
+	"name":"sort",
+	"title":"Sort",
+	"icon":"${url:images/sort.svg}",
+	"iconSmall":"${url:images/sort_small.svg}",
+	"element":true,
+	"container":true,
+	"group":"CommerceLab Grid & Filter",
+	"defaults":{
+	},
+	"placeholder":{
+	},
+	"templates":{
+		"render":"./templates/template.php",
+		"content":"./templates/content.php"
+	},
+	"fields":{
+
+		"layout":{
+			"label":"Layout",
+			"type":"select",
+			"default":"dropdown",
+			"options":{
+				"Dropdown":"dropdown",
+				"Buttons":"buttons"
+			}
+		},
+		"sorted_by":{
+			"label":"Sort Options",
+			"type":"select",
+			"default":"a.id",
+			"attrs":{
+				"multiple": true
+			},
+			"options":{
+				"Item Id":"a.id",
+				"Title":"a.title",
+				"Price":"p.base_price",
+				"SKU":"p.sku",
+				"Hits":"a.hits",
+				"Created Date":"a.created",
+				"Modified Date":"a.modified",
+				"Publish up Date":"a.publish_up"
+			},
+			"description":"Choose the sort options to show, the selected option on load is defined in Grid Element",
+			"show":"layout == 'dropdown'"
+		},
+
+		"button_sorted_by":{
+			"label":"Sort by",
+			"type":"select",
+			"default":"a.hits",
+			"options":{
+				"Item Id":"a.id",
+				"Title":"a.title",
+				"Price":"p.base_price",
+				"SKU":"p.sku",
+				"Hits":"a.hits",
+				"Created Date":"a.created",
+				"Modified Date":"a.modified",
+				"Publish up Date":"a.publish_up"
+			},
+			"description":"Choose the sort option which will be applied when the button is pressed",
+			"show":"layout == 'buttons'"
+		},
+
+		"asc_text":{
+			"label":"Ascending Text",
+			"show":"layout == 'dropdown'"
+		},
+
+		"asc_icon":{
+			"label":"Ascending Icon",
+			"type":"icon",
+			"default":"arrow-up",
+			"show":"layout == 'dropdown'"
+		},
+
+		"desc_text":{
+			"label":"Descending Text",
+			"show":"layout == 'dropdown'"
+		},
+
+		"desc_icon":{
+			"label":"Descending Icon",
+			"type":"icon",
+			"default":"arrow-down",
+			"show":"layout == 'dropdown'"
+		},
+
+		"button_text":{
+			"label":"Button Text",
+			"default":"Most Relevant",
+			"show":"layout == 'buttons'"
+		},
+
+		"button_sorted_direction":{
+			"label":"Direction",
+			"type":"select",
+			"default":"DESC",
+			"options":{
+				"Descendent":"DESC",
+				"Ascendent":"ASC"
+			},
+			"description":"Choose the sort direction which will be applied when the button is pressed",
+			"show":"layout == 'buttons'"
+		},
+
+		"button_styling":{
+			"label":"Button Style",
+			"type":"select",
+			"default":"",
+	        "options": {
+	            "Default": "uk-button-default",
+	            "Primary": "uk-button-primary",
+	            "Secondary": "uk-button-secondary",
+	            "Danger": "uk-button-danger",
+	            "Text": "uk-button-text",
+	            "Link": "",
+	            "Link Muted": "uk-button-link-muted",
+	            "Link Text": "uk-button-link-text"
+	        },
+			"show":"layout == 'buttons'"
+		},
+		
+		"button_size":{
+			"label":"Button Size",
+			"type":"select",
+			"default":"",
+	        "options": {
+	            "Small": "uk-button-small",
+	            "Default": "",
+	            "Large": "uk-button-large"
+	        },
+			"show":"layout == 'buttons'"
+		},
+
+        "panel_background": {
+            "label":"Color",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "uk-background-default",
+                "Primary": "uk-background-primary",
+                "Secondary": "uk-background-secondary",
+                "Muted": "uk-background-muted"
+            }
+        },
+        "panel_margin": {
+            "label":"Margin",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-margin-small",
+                "Medium": "uk-margin",
+                "Large": "uk-margin-large"
+            }
+        },
+        "panel_padding": {
+            "label":"Padding",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-padding-small",
+                "Medium": "uk-padding",
+                "Large": "uk-padding-large"
+            }
+        },
+        "panel_color_inverse": {
+            "label":"Color Inverse",
+            "type": "radio",
+            "default": "",
+            "options": {
+                "None": "",
+                "Light": "uk-light",
+                "Dark": "uk-dark"
+            },
+            "description": "This can be used to force the inner content to be Light or Dark, depending on the background"
+        },
+        
+
+        "position": "${builder.position}",
+        "position_left": "${builder.position_left}",
+        "position_right": "${builder.position_right}",
+        "position_top": "${builder.position_top}",
+        "position_bottom": "${builder.position_bottom}",
+        "position_z_index": "${builder.position_z_index}",
+        "margin": "${builder.margin}",
+        "margin_remove_top": "${builder.margin_remove_top}",
+        "margin_remove_bottom": "${builder.margin_remove_bottom}",
+        "maxwidth": "${builder.maxwidth}",
+        "maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+        "block_align": "${builder.block_align}",
+        "block_align_breakpoint": "${builder.block_align_breakpoint}",
+        "block_align_fallback": "${builder.block_align_fallback}",
+        ",text_align": "${builder.text_align_justify}",
+        ",text_align_breakpoint": "${builder.text_align_breakpoint}",
+        ",text_align_fallback": "${builder.text_align_justify_fallback}",
+        "animation": "${builder.animation}",
+        "_parallax_button": "${builder._parallax_button}",
+        "visibility": "${builder.visibility}",
+        "name": "${builder.name}",
+        "status": "${builder.status}",
+        "id": "${builder.id}",
+        "class": "${builder.cls}",
+        "attributes": "${builder.attrs}",
+        "css": {
+            "label": "CSS",
+            "description": "Enter your own custom CSS. The, following selectors will be prefixed automatically for this element: <code>.el-element</code> <code>.el-item</code> <code>.el-content</code> <code>.el-image</code> <code>.el-link</code>",
+            "type": "editor",
+            "editor": "code",
+            "mode": "css",
+            "attrs": {
+                "debounce": 500
+            }
+        }
+		
+	},
+	"fieldset":{
+		"default":{
+			"type":"tabs",
+			"fields":[
+				{
+					"title":"Setup",
+					"fields":[
+						{
+							"label":"Sort Options",
+							"type":"group",
+							"divider":true,
+							"fields":[
+								"layout",
+								"sorted_by",
+								"asc_text",
+								"asc_icon",
+								"desc_text",
+								"desc_icon",
+								"button_sorted_by",
+								"button_sorted_direction",
+								"button_text",
+								"button_styling",
+								"button_size"
+							]
+						}
+					]
+				},
+                {
+                    "title": "Settings",
+                    "fields": [
+                        {
+                            "label": "Panel",
+                            "type": "group",
+                            "fields": [
+                                "panel_background",
+                                "panel_margin",
+                                "panel_padding",
+                                "panel_color_inverse"
+                            ]
+                        },
+                        {
+                            "label": "General",
+                            "type": "group",
+                            "fields": [
+                                "position",
+                                "position_left",
+                                "position_right",
+                                "position_top",
+                                "position_bottom",
+                                "position_z_index",
+                                "margin",
+                                "margin_remove_top",
+                                "margin_remove_bottom",
+                                "maxwidth",
+                                "maxwidth_breakpoint",
+                                "block_align",
+                                "block_align_breakpoint",
+                                "block_align_fallback",
+                                ",text_align",
+                                ",text_align_breakpoint",
+                                ",text_align_fallback",
+                                "animation",
+                                "_parallax_button",
+                                "visibility"
+                            ]
+                        }
+                    ]
+                },
+                "${builder.advanced}"
+			]
+		}
+	}
+}

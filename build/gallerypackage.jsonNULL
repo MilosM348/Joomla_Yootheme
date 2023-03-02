@@ -1,0 +1,19 @@
+{
+	"name": "gallery",
+	"version": "2.1.2",
+	"private": true,
+	"description": "Add Product Gallery to your CommerceLab Shop products.",
+	"scripts": {
+		"build": "node build.js"
+	},
+	"author": "Cloud Chief",
+	"license": "GPL-2.0",
+	"homepage": "https://commercelab.solutions",
+	"dependencies": {
+		"adm-zip": "0.4.16",
+		"fs-extra": "9.0.1",
+		"fse": "4.0.1",
+		"replace-in-file": "^6.1.0",
+		"rimraf": "3.0.2"
+	}
+}

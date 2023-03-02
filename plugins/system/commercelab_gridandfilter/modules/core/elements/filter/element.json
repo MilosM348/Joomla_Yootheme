@@ -1,0 +1,363 @@
+{
+	"@import":"./element.php",
+	"name":"filter",
+	"title":"Filter",
+	"icon":"${url:images/filter.svg}",
+	"iconSmall":"${url:images/filter_small.svg}",
+	"element":true,
+	"container":true,
+	"group":"CommerceLab Grid & Filter",
+	"defaults":{
+	},
+	"placeholder":{
+	},
+	"templates":{
+		"render":"./templates/template.php",
+		"content":"./templates/content.php"
+	},
+	"fields":{
+		"filter_type":{
+			"label":"Filter By",
+			"type":"select",
+			"default":"categories",
+			"options":{
+				"Categories":"categories",
+				"Variants":"variants",
+				"Options":"options",
+				"Tags":"tags",
+				"Custom Fields":"custom_fields"
+			}
+		},
+
+		"layout":{
+			"label":"Layout",
+			"type":"select",
+			"default":"accordion",
+			"options":"${gridandfilter.filter.layouts}"
+		},
+
+		"sublayout":{
+			"label":"Sublayout",
+			"type":"select",
+			"default":"standard",
+			"options":"${gridandfilter.filter.sublayouts}"
+		},
+
+		"hide_empty_elements":{
+			"label":"Hide if Empty",
+			"type":"checkbox",
+			"description":"If filter option does have no items associated, do not show it within the filter box",
+			"text":"Yes",
+			"default": true
+		},
+
+		"multi_select":{
+			"label": "Multi Select",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": true
+		},
+
+		"show_number_items":{
+			"label": "Show Number of Items",
+			"type": "checkbox",
+			"text": "Show",
+			"default": true
+		},
+
+		"filter_variants":{
+			"label":"Select Variant",
+			"type":"select",
+			"options":"${gridandfilter.products.variants}",
+			"show":"filter_type == 'variants'",
+			"enable":"${gridandfilter.products.variants_count}"
+		},
+
+		"filter_custom_fields":{
+			"label":"Select Custom Fields",
+			"type":"select",
+			"options":"${gridandfilter.products.filter_custom_fields}",
+			"show":"filter_type == 'custom_fields'",
+			"enable":"${gridandfilter.products.filter_custom_fields_count}"
+		},
+
+		"filtered_options":{
+			"label":"Select Options",
+			"type":"select",
+			"attrs":{
+				"multiple": true
+			},
+			"options":"${gridandfilter.products.options}",
+			"description":"You can limit the elements to specific options",
+			"show":"filter_type == 'options'",
+			"enable":"${gridandfilter.products.options_count}"
+		},
+
+		"filtered_tags":{
+			"label":"Select Tags",
+			"type":"select",
+			"attrs":{
+				"multiple": true
+			},
+			"options":"${gridandfilter.joomla.tags}",
+			"description":"You can limit the elements to specific tags",
+			"show":"filter_type == 'tags'"
+		},
+
+		"accordion_opened":{
+			"label": "Opened by default",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": true,
+			"show":"layout == 'accordion'"
+		},
+
+		"accordion_limit_height":{
+			"label": "Limit accordion height",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": true,
+			"show":"layout == 'accordion'"
+		},
+
+		"accordion_limit_height_px":{
+			"label": "Maximum height in px",
+			"default": "300",
+			"show":"layout == 'accordion' && accordion_limit_height"
+		},
+
+		"accordion_closed_small_devices":{
+			"label": "Closed on small devices",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": true,
+			"show":"layout == 'accordion'",
+			"enable":"accordion_opened"
+		},
+
+		"accordion_close_bellow":{
+			"label": "If device smaller than (px)",
+			"default": "640",
+			"show":"layout == 'accordion'",
+			"enable":"accordion_opened && accordion_closed_small_devices"
+		},
+
+		"show_total_count":{
+			"label": "Show Total Count",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": false
+		},
+
+		"list_divider":{
+			"label": "Horizontal divider",
+			"type": "checkbox",
+			"text": "Show",
+			"default": true,
+			"show":"layout == 'accordion'"
+		},
+
+		"filter_title":{
+			"label": "Title",
+			"attrs": {
+				"placeholder": "Title or {Current_Category}"
+			},
+			"description": "If you are using a 'Current Category' in Filter Options, you can add a {Current_Category} shortcode in order to show the title dynamically"
+		},
+
+
+		"category_filter":{
+			"label":"From Category",
+			"type":"select",
+			"default":"-1",
+			"options":{
+				"Current Category":"-1",
+				"All Categories":"0",
+				"Specific":"1"
+			 }
+		},
+
+		"category_filter_children":{
+			"label":"Subcategory Levels",
+			"type":"select",
+			"default":"1",
+			"options":{
+				"None":0,
+				"All":-1,
+				"1":1,
+				"2":2,
+				"3":3,
+				"4":4,
+				"5":5
+			 },
+			"description": "Show items from child categories of the current category",
+			"show":"category_filter == '-1'"
+		},
+
+		"exclude_current":{
+			"label": "Exclude Current",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": true,
+			"description": "Show only child categories",
+			"show":"category_filter == '-1'",
+			"enable":"category_filter_children != '0'"
+		},
+		
+		"specific_category":{
+			"label":"Choose Category",
+			"type":"select",
+			"attrs": {
+				"multiple": true
+			},
+			"options": "${gridandfilter.joomla.categories}",
+			"show":"category_filter == '1'"
+		},
+
+		"exclude_category":{
+			"label":"Exclude Category",
+			"type":"select",
+			"attrs": {
+				"multiple": true
+			},
+			"options": "${gridandfilter.joomla.categories}",
+			"show":"category_filter == '0'"
+		},
+
+		"panel_card": "${cls_builder.panel_card}",
+		"panel_card_style": "${cls_builder.panel_card_style}",
+		"panel_background": "${cls_builder.panel_background}",
+		"panel_margin": "${cls_builder.panel_margin}",
+		"panel_padding": "${cls_builder.panel_padding}",
+		"panel_color_inverse": "${cls_builder.panel_color_inverse}",
+		"panel_border_bottom": {
+			"label": "Bottom border",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": false
+		},
+
+		"panel_border_bottom_color":{
+			"label":"Border Color",
+			"type":"select",
+			"default":"lightgrey",
+			"options": {
+				"Grey": "grey",
+				"Light Grey": "lightgrey"
+			},
+			"show":"panel_border_bottom"
+		},
+
+	    "position": "${builder.position}",
+	    "position_left": "${builder.position_left}",
+	    "position_right": "${builder.position_right}",
+	    "position_top": "${builder.position_top}",
+	    "position_bottom": "${builder.position_bottom}",
+	    "position_z_index": "${builder.position_z_index}",
+	    "margin": "${builder.margin}",
+	    "margin_remove_top": "${builder.margin_remove_top}",
+	    "margin_remove_bottom": "${builder.margin_remove_bottom}",
+	    "maxwidth": "${builder.maxwidth}",
+	    "maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+	    "block_align": "${builder.block_align}",
+	    "block_align_breakpoint": "${builder.block_align_breakpoint}",
+	    "block_align_fallback": "${builder.block_align_fallback}",
+	    "text_align": "${builder.text_align}",
+	    "text_align_breakpoint": "${builder.text_align_breakpoint}",
+	    "text_align_fallback": "${builder.text_align_fallback}",
+	    "animation": "${builder.animation}",
+	    "_parallax_button": "${builder._parallax_button}",
+	    "visibility": "${builder.visibility}",
+	    "name": "${builder.name}",
+	    "status": "${builder.status}",
+	    "id": "${builder.id}",
+	    "class": "${builder.cls}",
+	    "attributes": "${builder.attrs}",
+	    "css": {
+	        "label": "CSS",
+	        "description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>, <code>.el-item</code>, <code>.el-content</code>",
+	        "type": "editor",
+	        "editor": "code",
+	        "mode": "css",
+	        "attrs": {
+	            "debounce": 500
+	        }
+	    }
+	},
+	"fieldset":{
+		"default":{
+			"type":"tabs",
+			"fields":[
+				{
+					"title":"Setup",
+					"fields":[
+						{
+							"label":"Filter Box",
+							"type":"group",
+							"divider":true,
+							"fields":[
+								"filter_type",
+								"filter_variants",
+								"filter_custom_fields",
+								"filtered_options",
+								"filtered_tags",
+								"layout",
+								"filter_title",
+								"accordion_opened",
+								"accordion_closed_small_devices",
+								"accordion_close_bellow",
+								"accordion_limit_height",
+								"accordion_limit_height_px",
+								"show_total_count"
+							]
+						},
+						{
+							"label":"Filter Options",
+							"type":"group",
+							"fields":[
+								"sublayout",
+								"multi_select",
+								"list_divider",
+								"show_number_items",
+								"hide_empty_elements",
+								"category_filter",
+								"category_filter_children",
+								"exclude_current"
+							],
+                            "description":"You can show all available element based on the Filter Box params, or limit them by category, which will only show the elements that have items within the category selection. This param is usually the same as for Grid Element, so both match."
+						},
+						{
+                            "type": "grid",
+                            "name": "_prefiltered",
+                            "width": "1-1",
+							"fields": [
+								"specific_category",
+								"exclude_category"
+							]
+						}
+					]
+				},
+                {
+                    "title": "Settings",
+                    "fields": [
+                        {
+                            "label": "Panel",
+                            "type": "group",
+                            "fields": [
+                                "panel_card",
+                                "panel_card_style",
+                                "panel_background",
+                                "panel_margin",
+                                "panel_padding",
+                                "panel_color_inverse",
+                                "panel_border_bottom",
+                                "panel_border_bottom_color"
+                            ]
+                        }
+                    ]
+                },
+                "${builder.advanced}"
+			]
+		}
+	}
+}

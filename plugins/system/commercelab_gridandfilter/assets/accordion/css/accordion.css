@@ -1,0 +1,9 @@
+.tm-scrollbox {
+    overflow: auto;
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(30%,#fff),to(rgba(255,255,255,0))),-webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0)),color-stop(70%,#fff)) 0 100%,radial-gradient(farthest-side at 50% 0,rgba(0,0,0,.2),transparent),radial-gradient(farthest-side at 50% 100%,rgba(0,0,0,.2),transparent) 0 100%;
+    background: linear-gradient(#fff 30%,rgba(255,255,255,0)),linear-gradient(rgba(255,255,255,0),#fff 70%) 0 100%,radial-gradient(farthest-side at 50% 0,rgba(0,0,0,.2),transparent),radial-gradient(farthest-side at 50% 100%,rgba(0,0,0,.2),transparent) 0 100%;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-attachment: local,local,scroll,scroll;
+    background-size: 100% 40px,100% 40px,100% 14px,100% 14px;
+}

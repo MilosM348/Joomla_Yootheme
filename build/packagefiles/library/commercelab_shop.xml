@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!-- @package   CommerceLab  -->
+<!-- @author    Cloud Chief - CommerceLab.solutions -->
+<!-- @copyright Copyright (C) 2022 CommerceLab  - CommerceLab.solutions -->
+<!-- @license   http://www.gnu.org/licenses/gpl.html GNU/GPL -->
+<!-- -->
+
+<extension type="library" method="upgrade" version="3.x">
+    <name>CommerceLab</name>
+    <libraryname>commercelab_shop</libraryname>
+    <author>Cloud Chief</author>
+    <copyright>Copyright (C) 2022 - Cloud Chief - CommerceLab</copyright>
+    <license>
+    https://www.gnu.org/licenses/gpl-2.0.html GNU/GPL
+    </license>
+    <author>Cloud Chief</author>
+    <creationDate>March 2022</creationDate>
+    <version>{{version}}</version>
+    <description>CommerceLab Library</description>
+    <files>
+        <folder>commercelab_shop</folder>
+    </files>
+</extension>

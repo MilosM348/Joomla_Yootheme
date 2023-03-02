@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<extension type="package" version="3.0" method="upgrade">
+    <name>CommerceLab\Shop Product Gallery Package</name>
+    <author>CommerceLab\Shop - Cloud Chief</author>
+    <creationDate>Feb 2022</creationDate>
+    <packagename>commercelab_shop_gallery</packagename>
+    <version>{{version}}</version>
+    <copyright>Copyright (C) 2020 CommerceLab\Shop - Cloud Chief</copyright>
+    <license>http://www.gnu.org/licenses/gpl.html GNU/GPL</license>
+    <authorEmail>info@commercelab.solutions</authorEmail>
+    <authorUrl>https://commercelab.solutions</authorUrl>
+
+    <description>
+        <![CDATA[
+            <h1>CommerceLab Shop Gallery ({{version}})</h1>
+    		<div style="clear: both;"></div>
+    		<p>Commerce Lab Gallery - Add Product Gallery to your CommerceLab\Shop products.</p>
+    		<p>Visit https://www.commercelab.solutions for more info</p>
+    	]]>
+    </description>
+
+    <files folder="packages">
+        <file type="plugin" id="gallery" group="commercelab_shop_extended">plg_commercelab_shop_extended_gallery.zip</file>
+        <file type="plugin" id="commercelab_shop_gallery" group="system">plg_system_commercelab_shop_gallery.zip</file>
+    </files>
+
+    <scriptfile>script.php</scriptfile>
+
+    <updateservers>
+        <server type="extension" priority="1" name="CommerceLab Shop Gallery"><![CDATA[https://app.commercelab.shop/index.php?option=com_rdsubs&view=updater&format=xml&element=commercelab_shop_gallery]]></server>
+    </updateservers>
+
+</extension>

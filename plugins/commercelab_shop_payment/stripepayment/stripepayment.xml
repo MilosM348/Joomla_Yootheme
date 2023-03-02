@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="commercelab_shop_payment" method="upgrade">
+    <name>Stripe Payment - CommerceLab\Shop</name>
+    <version>2.1.1</version>
+    <creationDate>April 2020</creationDate>
+    <author>Cloud Chief - CommerceLab\Shop</author>
+    <authorEmail>info@pro2.store</authorEmail>
+    <authorUrl>https://Commercelab.solutions</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2020 Cloud Chief - CommerceLab\Shop. All rights reserved.</copyright>
+    <description>Stripe Payment - CommerceLab Shop</description>
+    <files>
+        <filename plugin="stripepayment">stripepayment.php</filename>
+        <folder>assets</folder>
+        <folder>vendor</folder>
+    </files>
+
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="live" type="radio" default="0" label="Live Mode" description="" class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="test_public_key" type="text" default="" label="Test Publishable Key" description="" size="10" showon="live:0"  />
+                <field name="test_private_key" type="text" default="" label="Test Secret key" description="" size="10" showon="live:0" />
+                <field name="test_endpoint_secret" type="text" default="" label="Test Signing Secret" description="" size="10" showon="live:0"  />
+                <field name="live_public_key" type="text" default="" label="Live Publishable key" description="" size="10" showon="live:1"  />
+                <field name="live_private_key" type="text" default="" label="Live Secret key" description="" size="10" showon="live:1"  />
+                <field name="live_endpoint_secret" type="text" default="" label="Live Signing Secret" description="" size="10" showon="live:1"  />
+
+                <field name="endpoint_secret_info" 
+                    type="note" 
+                    class="" 
+                    label="Use for Endpoint Secret" 
+                    description="https://your.domain/index.php?option=com_commercelab_shop&amp;paymenttype=stripepayment"  
+                />
+
+
+            <field name="system_locale" type="radio" default="1" label="Use Browser Locale?" description="" class="btn-group btn-group-yesno">
+                <option value="0">JNO</option>
+                <option value="1">JYES</option>
+            </field>
+            <field name="locale" type="list" default="" label="Select a Locale" description="" showon="system_locale:0">
+                <option value="ar">Arabic</option>
+                <option value="bg">Bulgarian (Bulgaria)</option>
+                <option value="cs">Czech (Czech Republic)</option>
+                <option value="da">Danish</option>
+                <option value="de">German (Germany)</option>
+                <option value="el">Greek (Greece)</option>
+                <option value="en">English</option>
+                <option value="en-GB">English (United Kingdom)</option>
+                <option value="es">Spanish (Spain)</option>
+                <option value="es-419">Spanish (Latin America)</option>
+                <option value="et">Estonian (Estonia)</option>
+                <option value="fi">Finnish (Finland)</option>
+                <option value="fr">French (France)</option>
+                <option value="fr-CA">French (Canada)</option>
+                <option value="he">Hebrew (Israel)</option>
+                <option value="id">Indonesian (Indonesia)</option>
+                <option value="it">Italian (Italy)</option>
+                <option value="ja">Japanese</option>
+                <option value="lt">Lithuanian (Lithuania)</option>
+                <option value="lv">Latvian (Latvia)</option>
+                <option value="ms">Malay (Malaysia)</option>
+                <option value="nb">Norwegian Bokmål</option>
+                <option value="nl">Dutch (Netherlands)</option>
+                <option value="pl">Polish (Poland)</option>
+                <option value="pt-BR">Portuguese (Brazil)</option>
+                <option value="pt">Portuguese (Brazil)</option>
+                <option value="ru">Russian (Russia)</option>
+                <option value="sk">Slovak (Slovakia)</option>
+                <option value="sl">Slovenian (Slovenia)</option>
+                <option value="sv">Swedish (Sweden)</option>
+                <option value="th">Thai</option>
+                <option value="zh">Chinese Simplified (China)</option>
+            </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>
+
+
+

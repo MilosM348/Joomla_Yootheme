@@ -1,0 +1,19 @@
+{
+	"name": "commercelab_shop/commercelab_shop",
+	"description": "Hello CommerceLab Shop",
+	"type": "library",
+	"license": "MIT",
+	"require": {
+		"php": "^7.1|^8.0",
+		"brick/money": "0.5.3",
+		"respect/validation": "2.1.0",
+		"stathisg/greek-slug-generator": "2.0.2",
+		"ph-7/eu-vat-validator": "2.8.*",
+		"guzzlehttp/guzzle": "^7.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"CommerceLabShop\\": "vendor/commercelab_shop/src"
+		}
+	}
+}

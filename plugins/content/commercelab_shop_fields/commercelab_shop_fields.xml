@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="content" method="upgrade">
+    <name>CommerceLab Shop - Fields</name>
+    <author>Cloud Chief</author>
+    <creationDate>March 2020</creationDate>
+    <copyright>Copyright (C) 2022 CommerceLab. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <author>Cloud Chief</author>
+    <creationDate>March 2022</creationDate>
+    <version>1.0.0</version>
+    <description>Adds the Product Activation to the Joomla content editor.</description>
+    <files>
+        <filename plugin="commercelab_shop_fields">commercelab_shop_fields.php</filename>
+        <folder>forms</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+            </fieldset>
+        </fields>
+    </config>
+</extension>

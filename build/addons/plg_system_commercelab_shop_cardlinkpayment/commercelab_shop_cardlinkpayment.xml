@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+    <name>System - CommerceLab Shop Cardlink Payment Gateway</name>
+    <version>{{version}}</version>
+    <creationDate>May 2020</creationDate>
+    <author>CommerceLab\Shop - Cloud Chief</author>
+    <authorEmail>Info@commercelab.solutions</authorEmail>
+    <authorUrl>https://commercelab.solutions</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2020 CommerceLab\Shop - Cloud Chief - All rights reserved.</copyright>
+    <description>System Plugin for CommerceLab Shop - Cardlink Payment Gateway {{version}}</description>
+    <files>
+        <filename plugin="commercelab_shop_cardlinkpayment">commercelab_shop_cardlinkpayment.php</filename>
+        <folder>modules</folder>
+    </files>
+    <scriptfile>script.php</scriptfile>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="live" type="radio" default="0" label="Live Mode" description="" class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                <field name="shared_secret" type="text" default="" label="Shared Secret" description="" size="10"  />
+
+            </fieldset>
+<!--             <fieldset name="update" label="Updater">
+                <field name="update_key" type="text" label="Your CommerceLab Shop Subscription key" description="" />
+            </fieldset> -->
+        </fields>
+    </config>
+    <updateservers>
+        <server type="extension" priority="1" name="CommerceLab Shop Stripe Advanced"><![CDATA[https://app.commercelab.shop/index.php?option=com_rdsubs&view=updater&format=xml&element=commercelab_shop_cardlinkpayment]]></server>
+    </updateservers>
+</extension>

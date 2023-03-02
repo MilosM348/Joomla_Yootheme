@@ -1,0 +1,156 @@
+{
+	 "@import":"./element.php",
+	 "name":"gaftools",
+	 "title":"Tools",
+	 "icon":"${url:images/gaftools.svg}",
+	 "iconSmall":"${url:images/gaftools_small.svg}",
+	 "element":true,
+	 "container":true,
+	 "group":"CommerceLab Grid & Filter",
+	 "defaults":{
+	 },
+	 "placeholder":{
+	 },
+	 "templates":{
+		 "render":"./templates/template.php",
+		 "content":"./templates/content.php"
+	 },
+	 "fields":{
+
+		"accessory_type":{
+			"label":"Reset Button",
+			"type":"select",
+			"default":"reset",
+			"options":{
+				"Reset Button":"reset",
+				"Total Amount":"total",
+				"Loading Icon":"loading"
+			 }
+		},
+
+		"total_style": {
+			"label": "Style",
+			"type": "select",
+			"default": "",
+			"options": {
+				"None": "",
+				"2Xlarge": "uk-heading-2xlarge",
+				"XLarge": "uk-heading-xlarge",
+				"Large": "uk-heading-large",
+				"Medium": "uk-heading-medium",
+				"Small": "uk-heading-small",
+				"H1": "uk-h1",
+				"H2": "uk-h2",
+				"H3": "uk-h3",
+				"H4": "uk-h4",
+				"H5": "uk-h5",
+				"H6": "uk-h6"
+			},
+			"show":"accessory_type == 'total'"
+		},
+
+		"reset_text":{
+			"label":"Reset text",
+			"default":"Reset",
+			"show":"accessory_type == 'reset'"
+		},
+
+		"total_pre_text":{
+			"label":"Before total",
+			"show":"accessory_type == 'total'"
+		},
+
+		"total_post_text":{
+			"label":"After total",
+			"show":"accessory_type == 'total'"
+		},
+
+		"loading_icon_size":{
+			"label":"Icon Size",
+			"type":"select",
+			"default":"15",
+	        "options": {
+	            "Small": "10",
+	            "Default": "15",
+	            "Large": "20",
+	            "X-Large": "30"
+	        },
+			"show":"accessory_type == 'loading'"
+		},
+
+		"test_loading":{
+			"label":"Test loading",
+			"type":"checkbox",
+			"default":false,
+			"text":"Show loading",
+			"description":"Enable the loading in order to see and adjust the design, be sure to leave this option disabled before saving",
+			"show":"accessory_type == 'loading'"
+		},
+
+		"reset_button_styling":{
+			"label":"Button Style",
+			"type":"select",
+			"default":"",
+	        "options": {
+	            "Default": "uk-button-default",
+	            "Primary": "uk-button-primary",
+	            "Secondary": "uk-button-secondary",
+	            "Danger": "uk-button-danger",
+	            "Text": "uk-button-text",
+	            "Link": "",
+	            "Link Muted": "uk-button-link-muted",
+	            "Link Text": "uk-button-link-text"
+	        },
+			"show":"accessory_type == 'reset'"
+		},
+		
+		"reset_button_size":{
+			"label":"Button Size",
+			"type":"select",
+			"default":"",
+	        "options": {
+	            "Small": "uk-button-small",
+	            "Default": "",
+	            "Large": "uk-button-large"
+	        },
+			"show":"accessory_type == 'reset'"
+		}
+
+	},
+	"fieldset":{
+		"default":{
+			"type":"tabs",
+			"fields":[
+				{
+					"title":"Accessories",
+					"fields":[
+						{
+							"label":"Accessories",
+							"type":"group",
+							"divider":true,
+							"fields":[
+								"accessory_type"
+							]
+						},
+						{
+							"label":"Options",
+							"type":"grid",
+							"width":"1-2",
+							"divider":true,
+							"fields":[
+								"reset_text",
+								"reset_button_styling",
+								"reset_button_size",
+								"total_pre_text",
+								"total_post_text",
+								"total_style",
+								"loading_icon_size",
+								"test_loading"
+							]
+						}
+					]
+				}
+			]
+		}
+	}
+}

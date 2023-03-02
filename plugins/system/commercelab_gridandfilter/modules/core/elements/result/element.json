@@ -1,0 +1,1190 @@
+{
+	"@import":"./element.php",
+	"name":"result",
+	"title":"Product Grid",
+	"icon":"${url:images/result.svg}",
+	"iconSmall":"${url:images/result_small.svg}",
+	"element":true,
+	"container":true,
+	"group":"CommerceLab Grid & Filter",
+	"defaults":{
+	},
+	"placeholder":{
+	},
+	 "templates":{
+		"render":"./templates/template.php",
+		"content":"./templates/content.php"
+	},
+	"fields":{
+
+		"content_type":{
+			"label":"Items Source",
+			"type":"select",
+			"default":"cslProducts",
+			"options":{
+				"Products":"cslProducts"
+			 }
+		},
+
+		"category_filter":{
+			"label":"From Category",
+			"type":"select",
+			"default":"-1",
+			"options":{
+				"Current Category":"-1",
+				"All Categories":"0",
+				"Specific":"1"
+			 }
+		},
+
+		"panel_background":{
+			"label":"Panel Background",
+			"type":"select",
+			"default":"default",
+			"options":{
+				"None":"",
+				"Default":"default",
+				"Primary":"primary",
+				"Secondary":"secondary"
+			 }
+		},
+
+		"panel_padding":{
+			"label":"Panel Padding",
+			"type":"select",
+			"default":"uk-padding",
+			"options":{
+				"None":"uk-padding-remove-top uk-padding-remove-bottom uk-padding-remove-left uk-padding-remove-right",
+				"Small":"uk-padding-small",
+				"Medium":"uk-padding",
+				"Large":"uk-padding-large"
+			 }
+		},
+
+		"panel_content_padding":{
+			"label":"Panel Content Padding",
+			"type":"select",
+			"default":"uk-padding",
+			"options":{
+				"None":"uk-padding-remove-top uk-padding-remove-bottom uk-padding-remove-left uk-padding-remove-right",
+				"Small":"uk-padding-small",
+				"Medium":"uk-padding",
+				"Large":"uk-padding-large"
+			 }
+		},
+
+		"panel_align":{
+			"label":"Panel Alignment",
+			"type":"select",
+			"default":"uk-text-left",
+			"options":{
+				"Left":"uk-text-left",
+				"Center":"uk-text-center",
+				"Right":"uk-text-right"
+			 }
+		},
+
+		"category_filter_children":{
+			"label":"Subcategory Levels",
+			"type":"select",
+			"default":"1",
+			"options":{
+				"None":"0",
+				"All":"-1",
+				"1":"1",
+				"2":"2",
+				"3":"3",
+				"4":"4",
+				"5":"5"
+			 },
+			"description": "Show items from child categories of the current category",
+			"show":"category_filter == '-1'"
+		},
+
+		"exclude_current":{
+			"label": "Exclude Current",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": true,
+			"description": "Show only child categories",
+			"show":"category_filter == '-1'",
+			"enable":"category_filter_children != '0'"
+		},
+		
+		"specific_category":{
+			"label":"Choose Category",
+			"type":"select",
+			"attrs": {
+				"multiple": true
+			},
+			"options": "${gridandfilter.joomla.categories}",
+			"description":"You can show products from these categories only",
+			"show":"category_filter == '1'"
+		},
+
+		"exclude_category":{
+			"label":"Exclude Category",
+			"type":"select",
+			"attrs": {
+				"multiple": true
+			},
+			"options": "${gridandfilter.joomla.categories}",
+			"description":"You can exclude products from these categories",
+			"show":"category_filter == '0'"
+		},
+
+		"filtered_tags":{
+			"label":"Filter by Tags",
+			"type":"select",
+			"attrs":{
+				"multiple": true
+			},
+			"options":"${gridandfilter.joomla.tags}",
+			"description":"You can limit the products by specific tags"
+		},
+
+		"sorted_by":{
+			"label":"Order",
+			"type":"select",
+			"default":"a.id",
+			"options":{
+				"Item Id":"a.id",
+				"Title":"a.title",
+				"Price":"p.base_price",
+				"SKU":"p.sku",
+				"Hits":"a.hits",
+				"Created Date":"a.created",
+				"Modified Date":"a.modified",
+				"Publish up Date":"a.publish_up"
+			}
+		},
+
+		 "sort_direction":{
+			 "label":"Order Direction",
+			 "type":"select",
+			 "default":"DESC",
+			 "options":{
+				 "Ascedent":"ASC",
+				 "Descendent":"DESC"
+			 }
+		 },
+
+		"items_per_page":{
+			"label":"Item per Page",
+			"default":"9"
+		},
+
+
+        "grid_masonry": {
+            "label": "Masonry",
+            "description": "Create a gap-free layout if grid items have different heights.",
+            "type": "checkbox",
+            "text": "Enable masonry layout"
+        },
+        "grid_parallax": {
+            "label": "Parallax",
+            "description": "The parallax effect moves single grid columns at different speeds while scrolling. Define the vertical parallax offset in pixels.",
+            "type": "range",
+            "attrs": {
+                "min": 0,
+                "max": 600,
+                "step": 10
+            }
+        },
+        "grid_column_gap": {
+            "label": "Column Gap",
+            "description": "Set the size of the gap between the grid columns.",
+            "type": "select",
+            "options": {
+                "Small": "small",
+                "Medium": "medium",
+                "Default": "",
+                "Large": "large",
+                "None": "collapse"
+            }
+        },
+        "grid_row_gap": {
+            "label": "Row Gap",
+            "description": "Set the size of the gap between the grid rows.",
+            "type": "select",
+            "options": {
+                "Small": "small",
+                "Medium": "medium",
+                "Default": "",
+                "Large": "large",
+                "None": "collapse"
+            }
+        },
+        "grid_divider": {
+            "label": "Divider",
+            "description": "Show a divider between grid columns.",
+            "type": "checkbox",
+            "text": "Show dividers",
+            "enable": "grid_column_gap != 'collapse' && grid_row_gap != 'collapse'"
+        },
+        "grid_column_align": {
+            "label": "Alignment",
+            "type": "checkbox",
+            "text": "Center columns"
+        },
+        "grid_row_align": {
+            "description": "Center grid columns horizontally and rows vertically.",
+            "type": "checkbox",
+            "text": "Center rows"
+        },
+
+      	"grid_default": {
+            "label": "Phone Portrait",
+            "description": "Set the number of grid columns for each breakpoint. <i>Inherit</i> refers to the number of columns on the next smaller screen size. <i>Auto</i> expands the columns to the width of their items filling the rows accordingly.",
+            "type": "select",
+            "default": "1",
+            "options": {
+                "1 Column": "1",
+                "2 Columns": "2",
+                "3 Columns": "3",
+                "4 Columns": "4",
+                "5 Columns": "5",
+                "6 Columns": "6",
+                "Auto": "auto"
+            }
+        },
+        "grid_small": {
+            "label": "Phone Landscape",
+            "description": "Set the number of grid columns for each breakpoint. <i>Inherit</i> refers to the number of columns on the next smaller screen size. <i>Auto</i> expands the columns to the width of their items filling the rows accordingly.",
+            "type": "select",
+            "options": {
+                "Inherit": "",
+                "1 Column": "1",
+                "2 Columns": "2",
+                "3 Columns": "3",
+                "4 Columns": "4",
+                "5 Columns": "5",
+                "6 Columns": "6",
+                "Auto": "auto"
+            }
+        },
+        "grid_medium": {
+            "label": "Tablet Landscape",
+            "description": "Set the number of grid columns for each breakpoint. <i>Inherit</i> refers to the number of columns on the next smaller screen size. <i>Auto</i> expands the columns to the width of their items filling the rows accordingly.",
+            "type": "select",
+            "default": "3",
+            "options": {
+                "Inherit": "",
+                "1 Column": "1",
+                "2 Columns": "2",
+                "3 Columns": "3",
+                "4 Columns": "4",
+                "5 Columns": "5",
+                "6 Columns": "6",
+                "Auto": "auto"
+            }
+        },
+        "grid_large": {
+            "label": "Desktop",
+            "description": "Set the number of grid columns for each breakpoint. <i>Inherit</i> refers to the number of columns on the next smaller screen size. <i>Auto</i> expands the columns to the width of their items filling the rows accordingly.",
+            "type": "select",
+            "options": {
+                "Inherit": "",
+                "1 Column": "1",
+                "2 Columns": "2",
+                "3 Columns": "3",
+                "4 Columns": "4",
+                "5 Columns": "5",
+                "6 Columns": "6",
+                "Auto": "auto"
+            }
+        },
+        "grid_xlarge": {
+            "label": "Large Screens",
+            "description": "Set the number of grid columns for each breakpoint. <i>Inherit</i> refers to the number of columns on the next smaller screen size. <i>Auto</i> expands the columns to the width of their items filling the rows accordingly.",
+            "type": "select",
+            "default": "6",
+            "options": {
+                "Inherit": "",
+                "1 Column": "1",
+                "2 Columns": "2",
+                "3 Columns": "3",
+                "4 Columns": "4",
+                "5 Columns": "5",
+                "6 Columns": "6",
+                "Auto": "auto"
+            }
+        },
+
+
+
+		"enable_title_source":{
+            "label": "Title",
+			"type":"checkbox",
+			"default": true,
+			"text":"Enable"
+		},
+
+        "title_source": {
+            "type": "select",
+            "default": "title",
+            "options": "${gridandfilter.ytp.types.YpsProduct.StringTypeList}",
+            "enable":"enable_title_source"
+        },
+
+		"margin_title_source":"${gandf_builder.text_margin}",
+
+		"title_source_link":{
+            "label": "Link to Product",
+			"type":"checkbox",
+			"default": true,
+			"text":"Yes",
+        	"show":"show_style_options"
+		},
+		"title_source_max_length":{
+            "label": "Maximum Characters",
+			"default": "",
+            "enable":"enable_additional_text"
+		},
+        "show_style_options": "${gandf_builder.show_style_options}",
+        "title_text_style": "${gandf_builder.text_style}",
+        "title_text_decoration": "${gandf_builder.text_decoration}",
+        "title_text_font_family": "${gandf_builder.text_font_family}",
+        "title_text_color": "${gandf_builder.text_color}",
+        "title_text_element": "${gandf_builder.text_element}",
+
+		"enable_subtitle_source":{
+            "label": "Subtitle",
+			"type":"checkbox",
+			"default": true,
+			"text":"Enable"
+		},
+
+        "subtitle_source": {
+            "type": "select",
+            "default": "subtitle",
+            "options": "${gridandfilter.ytp.types.YpsProduct.StringTypeList}",
+            "enable":"enable_subtitle_source"
+        },
+
+        "subtitle_position": {
+            "label": "Position",
+            "type": "select",
+            "default": "subtitle position",
+            "options": {
+            	"Above title":"above_title",
+            	"Bellow title":"bellow_title"
+            },
+            "enable":"enable_subtitle_source"
+        },
+
+		"margin_subtitle_source":"${gandf_builder.text_margin}",
+		"subtitle_source_max_length":{
+            "label": "Maximum Characters",
+			"default": "",
+            "enable":"enable_additional_text"
+		},
+        "subtitle_text_style": "${gandf_builder.text_style}",
+        "subtitle_text_decoration": "${gandf_builder.text_decoration}",
+        "subtitle_text_font_family": "${gandf_builder.text_font_family}",
+        "subtitle_text_color": "${gandf_builder.text_color}",
+        "subtitle_text_element": "${gandf_builder.text_element}",
+
+
+		"enable_content_source":{
+            "label": "Content",
+			"type":"checkbox",
+			"default": true,
+			"text":"Enable"
+		},
+
+        "content_source": {
+            "type": "select",
+            "default": "short_desc",
+            "options": "${gridandfilter.ytp.types.YpsProduct.StringTypeList}",
+            "enable":"enable_content_source"
+        },
+        "margin_content_source":"${gandf_builder.text_margin}",
+        "content_text_style_content_source":"${gandf_builder.text_style}",
+		"content_source_max_length":{
+            "label": "Maximum Characters",
+			"default": "",
+            "enable":"enable_additional_text"
+		},
+
+		"enable_image_source":{
+            "label": "Image",
+			"type":"checkbox",
+			"default": true,
+			"text":"Enable"
+		},
+        "image_source": {
+            "type": "select",
+            "default": "image_intro",
+            "options": "${gridandfilter.ytp.types.YpsProduct.ImageTypeList}",
+            "enable":"enable_image_source"
+        },
+        "image_alt_source": {
+            "label": "Image Alt",
+            "type": "select",
+            "options": "${gridandfilter.ytp.types.YpsProduct.StringTypeList}",
+            "enable":"enable_image_source"
+        },
+
+
+		"enable_additional_text":{
+            "label": "Text Field 1",
+			"type":"checkbox",
+			"default": true,
+			"text":"Enable"
+		},
+        "additional_text": {
+            "type": "select",
+            "options":"${gridandfilter.ytp.types.YpsProduct.StringTypeList}",
+            "enable":"enable_additional_text"
+        },
+		"additional_text_max_length":{
+            "label": "Maximum Characters",
+			"default": "",
+            "enable":"enable_additional_text"
+		},
+        "additional_text_pre": {
+            "label":"Text before"
+        },
+        "additional_text_after": {
+            "label":"Text after"
+        },
+		"margin_additional_text":"${gandf_builder.text_margin}",
+
+        "additional_text_text_style": "${gandf_builder.text_style}",
+        "additional_text_text_decoration": "${gandf_builder.text_decoration}",
+        "additional_text_text_font_family": "${gandf_builder.text_font_family}",
+        "additional_text_text_color": "${gandf_builder.text_color}",
+        "additional_text_text_element": "${gandf_builder.text_element}",
+
+		"enable_additional_text2":{
+            "label": "Text Field 2",
+			"type":"checkbox",
+			"default": true,
+			"text":"Enable"
+		},
+		"additional_text2_max_length":{
+            "label": "Maximum Characters",
+			"default": ""
+		},
+		"margin_additional_text2":"${gandf_builder.text_margin}",
+        "additional_text2": {
+            "type": "select",
+            "options":"${gridandfilter.ytp.types.YpsProduct.StringTypeList}",
+            "enable":"enable_additional_text2"
+        },
+        "additional_text2_pre": {
+            "label":"Text before"
+        },
+        "additional_text2_after": {
+            "label":"Text after"
+        },
+        "additional_text2_text_style": "${gandf_builder.text_style}",
+        "additional_text2_text_decoration": "${gandf_builder.text_decoration}",
+        "additional_text2_text_font_family": "${gandf_builder.text_font_family}",
+        "additional_text2_text_color": "${gandf_builder.text_color}",
+        "additional_text2_text_element": "${gandf_builder.text_element}",
+
+		"enable_button1":{
+            "label": "Button Link",
+			"type":"checkbox",
+			"default": true,
+			"text":"Enable"
+		},
+
+        "button1": {
+            "type": "select",
+            "default": "link",
+	        "options": {
+	            "Link to Product": "link",
+	            "Add to Cart": "add2cart"
+	        },
+            "enable":"enable_button1"
+        },
+
+		"button1_show_amount":{
+            "label": "Show cart amount",
+			"type":"checkbox",
+			"default": true,
+			"text":"Show",
+        	"show":"show_style_options && button1 == 'add2cart'"
+		},
+
+		"button1_text": {
+		    "label": "Button Text",
+		    "default": "Text",
+        	"show":"show_style_options"
+		},
+		"button1_text_added_cart": {
+		    "label": "Text If added to Cart",
+		    "default": "Added",
+        	"show":"show_style_options && button1 == 'add2cart'"
+		},
+		"button1_type": {
+		    "label": "Button type",
+		    "type": "select",
+		    "default": "",
+		    "options": {
+		        "Standard": "standard",
+		        "Icon": "icon"
+		    },
+        	"show":"show_style_options"
+		},
+		"button1_style": {
+		    "label": "Button style",
+		    "description": "Set the button style.",
+		    "type": "select",
+		    "default": "uk-button-primary",
+		    "options": {
+		        "Default": "uk-button-default",
+		        "Primary": "uk-button-primary",
+		        "Secondary": "uk-button-secondary",
+		        "Danger": "uk-button-danger",
+		        "Text": "uk-button-text",
+		        "Link": "uk-button-link",
+		        "Link Muted": "uk-button-link-muted",
+		        "Link Text": "uk-button-link-text"
+		    },
+        	"show":"show_style_options"
+		},
+		"button1_style_cart_added": {
+		    "label": "Button style if added to Cart",
+		    "description": "Set the button style.",
+		    "type": "select",
+		    "default": "uk-button-primary",
+		    "options": {
+		        "Default": "uk-button-default",
+		        "Primary": "uk-button-primary",
+		        "Secondary": "uk-button-secondary",
+		        "Danger": "uk-button-danger",
+		        "Text": "uk-button-text",
+		        "Link": "uk-button-link",
+		        "Link Muted": "uk-button-link-muted",
+		        "Link Text": "uk-button-link-text"
+		    },
+        	"show":"show_style_options && button1 == 'add2cart'"
+		},
+		"button1_action": {
+		    "label": "After Add to Cart",
+		    "type": "select",
+		    "default": "",
+		    "options": {
+		        "Do nothing": "",
+		        "Show Cart module": "open_cart",
+		        "Go to Checkout": "go_to_checkout"
+		    },
+        	"show":"show_style_options && button1 == 'add2cart'"
+		},
+		"button1_show_quantity":{
+            "label": "Quantity input",
+			"type":"checkbox",
+			"default": true,
+			"text":"Show",
+        	"show":"show_style_options && button1 == 'add2cart'"
+		},
+		"button1_margin":{
+	        "label": "Margin",
+	        "type": "select",
+	        "default": "uk-margin-small-top",
+	        "options": {
+	            "Remove": "uk-margin-remove",
+	            "Top large":"uk-margin-large-top",
+	            "Top small":"uk-margin-small-top",
+	            "Bottom large":"uk-margin-large-bottom",
+	            "Bottom small":"uk-margin-small-bottom"
+	        },
+	    	"show":"show_style_options"
+		},
+		"button1_width": {
+		    "label": "Button width",
+		    "type": "select",
+		    "default": "uk-width-1-1",
+		    "options": {
+		        "Full": "uk-width-1-1",
+		        "Half": "uk-width-1-2"
+		    },
+        	"show":"show_style_options"
+		},
+		"button1_size": {
+		    "label": "Button size",
+		    "type": "select",
+		    "default": "",
+		    "options": {
+		        "Small": "uk-button-small",
+		        "Default": "",
+		        "Large": "uk-button-large"
+		    },
+        	"show":"show_style_options"
+		},
+
+		"enable_button2":{
+            "label": "Button Link",
+			"type":"checkbox",
+			"default": true,
+			"text":"Enable"
+		},
+        "button2": {
+            "type": "select",
+            "default": "add2cart",
+	        "options": {
+	            "Link to Product": "link",
+	            "Add to Cart": "add2cart"
+	        },
+            "enable":"enable_button2"
+        },
+
+		"button2_show_amount":{
+            "label": "Show cart amount",
+			"type":"checkbox",
+			"default": true,
+			"text":"Show",
+        	"show":"show_style_options && button2 == 'add2cart'"
+		},
+
+		"button2_text": {
+		    "label": "Button Text",
+		    "default": "Text",
+        	"show":"show_style_options"
+		},
+		"button2_text_added_cart": {
+		    "label": "Text If added to Cart",
+		    "default": "Added",
+        	"show":"show_style_options && button2 == 'add2cart'"
+		},
+		"button2_style": {
+		    "label": "Button style",
+		    "description": "Set the button style.",
+		    "type": "select",
+		    "default": "uk-button-primary",
+		    "options": {
+		        "Default": "uk-button-default",
+		        "Primary": "uk-button-primary",
+		        "Secondary": "uk-button-secondary",
+		        "Danger": "uk-button-danger",
+		        "Text": "uk-button-text",
+		        "Link": "uk-button-link",
+		        "Link Muted": "uk-button-link-muted",
+		        "Link Text": "uk-button-link-text"
+		    },
+        	"show":"show_style_options"
+		},
+		"button2_style_cart_added": {
+		    "label": "Button style if added to Cart",
+		    "description": "Set the button style.",
+		    "type": "select",
+		    "default": "uk-button-primary",
+		    "options": {
+		        "Default": "uk-button-default",
+		        "Primary": "uk-button-primary",
+		        "Secondary": "uk-button-secondary",
+		        "Danger": "uk-button-danger",
+		        "Text": "uk-button-text",
+		        "Link": "uk-button-link",
+		        "Link Muted": "uk-button-link-muted",
+		        "Link Text": "uk-button-link-text"
+		    },
+        	"show":"show_style_options && button2 == 'add2cart'"
+		},
+		"button2_margin":{
+	        "label": "Margin",
+	        "type": "select",
+	        "default": "uk-margin-small-top",
+	        "options": {
+	            "Remove": "uk-margin-remove",
+	            "Top large":"uk-margin-large-top",
+	            "Top small":"uk-margin-small-top",
+	            "Bottom large":"uk-margin-large-bottom",
+	            "Bottom small":"uk-margin-small-bottom"
+	        },
+	    	"show":"show_style_options"
+		},
+		"button2_action": {
+		    "label": "After Add to Cart",
+		    "type": "select",
+		    "default": "",
+		    "options": {
+		        "Do nothing": "",
+		        "Show Cart module": "open_cart",
+		        "Go to Checkout": "go_to_checkout"
+		    },
+        	"show":"show_style_options && button2 == 'add2cart'"
+		},
+		"button2_show_quantity":{
+            "label": "Quantity input",
+			"type":"checkbox",
+			"default": true,
+			"text":"Show",
+        	"show":"show_style_options && button2 == 'add2cart'"
+		},
+		"button2_width": {
+		    "label": "Button width",
+		    "type": "select",
+		    "default": "uk-width-1-1",
+		    "options": {
+		        "Full": "uk-width-1-1",
+		        "Half": "uk-width-1-2"
+		    },
+        	"show":"show_style_options"
+		},
+		"button2_size": {
+		    "label": "Button size",
+		    "type": "select",
+		    "default": "",
+		    "options": {
+		        "Small": "uk-button-small",
+		        "Default": "",
+		        "Large": "uk-button-large"
+		    },
+        	"show":"show_style_options"
+		},
+		"button2_type": {
+		    "label": "Button type",
+		    "type": "select",
+		    "default": "",
+		    "options": {
+		        "Standard": "standard",
+		        "Icon": "icon"
+		    },
+        	"show":"show_style_options"
+		},
+
+        "status": "${builder.statusItem}",
+		"grid_source": {
+			"type":"select",
+			"label":"Source",
+			"default":"cslProducts",
+			"options":{
+				"Articles":"articles",
+				"Products":"cslProducts"
+			}
+	    },
+
+        "layout": {
+            "label": "Layout",
+            "description": "Choose between different predefined layouts",
+            "type": "select",
+            "default": "default",
+            "options": "${gridandfilter.result.layouts}"
+        },
+
+        "position": "${builder.position}",
+        "position_left": "${builder.position_left}",
+        "position_right": "${builder.position_right}",
+        "position_top": "${builder.position_top}",
+        "position_bottom": "${builder.position_bottom}",
+        "position_z_index": "${builder.position_z_index}",
+        "margin": "${builder.margin}",
+        "margin_remove_top": "${builder.margin_remove_top}",
+        "margin_remove_bottom": "${builder.margin_remove_bottom}",
+        "maxwidth": "${builder.maxwidth}",
+        "maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+        "block_align": "${builder.block_align}",
+        "block_align_breakpoint": "${builder.block_align_breakpoint}",
+        "block_align_fallback": "${builder.block_align_fallback}",
+        "text_align": "${builder.text_align_justify}",
+        "text_align_breakpoint": "${builder.text_align_breakpoint}",
+        "text_align_fallback": "${builder.text_align_justify_fallback}",
+        "animation": "${builder.animation}",
+        "item_animation": "${builder.item_animation}",
+        "_parallax_button": "${builder._parallax_button}",
+        "visibility": "${builder.visibility}",
+        "container_padding_remove": "${builder.container_padding_remove}",
+        "name": "${builder.name}",
+        "status": "${builder.status}",
+        "id": "${builder.id}",
+        "class": "${builder.cls}",
+        "attributes": "${builder.attrs}",
+        "css": {
+            "label": "CSS",
+            "description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>, <code>.el-item</code>, <code>.el-title</code>, <code>.el-meta</code>, <code>.el-content</code>, <code>.el-image</code>, <code>.el-link</code>",
+            "type": "editor",
+            "editor": "code",
+            "mode": "css",
+            "attrs": {
+                "debounce": 500
+            }
+        }
+	},
+	"fieldset":{
+		"default":{
+			"type":"tabs",
+			"fields":[
+				{
+					"title":"Items",
+					"fields":[
+						{
+							"label":"Items",
+                            "type": "grid",
+                            "width": "1-2",
+                            "name": "_items_options",
+                            "divider": true,
+							"fields": [
+								"grid_source",
+								"category_filter"
+							]
+						},
+						{
+                            "type": "grid",
+                            "width": "1-1",
+                            "name": "_extra_items",
+							"fields": [
+								"specific_category",
+								"exclude_category",
+								"category_filter_children",
+								"exclude_current"
+							]
+						},
+						{
+                            "type": "grid",
+                            "width": "1-1",
+                            "name": "_tags",
+                            "divider": true,
+							"fields": [
+								"filtered_tags"
+							]
+						},
+						{
+							"label":"Order",
+							"type":"group",
+							"divider":true,
+							"fields":[
+								"sorted_by",
+								"sort_direction"
+							]
+						}
+					]
+				},
+				{
+					"title":"Content",
+					"fields":[
+						{
+							"label":"Layout",
+							"type":"group",
+							"fields":[
+								"layout",
+								"items_per_page"
+							]
+						},
+						{
+							"label":"Panel",
+							"type":"group",
+							"fields":[
+								"panel_background",
+								"panel_padding",
+								"panel_content_padding",
+								"panel_align"
+							]
+						},
+						{
+							"type":"grid",
+							"name":"_show_style_options",
+							"divider":true,
+							"fields":[
+								"show_style_options"
+							]
+						},
+						{
+							"name":"_title_dynamic_enable",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "enable_title_source"
+							]
+						},
+						{
+							"name":"_title_dynamic",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "title_source"
+							]
+						},
+						{
+							"name":"_title_dynamic",
+							"type":"group",
+							"divider":true,
+							"fields":[
+						        "margin_title_source",
+						        "title_source_link",
+						        "title_max_length",
+						        "title_text_style",
+						        "title_text_decoration",
+						        "title_text_font_family",
+						        "title_text_color",
+						        "title_text_element"
+							]
+						},
+						{
+							"name":"_meta_dynamic",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "enable_subtitle_source"
+							]
+						},
+						{
+							"name":"_meta_dynamic",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "subtitle_source"
+							]
+						},
+						{
+							"name":"_meta_dynamic",
+							"type":"group",
+							"divider":true,
+							"fields":[
+						        "subtitle_position",
+						        "margin_subtitle_source",
+						        "subtitle_max_length",
+						        "subtitle_text_style",
+						        "subtitle_text_decoration",
+						        "subtitle_text_font_family",
+						        "subtitle_text_color",
+						        "subtitle_text_element"
+							]
+						},
+						{
+							"name":"_content_dynamic",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "enable_content_source"
+							]
+						},
+						{
+							"name":"_content_dynamic",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "content_source"
+							]
+						},
+
+						{
+							"name":"_additional_content_source",
+							"type":"group",
+							"divider":true,
+							"fields":[
+						        "margin_content_source",
+						        "content_text_style_content_source",
+						        "content_source_max_length"
+							]
+						},
+						{
+							"name":"_image_dynamic",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "enable_image_source"
+							]
+						},
+						{
+							"name":"_image_dynamic",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "image_source"
+							]
+						},
+						{
+							"name":"_image_alt_dynamic",
+                            "width": "1-1",
+							"type":"grid",
+							"divider":true,
+							"fields":[
+						        "image_alt_source"
+							]
+						},
+						{
+							"name":"_additional_text",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "enable_additional_text"
+							]
+						},
+						{
+							"name":"_additional_text",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "additional_text"
+							]
+						},
+						{
+							"name":"_additional_text",
+                            "width": "1-2",
+							"type":"group",
+							"divider":true,
+							"fields":[
+						        "additional_text_pre",
+						        "additional_text_after",
+						        "additional_text_max_length",
+						        "margin_additional_text",
+						        "additional_text_text_style",
+						        "additional_text_text_decoration",
+						        "additional_text_text_font_family",
+						        "additional_text_text_color",
+						        "additional_text_text_element"
+							]
+						},
+						{
+							"name":"_additional_text2",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "enable_additional_text2"
+							]
+						},
+						{
+							"name":"_additional_text2",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "additional_text2"
+							]
+						},
+						{
+							"name":"_additional_text2",
+							"type":"group",
+							"divider":true,
+							"fields":[
+						        "additional_text2_pre",
+						        "additional_text2_after",
+						        "additional_text2_max_length",
+						        "margin_additional_text2",
+						        "additional_text2_text_style",
+						        "additional_text2_text_decoration",
+						        "additional_text2_text_font_family",
+						        "additional_text2_text_color",
+						        "additional_text2_text_element"
+							]
+						},
+						{
+							"name":"_enable_button1",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "enable_button1"
+							]
+						},
+						{
+							"name":"_button1",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "button1"
+							]
+						},
+						{
+							"name":"_button1",
+							"type":"group",
+							"divider":true,
+							"fields":[
+						        "button1_text",
+						        "button1_text_added_cart",
+						        "button1_show_amount",
+						        "button1_show_quantity",
+						        "button1_action",
+						        "button1_margin",
+						        "button1_width",
+						        "button1_style",
+						        "button1_style_cart_added",
+						        "button1_size"
+							]
+						},
+						{
+							"name":"_enable_button2",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "enable_button2"
+							]
+						},
+						{
+							"name":"_button2",
+                            "width": "1-1",
+							"type":"grid",
+							"fields":[
+						        "button2"
+							]
+						},
+						{
+							"name":"_button2",
+							"type":"group",
+							"divider":true,
+							"fields":[
+						        "button2_text",
+						        "button2_text_added_cart",
+						        "button2_show_amount",
+						        "button2_show_quantity",
+						        "button2_action",
+						        "button2_margin",
+						        "button2_width",
+						        "button2_style",
+						        "button2_style_cart_added",
+						        "button2_size"
+							]
+						}
+					]
+				},
+				{
+					"title":"Settings",
+					"fields":[
+						{
+							"label":"Grid",
+							"type":"group",
+							"divider":true,
+							"fields":[
+                            	"grid_masonry",
+                            	"grid_parallax",
+                            	"grid_column_gap",
+                            	"grid_row_gap",
+                            	"grid_divider",
+                            	"grid_column_align",
+                            	"grid_row_align",
+                                "position",
+                                "position_left",
+                                "position_right",
+                                "position_top",
+                                "position_bottom",
+                                "position_z_index",
+                                "margin",
+                                "margin_remove_top",
+                                "margin_remove_bottom",
+                                "maxwidth",
+                                "maxwidth_breakpoint",
+                                "block_align",
+                                "block_align_breakpoint",
+                                "block_align_fallback",
+                                "text_align",
+                                "text_align_breakpoint",
+                                "text_align_fallback",
+                                "animation",
+                                "item_animation",
+                                "_parallax_button",
+                                "visibility",
+                                "container_padding_remove"
+							]
+						},
+						{
+							"label":"Columns",
+							"type":"group",
+							"divider":true,
+							"fields":[
+                            	"grid_default",
+                            	"grid_small",
+                            	"grid_medium",
+                            	"grid_large",
+                            	"grid_xlarge"
+							]
+						}
+					]
+				},
+                "${builder.advanced}"
+			]
+		}
+	}
+}

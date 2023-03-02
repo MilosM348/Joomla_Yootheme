@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.5" client="site" method="upgrade">
+    <name>CommerceLab - Customer Addresses</name>
+    <author>Cloud Chief</author>    
+    <copyright>Copyright (C) 2022 CommerceLab. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <author>Cloud Chief</author>
+    <creationDate>March 2022</creationDate>
+    <version>1.0.0</version>
+    <description>CommerceLab - Customer Addresses - by Cloud Chief - CommerceLab</description>
+    <files>
+        <filename module="mod_commercelab_shop_customeraddresses">mod_commercelab_shop_customeraddresses.php</filename>
+        <folder>tmpl</folder>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic" label="Basic">
+                <field name="grid_cols" type="list" default="" label="Grid Columns" description="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

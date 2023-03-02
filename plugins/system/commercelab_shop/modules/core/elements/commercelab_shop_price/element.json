@@ -1,0 +1,303 @@
+{
+	"@import": "./element.php",
+	"name": "commercelab_shop_price",
+	"title": "Static Price",
+	"icon": "${url:images/commercelab_shop_price.svg}",
+	"iconSmall": "${url:images/commercelab_shop_price_small.svg}",
+	"element": true,
+	"container": true,
+	"group": "CommerceLab Products",
+	"defaults": {
+		"product_source": "dynamic",
+		"title_element": "h3"
+	},
+	"templates": {
+		"render": "./templates/template.php",
+		"content": "./templates/content.php"
+	},
+	"fields": {
+
+        "product_source": {
+            "label":"Product source",
+            "type": "select",
+            "default": "dynamic",
+            "options": {
+                "Dynamic": "dynamic",
+                "Manual": "manual"
+            },
+            "enable":"${commercelab.add2cartanywhere}"
+        },
+
+        "product_source_manual": {
+            "label":"Manual product",
+            "type": "select",
+            "options": "${commercelab.component.products.products_list}",
+            "show":"${commercelab.add2cartanywhere}",
+            "enable":"product_source == 'manual'"
+        },
+
+		"price_type": {
+			"label": "Type",
+			"description": "Choose what price information to show",
+			"type": "select",
+			"default": "base_price",
+			"options": {
+				"Base Price": "base_price",
+				"Discount": "discount",
+				"Price After Discount": "priceAfterDiscount",
+				"Saving": "saving",
+				"Tax": "tax",
+				"Tax Rate": "tax_rate"
+			}
+		},
+		"with_tax": {
+			"type": "checkbox",
+			"default": 1,
+			"text": "With Tax",
+			"description": "Show the value with or without taxes",
+			"description": "price_type == 'base_price' || price_type == 'priceAfterDiscount'"
+		},
+
+		"formatted": {
+			"type": "checkbox",
+			"default": 1,
+			"text": "Formatted",
+			"description": "This option formats the price to language based format and currency, usually this option should be enabled"
+		},
+
+		"content_before": {
+			"type": "text",
+			"label": "Content Before"
+		},
+		"content_before_color": {
+			"label": "Content Before Color",
+			"type": "select",
+			"default": "",
+			"options": {
+				"None": "",
+				"Muted": "muted",
+				"Emphasis": "emphasis",
+				"Primary": "primary",
+				"Success": "success",
+				"Warning": "warning",
+				"Danger": "danger",
+				"Background": "background"
+			},
+			"show":"content_before"
+		},
+		"content_after": {
+			"type": "text",
+			"label": "Content After"
+		},
+		"content_after_color": {
+			"label": "Content After Color",
+			"type": "select",
+			"default": "",
+			"options": {
+				"None": "",
+				"Muted": "muted",
+				"Emphasis": "emphasis",
+				"Primary": "primary",
+				"Success": "success",
+				"Warning": "warning",
+				"Danger": "danger",
+				"Background": "background"
+			},
+			"show":"content_after"
+		},
+		"title_style": {
+			"label": "Style",
+			"description": "Choose the style of the Price information",
+			"type": "select",
+			"default": "",
+			"options": {
+				"None": "",
+				"2Xlarge": "heading-2xlarge",
+				"XLarge": "heading-xlarge",
+				"Large": "heading-large",
+				"Medium": "heading-medium",
+				"Small": "heading-small",
+				"H1": "h1",
+				"H2": "h2",
+				"H3": "h3",
+				"H4": "h4",
+				"H5": "h5",
+				"H6": "h6"
+			}
+		},
+		"strikethru": {
+			"type": "checkbox",
+			"text": "Strikethrough?"
+		},
+		"strikethru_only_if_discount": {
+			"type": "checkbox",
+			"default": 1,
+			"text": "Only if Discounted?",
+			"description": "If this option is enabled, the striketrough effect will be applied only if the discount is enabled for that product, it's a good way to make the product price have a dynamic behaviour.",
+			"show":"strikethru"
+		},
+		"title_decoration": {
+			"label": "Decoration",
+			"description": "Choose the decoration of the Price information",
+			"type": "select",
+			"default": "",
+			"options": {
+				"None": "",
+				"Divider": "divider",
+				"Bullet": "bullet",
+				"Line": "line"
+			}
+		},
+		"title_font_family": {
+			"label": "Font Family",
+			"description": "Select an alternative font family for the Price information.",
+			"type": "select",
+			"default": "",
+			"options": {
+				"None": "",
+				"Default": "default",
+				"Primary": "primary",
+				"Secondary": "secondary",
+				"Tertiary": "tertiary"
+			}
+		},
+		"title_color": {
+			"label": "Color",
+			"description": "Select the text color. If the Background option is selected, styles that don't apply a background image use the primary color instead.",
+			"type": "select",
+			"default": "",
+			"options": {
+				"None": "",
+				"Muted": "muted",
+				"Emphasis": "emphasis",
+				"Primary": "primary",
+				"Success": "success",
+				"Warning": "warning",
+				"Danger": "danger",
+				"Background": "background"
+			}
+		},
+		"title_element": {
+			"label": "HTML Element",
+			"description": "Choose one of the elements to fit your semantic structure.",
+			"type": "select",
+			"options": {
+				"H1": "h1",
+				"H2": "h2",
+				"H3": "h3",
+				"H4": "h4",
+				"H5": "h5",
+				"H6": "h6",
+				"div": "div"
+			}
+		},
+		"position": "${builder.position}",
+		"position_left": "${builder.position_left}",
+		"position_right": "${builder.position_right}",
+		"position_top": "${builder.position_top}",
+		"position_bottom": "${builder.position_bottom}",
+		"position_z_index": "${builder.position_z_index}",
+		"margin": "${builder.margin}",
+		"margin_remove_top": "${builder.margin_remove_top}",
+		"margin_remove_bottom": "${builder.margin_remove_bottom}",
+		"maxwidth": "${builder.maxwidth}",
+		"maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+		"block_align": "${builder.block_align}",
+		"block_align_breakpoint": "${builder.block_align_breakpoint}",
+		"block_align_fallback": "${builder.block_align_fallback}",
+		"text_align": "${builder.text_align_justify}",
+		"text_align_breakpoint": "${builder.text_align_breakpoint}",
+		"text_align_fallback": "${builder.text_align_justify_fallback}",
+		"animation": "${builder.animation}",
+		"_parallax_button": "${builder._parallax_button}",
+		"visibility": "${builder.visibility}",
+		"name": "${builder.name}",
+		"status": "${builder.status}",
+		"id": "${builder.id}",
+		"class": "${builder.cls}",
+		"css": {
+			"label": "CSS",
+			"description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>",
+			"type": "editor",
+			"editor": "code",
+			"mode": "css",
+			"attrs": {
+				"debounce": 500
+			}
+		}
+	},
+	"fieldset": {
+		"default": {
+			"type": "tabs",
+			"fields": [
+				{
+					"title": "Price",
+					"fields": [
+						{
+							"label": "Source",
+							"type": "group",
+				            "description": "You need 'Add 2 Cart Anywhere' plugin in order to choose a different Product source",
+							"fields": [
+								"product_source",
+								"product_source_manual"
+							]
+						},
+						{
+							"label": "Price",
+							"type": "group",
+							"divider": true,
+							"fields": [
+								"price_type",
+								"with_tax",
+								"formatted",
+								"content_before",
+								"content_before_color",
+								"content_after",
+								"content_after_color",
+								"title_style",
+								"strikethru",
+								"strikethru_only_if_discount",
+								"title_decoration",
+								"title_font_family",
+								"title_color",
+								"title_element"
+							]
+						}
+					]
+				},
+				{
+					"title": "Settings",
+					"fields": [
+						{
+							"label": "General",
+							"type": "group",
+							"fields": [
+								"position",
+								"position_left",
+								"position_right",
+								"position_top",
+								"position_bottom",
+								"position_z_index",
+								"margin",
+								"margin_remove_top",
+								"margin_remove_bottom",
+								"maxwidth",
+								"maxwidth_breakpoint",
+								"block_align",
+								"block_align_breakpoint",
+								"block_align_fallback",
+								"text_align",
+								"text_align_breakpoint",
+								"text_align_fallback",
+								"animation",
+								"_parallax_button",
+								"visibility"
+							]
+						}
+					]
+				},
+				"${builder.advanced}"
+			]
+		}
+	}
+}

@@ -1,0 +1,478 @@
+{
+	"@import":"./element.php",
+	"name":"searchbar",
+	"title":"Search",
+	"icon":"${url:images/searchbar.svg}",
+	"iconSmall":"${url:images/searchbar_small.svg}",
+	"element":true,
+	"container":true,
+	"group":"CommerceLab Grid & Filter",
+	"defaults":{
+	},
+	"placeholder":{
+	},
+	"templates":{
+		"render":"./templates/template.php",
+		"content":"./templates/content.php"
+	},
+	"fields":{
+
+
+		"searchbar_label":{
+			"label":"Title"
+		},
+
+		"searchbar_label_style":{
+			"label":"Label Style",
+			"type":"select",
+			"default":"uk-heading-line",
+			"options": {
+				"Label": "uk-label",
+	            "Divider": "uk-heading-divider",
+	            "Bullet": "uk-heading-bullet",
+	            "Line": "uk-heading-line"
+			},
+			"show": "searchbar_label && layout == 'label'"
+		},
+
+		"perform_query":{
+			"label":"On Change",
+			"type":"checkbox",
+			"default":true,
+			"text":"As soon data added"
+		},
+
+		"perform_query_logic":{
+			"label":"Logic",
+			"type":"select",
+			"default":"OR",
+			"options": {
+				"AND": "AND",
+	            "OR": "OR"
+			},
+			"enable":"!search_within || search_within == 'specific'"
+		},
+
+		"search_within":{
+			"label":"Within",
+			"type":"radio",
+			"default":"",
+			"options": {
+				"Price": "price",
+				"Stock": "stock",
+				"All from Search List": "",
+				"Specific from Search List": "specific"
+			}
+
+		},
+
+		"search_within_title":{
+			"type":"checkbox",
+			"default":true,
+			"text":"Title",
+			"enable":"search_within == 'specific'"
+		},
+
+		"search_within_subtitle":{
+			"type":"checkbox",
+			"default":true,
+			"text":"Subtitle",
+			"enable":"search_within == 'specific'"
+		},
+
+		"search_within_short_desc":{
+			"type":"checkbox",
+			"default":true,
+			"text":"Short Description",
+			"enable":"search_within == 'specific'"
+		},
+
+		"search_within_long_desc":{
+			"type":"checkbox",
+			"default":true,
+			"text":"Long Description",
+			"enable":"search_within == 'specific'"
+		},
+
+		"search_within_sku":{
+			"type":"checkbox",
+			"default":true,
+			"text":"SKU",
+			"enable":"search_within == 'specific'"
+		},
+
+		"search_within_all_custom_fields":{
+			"type":"checkbox",
+			"default":true,
+			"text":"All Custom Fields",
+			"enable":"search_within == 'specific'"
+		},
+
+		"search_within_custom_fields":{
+			"label":"Specific Custom Fields",
+			"type":"select",
+			"default":"",
+			"attrs":{
+				"multiple": true
+			},
+			"options": "${gridandfilter.products.search_custom_fields}",
+			"show":"search_within == 'specific'",
+			"enable":"!search_within_all_custom_fields"
+		},
+
+		"search_price_from_placeholder":{
+			"label":"From Placeholder",
+			"default":"From",
+			"show":"search_within == 'price' && !slider"
+		},
+
+		"search_price_to_placeholder":{
+			"label":"To Placeholder",
+			"default":"To",
+			"show":"search_within == 'price' && !slider"
+		},
+
+		"searchbar_placeholder":{
+			"label":"Placeholder",
+			"default":"Search...",
+			"show":"search_within != 'price' && (search_within == 'stock' && !slider) || search_within == 'specific' || search_within == ''"
+		},
+		"show_icon":{
+			"label":"Show Icon",
+			"type":"checkbox",
+			"default":true,
+			"text":"Show",
+			"description":"Show Icon inside Search Bar",
+			"show":"(search_within == 'price' && !slider) || search_within == 'specific' || search_within == ''"
+		},
+
+		"search_icon":{
+			"label":"Icon",
+			"type":"icon",
+			"default":"search",
+			"show":"show_icon && ((search_within != 'price' && !slider) || search_within == 'specific' || search_within == '')"
+		},
+
+		"price_icon":{
+			"label":"Icon",
+			"type":"icon",
+			"default":"CurrencySymbol",
+			"show":"show_icon && search_within == 'price' && !slider"
+		},
+
+		"icon_position":{
+			"label":"Icon Position",
+			"type":"select",
+			"default":"right",
+			"options": {
+				"Left": "left",
+				"Right": "right"
+			},
+			"enable":"show_icon",
+			"show":"(search_within == 'price' && !slider) || (search_within == 'stock' && !slider) || search_within == 'specific' || search_within == ''"
+		},
+
+		"layout":{
+			"label":"Layout",
+			"type":"select",
+			"default":"accordion",
+			"options":"${gridandfilter.searchbar.layouts}"
+		},
+
+		"accordion_opened":{
+			"label": "Opened by default",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": true,
+			"show":"layout == 'accordion'"
+		},
+
+		"accordion_closed_small_devices":{
+			"label": "Closed on small devices",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": true,
+			"show":"layout == 'accordion'",
+			"enable":"accordion_opened"
+		},
+
+		"accordion_close_bellow":{
+			"label": "If device smaller than (px)",
+			"default": "640",
+			"show":"layout == 'accordion'",
+			"enable":"accordion_opened && accordion_closed_small_devices"
+		},
+
+		"sublayout":{
+			"label":"Sublayout",
+			"type":"select",
+			"default":"standard",
+			"options":"${gridandfilter.searchbar.sublayouts}"
+		},
+
+		"slider":{
+			"label": "Slider",
+			"type": "checkbox",
+			"text": "Enable",
+			"default": true,
+			"show":"search_within == 'price' || search_within == 'stock'"
+		},
+
+		"slider_values_type":{
+			"label": "Set values",
+			"type":"select",
+			"default":"auto",
+			"options": {
+				"Manual": "manual",
+				"Auto": "auto"
+			},
+			"show":"(search_within == 'price' && slider) || (search_within == 'stock' && slider)"
+		},
+
+		"slider_manual_values":{
+			"label": "Manual values",
+			"attrs":{
+				"placeholder":"10,20,30,40"
+			},
+			"default":"10,20,30,40",
+			"description":"Add values for the slider, separated by commas",
+			"show":"(search_within == 'price' && slider) || (search_within == 'stock' && slider)",
+			"enable":"slider_values_type == 'manual'"
+		},
+
+		"slider_auto_values_start":{
+			"label": "Start value",
+			"show":"(search_within == 'price' && slider) || (search_within == 'stock' && slider)",
+			"enable":"slider_values_type == 'auto'"
+		},
+
+		"slider_auto_values_end":{
+			"label": "End value",
+			"show":"(search_within == 'price' && slider) || (search_within == 'stock' && slider)",
+			"enable":"slider_values_type == 'auto'"
+		},
+
+		"slider_auto_values_step":{
+			"label": "Step value",
+			"show":"(search_within == 'price' && slider) || (search_within == 'stock' && slider)",
+			"enable":"slider_values_type == 'auto'"
+		},
+
+		"slider_stock_values_set":{
+			"label": "Value on start",
+			"show":"search_within == 'stock' && slider"
+		},
+
+		"slider_price_values_set_start":{
+			"label": "Low value on start",
+			"show":"search_within == 'price' && slider"
+		},
+
+		"slider_price_values_set_end":{
+			"label": "High value on start",
+			"show":"search_within == 'price' && slider"
+		},
+
+		"slider_values_set":{
+			"label": "Initial value",
+			"show":"(search_within == 'price' && slider) || (search_within == 'stock' && slider)"
+		},
+
+		"slider_scale":{
+			"label": "Scale",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": true,
+			"show":"(search_within == 'price' && slider) || (search_within == 'stock' && slider)"
+		},
+
+		"slider_labels":{
+			"label": "Labels",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": true,
+			"show":"(search_within == 'price' && slider) || (search_within == 'stock' && slider)"
+		},
+
+		"slider_tooltip":{
+			"label": "Tooltip",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": true,
+			"show":"(search_within == 'price' && slider) || (search_within == 'stock' && slider)"
+		},
+
+		"slider_bar_color":{
+			"label": "Bar color",
+			"type":"select",
+			"default":"uk-background-default",
+			"options": {
+				"Default": "uk-background-default",
+				"Primary": "uk-background-primary",
+				"Primary": "uk-background-secondary",
+				"Custom": "custom"
+			},
+			"show":"(search_within == 'price' && slider) || (search_within == 'stock' && slider)"
+		},
+
+		"slider_custom_bar_color":{
+			"label": "Custom bar color",
+			"type":"color",
+			"show":"(search_within == 'price' && slider && slider_bar_color == 'custom') || (search_within == 'stock' && slider && slider_bar_color == 'custom')"
+		},
+
+		"panel_card": "${cls_builder.panel_card}",
+		"panel_card_style": "${cls_builder.panel_card_style}",
+		"panel_background": "${cls_builder.panel_background}",
+		"panel_margin": "${cls_builder.panel_margin}",
+		"panel_padding": "${cls_builder.panel_padding}",
+		"panel_color_inverse": "${cls_builder.panel_color_inverse}",
+		"panel_border_bottom": {
+			"label": "Bottom border",
+			"type": "checkbox",
+			"text": "Yes",
+			"default": false
+		},
+
+		"panel_border_bottom_color":{
+			"label":"Border Color",
+			"type":"select",
+			"default":"lightgrey",
+			"options": {
+				"Grey": "grey",
+				"Light Grey": "lightgrey"
+			},
+			"show":"panel_border_bottom"
+		},
+
+        "position": "${builder.position}",
+        "position_left": "${builder.position_left}",
+        "position_right": "${builder.position_right}",
+        "position_top": "${builder.position_top}",
+        "position_bottom": "${builder.position_bottom}",
+        "position_z_index": "${builder.position_z_index}",
+        "margin": "${builder.margin}",
+        "margin_remove_top": "${builder.margin_remove_top}",
+        "margin_remove_bottom": "${builder.margin_remove_bottom}",
+        "maxwidth": "${builder.maxwidth}",
+        "maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+        "block_align": "${builder.block_align}",
+        "block_align_breakpoint": "${builder.block_align_breakpoint}",
+        "block_align_fallback": "${builder.block_align_fallback}",
+        "text_align": "${builder.text_align}",
+        "text_align_breakpoint": "${builder.text_align_breakpoint}",
+        "text_align_fallback": "${builder.text_align_fallback}",
+        "animation": "${builder.animation}",
+        "_parallax_button": "${builder._parallax_button}",
+        "visibility": "${builder.visibility}",
+        "name": "${builder.name}",
+        "status": "${builder.status}",
+        "id": "${builder.id}",
+        "class": "${builder.cls}",
+        "attributes": "${builder.attrs}",
+        "css": {
+            "label": "CSS",
+            "description": "Enter your own custom CSS. The following selectors will be prefixed automatically for this element: <code>.el-element</code>, <code>.el-item</code>, <code>.el-content</code>",
+            "type": "editor",
+            "editor": "code",
+            "mode": "css",
+            "attrs": {
+                "debounce": 500
+            }
+        }
+
+	 },
+	 "fieldset":{
+		"default":{
+			"type":"tabs",
+			"fields":[
+				{
+					"title":"Setup",
+					"fields":[
+
+						{
+							"label":"Search",
+							"type":"grid",
+							"width":"1-2",
+							"fields":[
+							 	"perform_query",
+							 	"search_within"
+							]
+						},
+						{
+							"label":"Search List",
+							"type":"group",
+							"divider":true,
+							"fields":[
+								"search_within_title",
+								"search_within_subtitle",
+								"search_within_sku",
+								"search_within_short_desc",
+								"search_within_long_desc",
+								"search_within_all_custom_fields",
+								"search_within_custom_fields"
+							]
+						},
+						{
+							"label":"Layout",
+							"type":"group",
+							"divider":true,
+							"fields":[
+								"layout",
+							 	"searchbar_label",
+							 	"searchbar_label_style",
+								"accordion_opened",
+								"accordion_closed_small_devices",
+								"accordion_close_bellow"
+							]
+						},
+						{
+							"label":"Sub Layout",
+							"type":"group",
+							"divider":true,
+							"fields":[
+								"sublayout",
+								"slider",
+								"slider_values_type",
+								"slider_manual_values",
+								"slider_auto_values_start",
+								"slider_auto_values_end",
+								"slider_auto_values_step",
+								"slider_scale",
+								"slider_labels",
+								"slider_tooltip",
+							 	"searchbar_placeholder",
+							 	"search_price_from_placeholder",
+							 	"search_price_to_placeholder",
+							 	"show_icon",
+							 	"search_icon",
+							 	"price_icon",
+							 	"icon_position"
+							]
+						}
+					]
+				},
+                {
+                    "title": "Settings",
+                    "fields": [
+                        {
+                            "label": "Panel",
+                            "type": "group",
+                            "fields": [
+                                "panel_card",
+                                "panel_card_style",
+                                "panel_background",
+                                "panel_margin",
+                                "panel_padding",
+                                "panel_color_inverse",
+                                "panel_border_bottom",
+                                "panel_border_bottom_color"
+                            ]
+                        }
+                    ]
+                },
+                "${builder.advanced}"
+			]
+		}
+	}
+}

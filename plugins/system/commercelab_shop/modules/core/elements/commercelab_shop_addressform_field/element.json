@@ -1,0 +1,192 @@
+{
+    "@import": "./element.php",
+    "name": "commercelab_shop_addressform_field",
+    "title": "Address Field",
+    "width": 500,
+    "placeholder": {
+        "props": {
+            "content": "Lorem ipsum dolor sit amet.",
+            "image": "",
+            "icon": ""
+        }
+    },
+    "templates": {
+        "render": "./templates/template.php",
+        "content": "./templates/content.php"
+    },
+    "fields": {
+        "field_type":  {
+            "label": "Field Name",
+            "type": "select",
+            "default": "",
+            "options": {
+                "- Select - ": "",
+                "First Name": "first_name",
+                "Last Name": "last_name",
+                "Email": "email",
+                "Phone Number": "phone",
+                "Mobile Number": "mobile_phone",
+                "Address": "address1",
+                "Address 2": "address2",
+                "Address 3": "address3",
+                "City": "city",
+                "Postal Code": "postcode",
+                "Country": "country",
+                "State": "zone",
+                "VAT number": "vat",
+                "Company Name": "company_name"
+            },
+            "description": "Choose the Field"
+        },
+        "field_required": {
+            "text": "Required",
+            "type": "checkbox",
+            "default": true
+        },
+
+        "field_address_type_exclude": {
+            "label": "Shipping and Billing",
+            "type": "radio",
+            "options": {
+                "Both": 0,
+                "Shipping": "shipping",
+                "Billing": "billing"
+            },
+            "default": 0
+        },
+
+        "field_label": {
+            "label": "Label",
+            "attrs": {
+                "placeholder":"Same as Field Name"
+            },
+            "description": "You can define a different Label"
+        },
+        "field_label_show_use_global": {
+            "label": "Hide/Show",
+            "text": "Use Global",
+            "type": "checkbox",
+            "default": true
+        },
+        "field_label_show": {
+            "text": "Show Label",
+            "type": "radio",
+            "options": {
+                "Show": 1,
+                "Hide": 0
+            },
+            "default": 1,
+            "enable": "!field_label_show_use_global"
+        },
+
+        "field_placeholder": {
+            "label": "Placeholder",
+            "attrs": {
+                "placeholder":"Same as Field Name"
+            },
+            "description": "You can define a different Placeholder"
+        },
+        "field_placeholder_show_use_global": {
+            "label": "Hide/Show",
+            "text": "Use Global",
+            "type": "checkbox",
+            "default": true
+        },
+        "field_placeholder_show": {
+            "text": "Show Placeholder",
+            "type": "radio",
+            "options": {
+                "Show": 1,
+                "Hide": 0
+            },
+            "default": 1,
+            "enable": "!field_placeholder_show_use_global"
+        },
+
+
+        "field_width_use_global": {
+            "text": "Use GLobal",
+            "type": "checkbox",
+            "default": true
+        },
+        "field_width": {
+            "label":"Width", 
+            "type":"select", 
+            "default":"uk-width-1-1@s", 
+            "options":{
+                "Full":"uk-width-1-1@s", 
+                "Half":"uk-width-1-2@s", 
+                "Third":"uk-width-1-3@s", 
+                "Quarter":"uk-width-1-4@s", 
+                "Large":"uk-width-large@s", 
+                "Medium":"uk-width-medium@s", 
+                "Small":"uk-width-small@s", 
+                "Custom":"custom"
+            },
+            "enable": "!field_width_use_global"
+        },
+        "field_width_custom": {
+            "label": "Custom Width",
+            "attrs": {
+                "placeholder":"uk-width-expand@s uk-width-medium ..."
+            },
+            "enable": "field_width == 'custom' && !field_width_use_global",
+            "description": "Choose one of the predefined width, or add a custom UIkit class. This is applied to the container of the field, you can also set a global option to style all fields, making them more or less compact"
+        }
+
+
+    },
+    "fieldset": {
+        "default": {
+            "type": "tabs",
+            "fields": [
+                {
+                    "title": "Address Field",
+                    "fields": [
+                        {
+                            "label": "Field",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "field_type",
+                                "field_required",
+                                "field_address_type_exclude"
+                            ],
+                            "description": "Some Fields will remain required even if this option is disabled.<br> Bellow options can be enabled or disabled for the entire Form, and also individually."
+                        },
+                        {
+                            "label": "Label",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "field_label",
+                                "field_label_show_use_global",
+                                "field_label_show"
+                            ]
+                        },
+                        {
+                            "label": "Placeholder",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "field_placeholder",
+                                "field_placeholder_show_use_global",
+                                "field_placeholder_show"
+                            ]
+                        },
+                        {
+                            "label": "Field Width",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "field_width_use_global",
+                                "field_width",
+                                "field_width_custom"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

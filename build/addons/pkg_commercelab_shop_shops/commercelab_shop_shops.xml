@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.0" type="plugin" group="system" method="upgrade">
+    <name>System - Shops</name>
+    <version>{{version}}</version>
+    <creationDate>September 2022</creationDate>
+    <author>CommerceLab\Shop - Cloud Chief</author>
+    <authorEmail>Info@commercelab.solutions</authorEmail>
+    <authorUrl>https://commercelab.solutions</authorUrl>
+    <license>GNU General Public License version 2 or later</license>
+    <copyright>Copyright (C) 2020 CommerceLab\Shop - Cloud Chief - All rights reserved.</copyright>
+    <description>System Plugin for CommerceLab Shop - Shops {{version}}</description>
+    <files>
+        <filename plugin="commercelab_shop_shops">commercelab_shop_shops.php</filename>
+    </files>
+    <scriptfile>script.php</scriptfile>
+    <config>
+        <fields name="params">
+            <fieldset name="basic"></fieldset>
+        </fields>
+    </config>
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+</extension>

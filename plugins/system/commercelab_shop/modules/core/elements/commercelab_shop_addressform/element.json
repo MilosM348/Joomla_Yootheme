@@ -1,0 +1,622 @@
+{
+    "@import": "./element.php",
+    "name": "commercelab_shop_addressform",
+    "title": "Address Forms",
+    "group": "CommerceLab Cart & Checkout",
+    "icon": "${url:images/commercelab_shop_addressform.svg}",
+    "iconSmall": "${url:images/commercelab_shop_addressform_small.svg}",
+    "element": true,
+    "container": true,
+    "width": 500,
+    "defaults": {
+    },
+    "placeholder": {
+        "children": [
+            { "type": "commercelab_shop_addressform_field", "props": {} },
+            { "type": "commercelab_shop_addressform_field", "props": {} },
+            { "type": "commercelab_shop_addressform_field", "props": {} }
+        ]
+    },
+    "templates": {
+        "render": "./templates/template.php",
+        "content": "./templates/content.php"
+    },
+    "fields": {
+
+
+        "panel_background": {
+            "label":"Color",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Default": "uk-background-default",
+                "Primary": "uk-background-primary",
+                "Secondary": "uk-background-secondary",
+                "Muted": "uk-background-muted"
+            }
+        },
+        "panel_margin": {
+            "label":"Margin",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-margin-small",
+                "Medium": "uk-margin",
+                "Large": "uk-margin-large"
+            }
+        },
+        "panel_padding": {
+            "label":"Padding",
+            "type": "select",
+            "options": {
+                "None": "",
+                "Small": "uk-padding-small",
+                "Medium": "uk-padding",
+                "Large": "uk-padding-large"
+            }
+        },
+        "panel_color_inverse": {
+            "label":"Color Inverse",
+            "type": "radio",
+            "default": "",
+            "options": {
+                "None": "",
+                "Light": "uk-light",
+                "Dark": "uk-dark"
+            },
+            "description": "This can be used to force the inner content to be Light or Dark, depending on the background"
+        },
+        
+
+        "content": {
+            "type": "content-items",
+            "title": "field_type",
+            "item": "commercelab_shop_addressform_field"
+        },
+
+        "shipping_form_title": {
+            "default": "Shipping Address",
+            "label": "Shipping form Title"
+        },
+
+        "billing_form_title": {
+            "default": "Billing Address",
+            "label": "Billing form Title",
+            "show": "billing_address_required"
+        },
+
+        "show_labels": {
+            "type": "checkbox",
+            "default": true,
+            "text": "Show Labels"
+        },
+        "show_placeholders": {
+            "type": "checkbox",
+            "default": true,
+            "text": "Show Placeholders"
+        },
+        "fields_size": {
+            "label": "Fields Size",
+            "description": "Set size for all fields",
+            "type": "select",
+            "default": "",
+            "options": {
+                "Small": "uk-form-small",
+                "Default": "",
+                "Large": "uk-form-large"
+            }
+        },
+        "labels_layout": {
+            "label": "Labels Layout",
+            "type": "select",
+            "default": "uk-form-stacked",
+            "options": {
+                "Labels on Top": "uk-form-stacked",
+                "Labels Inline": "uk-form-horizontal"
+            }
+        },
+
+        "fields_width": {
+            "label":"Fields Width", 
+            "type":"select", 
+            "default":"uk-width-1-1@s", 
+            "options":{
+                "Full":"uk-width-1-1@s", 
+                "Half":"uk-width-1-2@s", 
+                "Third":"uk-width-1-3@s", 
+                "Quarter":"uk-width-1-4@s", 
+                "Large":"uk-width-large@s",
+                "Medium":"uk-width-medium@s",
+                "Small":"uk-width-small@s",
+                "Custom":"custom"
+            }
+        },
+
+        "fields_width_custom": {
+            "label": "Custom Width",
+            "attrs": {
+                "placeholder":"uk-width-expand@s uk-width-medium ..."
+            },
+            "enable": "fields_width == 'custom'",
+            "description": "Choose one of the predefined widths for all fields, or add a custom UIkit class. This is applied to the container of the field, you can also set a global option to style all fields, making them more or less compact. If this option is enabled individual width will have no effect"
+        },
+
+
+        "show_icons": {
+            "label": "Show Icons",
+            "type": "checkbox",
+            "default": true,
+            "text": "Yes"
+        },
+
+        "show_icons_default": {
+            "label": "Default Icons",
+            "type": "checkbox",
+            "default": true,
+            "text": "Yes",
+            "description": "By default each field has an icon based on type of data,here you can change that behaviour by setting for all fields the same type of icon",
+            "enable": "show_icons"
+        },
+
+        "empty_field_icon": {
+            "label": "Empty Field Icon",
+            "type": "radio",
+            "default": "default_icon_set",
+            "options": {
+                "Default": "default_icon_set",
+                "No Icon": "",
+                "Custom": "custom_icon"
+            },
+            "show": "!show_icons_default"
+        },
+
+        "empty_field_icon_custom": {
+            "label": "Empty Field Custom Icon",
+            "type": "icon",
+            "show": "!show_icons_default && empty_field_icon == 'custom_icon'"
+        },
+        "empty_field_color": {
+            "label": "Empty Field Color",
+            "type": "select",
+            "default": "uk-text-muted",
+            "options": {
+                "Default": "",
+                "Muted": "uk-text-muted",
+                "Light": "uk-light",
+                "Emphasis": "uk-text-emphasis",
+                "Primary": "uk-text-primary",
+                "Success": "uk-text-success",
+                "Warning": "uk-text-warning",
+                "Danger": "uk-text-danger",
+                "Background": "uk-text-background"
+            },
+            "show": "!show_icons_default"
+        },
+        "valid_field_icon": {
+            "label": "Valid Field Icon",
+            "type": "radio",
+            "default": "default_icon_set",
+            "options": {
+                "Default": "default_icon_set",
+                "No Icon": "",
+                "Custom": "custom_icon"
+            },
+            "show": "!show_icons_default"
+
+        },
+        "valid_field_icon_custom": {
+            "label": "Valid Field Custom Icon",
+            "type": "icon",
+            "show": "!show_icons_default && valid_field_icon == 'custom_icon'"
+        },
+        
+        "valid_field_color": {
+            "label": "Valid Field Color",
+            "type": "select",
+            "default": "uk-text-success",
+            "options": {
+                "Default": "",
+                "Muted": "uk-text-muted",
+                "Emphasis": "uk-text-emphasis",
+                "Light": "uk-light",
+                "Primary": "uk-text-primary",
+                "Success": "uk-text-success",
+                "Warning": "uk-text-warning",
+                "Danger": "uk-text-danger",
+                "Background": "uk-text-background"
+            },
+            "show": "!show_icons_default"
+        },
+             
+        "invalid_field_icon": {
+            "label": "Invalid Field Icon",
+            "type": "radio",
+            "default": "default_icon_set",
+            "options": {
+                "Default": "default_icon_set",
+                "No Icon": "",
+                "Custom": "custom_icon"
+            },
+            "show": "!show_icons_default"
+
+        },
+
+        "invalid_field_icon_custom": {
+            "label": "Invalid Field Custom Icon",
+            "type": "icon",
+            "show": "!show_icons_default && invalid_field_icon == 'custom_icon'"
+        },
+   
+        "invalid_field_color": {
+            "label": "Invalid Field Color",
+            "type": "select",
+            "default": "uk-text-danger",
+            "options": {
+                "Default": "",
+                "Muted": "uk-text-muted",
+                "Light": "uk-light",
+                "Emphasis": "uk-text-emphasis",
+                "Primary": "uk-text-primary",
+                "Success": "uk-text-success",
+                "Warning": "uk-text-warning",
+                "Danger": "uk-text-danger",
+                "Background": "uk-text-background"
+            },
+            "show": "!show_icons_default"
+        },
+        
+        "rows_spacing": {
+            "label": "Rows Separation",
+            "type": "select",
+            "default": "uk-margin-small-top",
+            "options": {
+                "Compact": "uk-margin-remove",
+                "Normal": "uk-margin-small-top",
+                "Large": "uk-margin-large-top"
+            }
+        },
+
+
+        "rows_spacing": {
+            "label": "Rows Separation",
+            "type": "select",
+            "default": "uk-margin-small-top",
+            "options": {
+                "Compact": "uk-margin-remove",
+                "Normal": "uk-margin-small-top",
+                "Large": "uk-margin-large-top"
+            }
+        },
+
+
+        "shipping_submit_button_text": {
+            "label": "Text",
+            "default": "Confirm"
+        },
+        "shipping_submit_button_size": {
+            "label": "Size",
+            "type": "select",
+            "default": "",
+            "options": {
+                "Small": "uk-button-small",
+                "Default": "",
+                "Large": "uk-button-large"
+            }
+        },
+        "shipping_submit_button_alignment": {
+            "label": "Alignment",
+            "type": "radio",
+            "default": "uk-text-right",
+            "options": {
+                "Left": "uk-text-left",
+                "Right": "uk-text-right"
+            }
+        },
+        "shipping_submit_button_type": {
+            "label": "Type",
+            "type": "select",
+            "default": "uk-button-primary",
+            "options": {
+                "Default": "uk-button-default",
+                "Primary": "uk-button-primary",
+                "Secondary": "uk-button-secondary",
+                "Success": "uk-button-success",
+                "Danger": "uk-button-danger",
+                "Warning": "uk-button-warning"
+            }
+        },
+
+
+        "billing_address_required": {
+            "type": "checkbox",
+            "label": "Ask for a Billing Address",
+            "default": false,
+            "text": "Yes"
+        },
+
+        "address_order": {
+            "label": "Form Order",
+            "type": "radio",
+            "default": "billing",
+            "options": {
+                "Billing First": "billing",
+                "Shipping First": "shipping"
+            },
+            "show": "billing_address_required"
+        },
+
+        "show_copy_from": {
+            "label": "Show copy from",
+            "type": "checkbox",
+            "default": true,
+            "text": "Show",
+            "show": "billing_address_required"
+        },
+
+        "show_copy_from_shipping": {
+            "type": "checkbox",
+            "default": false,
+            "text": "On Shipping form",
+            "show": "billing_address_required && show_copy_from"
+        },
+
+        "show_copy_from_billing": {
+            "type": "checkbox",
+            "default": true,
+            "text": "On Billing form",
+            "show": "billing_address_required && show_copy_from"
+        },
+
+        "show_copy_from_text": {
+            "label": "Copy from text",
+            "default": "Copy from [form_title]",
+            "attrs": {
+                "placeholder": "Copy from [form_title]"
+            },
+            "show": "billing_address_required && show_copy_from"
+        },
+        
+        "show_copy_from_icon": {
+            "label": "Icon",
+            "type": "select",
+            "default": "bolt",
+            "options": {
+                "None": "",
+                "Default": "bolt",
+                "Custom": "custom"
+            },
+            "show": "billing_address_required && show_copy_from"
+        },
+        "show_copy_from_custom_icon": {
+            "label": "Custom Icon",        
+            "type": "icon",
+            "show": "billing_address_required && show_copy_from && show_copy_from_icon == 'custom'"
+        },
+
+        "forms_layout": {
+            "label": "Forms Layout",
+            "type": "select",
+            "default": "accordion",
+            "options": {
+                "Accordion": "accordion",
+                "Tabs": "tabs",
+                "Side by side": "side_by_side"
+            },
+            "description":"Set the, forms with additional layouts to improve user experience",
+            "enable": "billing_address_required"
+        },
+
+        "billing_submit_button_text": {
+            "label": "Text",
+            "default": "Confirm",
+            "enable": "billing_address_required"
+        },
+        "billing_submit_button_size": {
+            "label": "Size",
+            "type": "select",
+            "default": "",
+            "options": {
+                "Small": "uk-button-small",
+                "Default": "",
+                "Large": "uk-button-large"
+            },
+            "enable": "billing_address_required"
+        },
+        "billing_submit_button_alignment": {
+            "label": "Alignment",
+            "type": "radio",
+            "default": "uk-text-right",
+            "options": {
+                "Left": "uk-text-left",
+                "Right": "uk-text-right"
+            },
+            "enable": "billing_address_required"
+        },
+        "billing_submit_button_type": {
+            "label": "Type",
+            "type": "select",
+            "default": "uk-button-primary",
+            "options": {
+                "Default": "uk-button-default",
+                "Primary": "uk-button-primary",
+                "Secondary": "uk-button-secondary",
+                "Success": "uk-button-success",
+                "Danger": "uk-button-danger",
+                "Warning": "uk-button-warning"
+            },
+            "enable": "billing_address_required"
+        },
+        
+        "position": "${builder.position}",
+        "position_left": "${builder.position_left}",
+        "position_right": "${builder.position_right}",
+        "position_top": "${builder.position_top}",
+        "position_bottom": "${builder.position_bottom}",
+        "position_z_index": "${builder.position_z_index}",
+        "margin": "${builder.margin}",
+        "margin_remove_top": "${builder.margin_remove_top}",
+        "margin_remove_bottom": "${builder.margin_remove_bottom}",
+        "maxwidth": "${builder.maxwidth}",
+        "maxwidth_breakpoint": "${builder.maxwidth_breakpoint}",
+        "block_align": "${builder.block_align}",
+        "block_align_breakpoint": "${builder.block_align_breakpoint}",
+        "block_align_fallback": "${builder.block_align_fallback}",
+        ",text_align": "${builder.text_align_justify}",
+        ",text_align_breakpoint": "${builder.text_align_breakpoint}",
+        ",text_align_fallback": "${builder.text_align_justify_fallback}",
+        "animation": "${builder.animation}",
+        "_parallax_button": "${builder._parallax_button}",
+        "visibility": "${builder.visibility}",
+        "name": "${builder.name}",
+        "status": "${builder.status}",
+        "id": "${builder.id}",
+        "class": "${builder.cls}",
+        "attributes": "${builder.attrs}",
+        "css": {
+            "label": "CSS",
+            "description": "Enter your own custom CSS. The, following selectors will be prefixed automatically for this element: <code>.el-element</code> <code>.el-item</code> <code>.el-content</code> <code>.el-image</code> <code>.el-link</code>",
+            "type": "editor",
+            "editor": "code",
+            "mode": "css",
+            "attrs": {
+                "debounce": 500
+            }
+        }
+    },
+    "fieldset": {
+        "default": {
+            "type": "tabs",
+            "fields": [
+                {
+                    "title": "Content",
+                    "fields": [
+                        "content",
+                        {
+                            "label": "Forms",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "shipping_form_title",
+                                "billing_address_required",
+                                "address_order",
+                                "billing_form_title"
+                            ]
+                        },
+                        {
+                            "label": "Copy Data",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "show_copy_from",
+                                "show_copy_from_shipping",
+                                "show_copy_from_billing",
+                                "show_copy_from_text",
+                                "show_copy_from_icon",
+                                "show_copy_from_custom_icon"
+                            ]
+                        },
+                        {
+                            "label": "Fields Layout",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "show_labels",
+                                "show_placeholders",
+                                "fields_size",
+                                "labels_layout",
+                                "rows_spacing",
+                                "fields_width",
+                                "fields_width_custom"
+                            ]
+                        },
+                        {
+                            "label": "Icons",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "show_icons",
+                                "show_icons_default",
+
+                                "empty_field_icon",
+                                "empty_field_icon_custom",
+                                "empty_field_color",
+
+                                "valid_field_icon",
+                                "valid_field_icon_custom",
+                                "valid_field_color",
+
+                                "invalid_field_icon",
+                                "invalid_field_icon_custom",
+                                "invalid_field_color"
+                            ]
+                        },
+                        {
+                            "label": "Shipping Save Button",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "shipping_submit_button_text",
+                                "shipping_submit_button_size",
+                                "shipping_submit_button_type",
+                                "shipping_submit_button_alignment"
+                            ]
+                        },
+                        {
+                            "label": "Billing Save Button",
+                            "type": "group",
+                            "divider": true,
+                            "fields": [
+                                "billing_submit_button_text",
+                                "billing_submit_button_size",
+                                "billing_submit_button_type",
+                                "billing_submit_button_alignment"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "title": "Settings",
+                    "fields": [
+                        {
+                            "label": "Panel",
+                            "type": "group",
+                            "fields": [
+                                "panel_background",
+                                "panel_margin",
+                                "panel_padding",
+                                "panel_color_inverse"
+                            ]
+                        },
+                        {
+                            "label": "General",
+                            "type": "group",
+                            "fields": [
+                                "position",
+                                "position_left",
+                                "position_right",
+                                "position_top",
+                                "position_bottom",
+                                "position_z_index",
+                                "margin",
+                                "margin_remove_top",
+                                "margin_remove_bottom",
+                                "maxwidth",
+                                "maxwidth_breakpoint",
+                                "block_align",
+                                "block_align_breakpoint",
+                                "block_align_fallback",
+                                ",text_align",
+                                ",text_align_breakpoint",
+                                ",text_align_fallback",
+                                "animation",
+                                "_parallax_button",
+                                "visibility"
+                            ]
+                        }
+                    ]
+                },
+                "${builder.advanced}"
+            ]
+        }
+    }
+}
